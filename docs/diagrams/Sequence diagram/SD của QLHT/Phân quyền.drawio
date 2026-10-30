@@ -1,0 +1,212 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Trang-1" id="qTu4wzCoBhEq6j4qAV5r">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="EjonK90McMDZnr5hfrLV-52" connectable="0" parent="1" style="group;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" value="" vertex="1">
+          <mxGeometry height="630" width="1252.37" x="50" y="-10" as="geometry" />
+        </mxCell>
+        <mxCell id="EjonK90McMDZnr5hfrLV-33" edge="1" parent="EjonK90McMDZnr5hfrLV-52" style="endArrow=none;dashed=1;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="EjonK90McMDZnr5hfrLV-32" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="1182.37" y="620" as="sourcePoint" />
+            <mxPoint x="1120" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <UserObject label="" plantUmlData="{&#xa;  &quot;data&quot;: &quot;@startuml\nautonumber\nactor \&quot;Quản trị viên\&quot; as Admin\nparticipant \&quot;Giao diện (UI)\&quot; as UI\nparticipant \&quot;Xử lý hệ thống (Controller)\&quot; as System\ndatabase \&quot;Cơ sở dữ liệu (DB)\&quot; as DB\n\n== Xác thực danh tính người dùng (&lt;&lt;include&gt;&gt; Đăng nhập) ==\nAdmin -&gt; UI: 1. Truy cập trang Quản lý phân quyền\nactivate UI\nUI -&gt; System: 2. Kiểm tra Session/Token &amp; Quyền Quản trị viên\nactivate System\nSystem -&gt; DB: 3. Kiểm tra vai trò (Role)\nactivate DB\nDB --&gt; System: 4. Hợp lệ (Is Admin)\ndeactivate DB\n\n== Thực hiện Phân quyền hệ thống ==\nSystem --&gt; UI: 5. Trả về danh sách Người dùng &amp; Vai trò (Roles/Permissions)\nUI --&gt; Admin: 6. Hiển thị giao diện phân quyền\n\nAdmin -&gt; UI: 7. Chọn Người dùng &amp; Cập nhật Vai trò / Quyền hạn mới\nUI -&gt; System: 8. Gửi yêu cầu lưu phân quyền (UserId, RoleList)\n\nSystem -&gt; DB: 9. Cập nhật thông tin phân quyền trong DB\nactivate DB\nDB --&gt; System: 10. Lưu thành công\ndeactivate DB\n\nSystem --&gt; UI: 11. Trả về kết quả phân quyền thành công\nUI --&gt; Admin: 12. Hiển thị thông báo \&quot;Phân quyền thành công\&quot;\n\ndeactivate System\ndeactivate UI\n@enduml&quot;,&#xa;  &quot;config&quot;: null&#xa;}" id="EjonK90McMDZnr5hfrLV-1">
+          <mxCell connectable="0" parent="EjonK90McMDZnr5hfrLV-52" style="group;transparentBounds=1;editIcon=1;lockedGroup=0;groupPadding=10;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" vertex="1">
+            <mxGeometry as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="EjonK90McMDZnr5hfrLV-37" edge="1" parent="EjonK90McMDZnr5hfrLV-1" style="endArrow=none;dashed=1;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="EjonK90McMDZnr5hfrLV-38" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="427.9499999999999" y="620" as="sourcePoint" />
+            <mxPoint x="365.58" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="EjonK90McMDZnr5hfrLV-36" edge="1" parent="EjonK90McMDZnr5hfrLV-1" style="endArrow=none;dashed=1;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="EjonK90McMDZnr5hfrLV-35" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="862.1599999999999" y="620" as="sourcePoint" />
+            <mxPoint x="799.79" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <UserObject label="&lt;b&gt;1&lt;/b&gt;. Truy cập trang Quản lý phân quyền" plantUmlId="msg_11" plantUmlBaseStyle="endArrow=classic;endFill=1;endSize=9;html=1;edgeStyle=sequenceEdgeStyle;libavoidRouting=0;curved=0;rounded=0;strokeColor=#181818;strokeWidth=1;fontColor=#000000;fontSize=13;verticalAlign=bottom;labelBackgroundColor=none;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="&lt;b&gt;1&lt;/b&gt; 1. Truy cập trang Quản lý phân quyền" id="EjonK90McMDZnr5hfrLV-10">
+          <mxCell edge="1" parent="EjonK90McMDZnr5hfrLV-1" style="endArrow=classic;endFill=1;endSize=9;html=1;edgeStyle=sequenceEdgeStyle;libavoidRouting=0;curved=0;rounded=0;strokeColor=#181818;strokeWidth=1;fontColor=#000000;fontSize=13;verticalAlign=bottom;labelBackgroundColor=none;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="EjonK90McMDZnr5hfrLV-22">
+            <mxGeometry relative="1" x="-0.321" as="geometry">
+              <Array as="points">
+                <mxPoint x="227" y="176" />
+              </Array>
+              <mxPoint x="30.12935000000016" y="176.0000000000001" as="sourcePoint" />
+              <mxPoint x="422.94902142857126" y="176" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="&lt;b&gt;2&lt;/b&gt;. Lấy dữ liệu phân quyền" plantUmlId="msg_12" plantUmlBaseStyle="endArrow=classic;endFill=1;endSize=9;html=1;edgeStyle=sequenceEdgeStyle;libavoidRouting=0;curved=0;rounded=0;strokeColor=#181818;strokeWidth=1;fontColor=#000000;fontSize=13;verticalAlign=bottom;labelBackgroundColor=none;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="&lt;b&gt;2&lt;/b&gt; 2. Kiểm tra Session/Token &amp;amp; Quyền Quản trị viên" id="EjonK90McMDZnr5hfrLV-11">
+          <mxCell edge="1" parent="EjonK90McMDZnr5hfrLV-1" source="EjonK90McMDZnr5hfrLV-22" style="endArrow=classic;endFill=1;endSize=9;html=1;edgeStyle=sequenceEdgeStyle;libavoidRouting=0;curved=0;rounded=0;strokeColor=#181818;strokeWidth=1;fontColor=#000000;fontSize=13;verticalAlign=bottom;labelBackgroundColor=none;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="EjonK90McMDZnr5hfrLV-23">
+            <mxGeometry relative="1" x="-0.198" as="geometry">
+              <Array as="points">
+                <mxPoint x="645" y="208" />
+              </Array>
+              <mxPoint x="432.94902142857126" y="208" as="sourcePoint" />
+              <mxPoint x="857.1631428571427" y="208" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="&lt;b&gt;5&lt;/b&gt;. Trả về danh sách Người dùng &amp;amp; Vai trò (Roles/Permissions)" plantUmlId="msg_18" plantUmlBaseStyle="endArrow=classic;endFill=1;endSize=9;html=1;edgeStyle=sequenceEdgeStyle;libavoidRouting=0;curved=0;rounded=0;strokeColor=#181818;strokeWidth=1;fontColor=#000000;fontSize=13;verticalAlign=bottom;labelBackgroundColor=none;dashed=1;dashPattern=2 2;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="&lt;b&gt;5&lt;/b&gt; 5. Trả về danh sách Người dùng &amp;amp; Vai trò (Roles/Permissions)" id="EjonK90McMDZnr5hfrLV-14">
+          <mxCell edge="1" parent="EjonK90McMDZnr5hfrLV-1" source="EjonK90McMDZnr5hfrLV-23" style="endArrow=classic;endFill=1;endSize=9;html=1;edgeStyle=sequenceEdgeStyle;libavoidRouting=0;curved=0;rounded=0;strokeColor=#181818;strokeWidth=1;fontColor=#000000;fontSize=13;verticalAlign=bottom;labelBackgroundColor=none;dashed=1;dashPattern=2 2;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="EjonK90McMDZnr5hfrLV-22">
+            <mxGeometry relative="1" x="-0.021" as="geometry">
+              <Array as="points">
+                <mxPoint x="645.0560820000001" y="310" />
+              </Array>
+              <mxPoint x="857.1631428571427" y="310" as="sourcePoint" />
+              <mxPoint x="432.94902142857126" y="310" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="&lt;b&gt;6&lt;/b&gt;. Hiển thị giao diện phân quyền" plantUmlId="msg_19" plantUmlBaseStyle="endArrow=classic;endFill=1;endSize=9;html=1;edgeStyle=sequenceEdgeStyle;libavoidRouting=0;curved=0;rounded=0;strokeColor=#181818;strokeWidth=1;fontColor=#000000;fontSize=13;verticalAlign=bottom;labelBackgroundColor=none;dashed=1;dashPattern=2 2;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="&lt;b&gt;6&lt;/b&gt; 6. Hiển thị giao diện phân quyền" id="EjonK90McMDZnr5hfrLV-15">
+          <mxCell edge="1" parent="EjonK90McMDZnr5hfrLV-1" source="EjonK90McMDZnr5hfrLV-22" style="endArrow=classic;endFill=1;endSize=9;html=1;edgeStyle=sequenceEdgeStyle;libavoidRouting=0;curved=0;rounded=0;strokeColor=#181818;strokeWidth=1;fontColor=#000000;fontSize=13;verticalAlign=bottom;labelBackgroundColor=none;dashed=1;dashPattern=2 2;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;">
+            <mxGeometry relative="1" x="0.345" as="geometry">
+              <Array as="points">
+                <mxPoint x="226.53918550000003" y="330" />
+              </Array>
+              <mxPoint x="422.94902142857126" y="330" as="sourcePoint" />
+              <mxPoint x="30.12935000000016" y="330" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="&lt;b&gt;7&lt;/b&gt;. Chọn Người dùng &amp;amp; Cập nhật Vai trò / Quyền hạn mới" plantUmlId="msg_20" plantUmlBaseStyle="endArrow=classic;endFill=1;endSize=9;html=1;edgeStyle=sequenceEdgeStyle;libavoidRouting=0;curved=0;rounded=0;strokeColor=#181818;strokeWidth=1;fontColor=#000000;fontSize=13;verticalAlign=bottom;labelBackgroundColor=none;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="&lt;b&gt;7&lt;/b&gt; 7. Chọn Người dùng &amp;amp; Cập nhật Vai trò / Quyền hạn mới" id="EjonK90McMDZnr5hfrLV-16">
+          <mxCell edge="1" parent="EjonK90McMDZnr5hfrLV-1" style="endArrow=classic;endFill=1;endSize=9;html=1;edgeStyle=sequenceEdgeStyle;libavoidRouting=0;curved=0;rounded=0;strokeColor=#181818;strokeWidth=1;fontColor=#000000;fontSize=13;verticalAlign=bottom;labelBackgroundColor=none;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="EjonK90McMDZnr5hfrLV-22">
+            <mxGeometry relative="1" x="-0.028" as="geometry">
+              <Array as="points">
+                <mxPoint x="229.35918550000002" y="390" />
+              </Array>
+              <mxPoint x="32.94935000000016" y="390" as="sourcePoint" />
+              <mxPoint x="425.76902142857125" y="390" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="&lt;b&gt;8&lt;/b&gt;. Gửi yêu cầu lưu phân quyền&amp;nbsp;" plantUmlId="msg_21" plantUmlBaseStyle="endArrow=classic;endFill=1;endSize=9;html=1;edgeStyle=sequenceEdgeStyle;libavoidRouting=0;curved=0;rounded=0;strokeColor=#181818;strokeWidth=1;fontColor=#000000;fontSize=13;verticalAlign=bottom;labelBackgroundColor=none;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="&lt;b&gt;8&lt;/b&gt; 8. Gửi yêu cầu lưu phân quyền (UserId, RoleList)" id="EjonK90McMDZnr5hfrLV-17">
+          <mxCell edge="1" parent="EjonK90McMDZnr5hfrLV-1" source="EjonK90McMDZnr5hfrLV-22" style="endArrow=classic;endFill=1;endSize=9;html=1;edgeStyle=sequenceEdgeStyle;libavoidRouting=0;curved=0;rounded=0;strokeColor=#181818;strokeWidth=1;fontColor=#000000;fontSize=13;verticalAlign=bottom;labelBackgroundColor=none;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="EjonK90McMDZnr5hfrLV-23">
+            <mxGeometry relative="1" x="-0.228" as="geometry">
+              <Array as="points">
+                <mxPoint x="645.0560820000001" y="420" />
+              </Array>
+              <mxPoint x="432.94902142857126" y="420" as="sourcePoint" />
+              <mxPoint x="857.1631428571427" y="420" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="&lt;b&gt;9&lt;/b&gt;. Cập nhật thông tin phân quyền trong DB" plantUmlId="msg_22" plantUmlBaseStyle="endArrow=classic;endFill=1;endSize=9;html=1;edgeStyle=sequenceEdgeStyle;libavoidRouting=0;curved=0;rounded=0;strokeColor=#181818;strokeWidth=1;fontColor=#000000;fontSize=13;verticalAlign=bottom;labelBackgroundColor=none;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="&lt;b&gt;9&lt;/b&gt; 9. Cập nhật thông tin phân quyền trong DB" id="EjonK90McMDZnr5hfrLV-18">
+          <mxCell edge="1" parent="EjonK90McMDZnr5hfrLV-1" source="EjonK90McMDZnr5hfrLV-23" style="endArrow=classic;endFill=1;endSize=9;html=1;edgeStyle=sequenceEdgeStyle;libavoidRouting=0;curved=0;rounded=0;strokeColor=#181818;strokeWidth=1;fontColor=#000000;fontSize=13;verticalAlign=bottom;labelBackgroundColor=none;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="EjonK90McMDZnr5hfrLV-25">
+            <mxGeometry relative="1" x="-0.035" as="geometry">
+              <Array as="points">
+                <mxPoint x="1022.2641357857142" y="450" />
+              </Array>
+              <mxPoint x="867.1631428571427" y="450" as="sourcePoint" />
+              <mxPoint x="1177.3651285714284" y="450" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="&lt;b&gt;10&lt;/b&gt;. Lưu thành công" plantUmlId="msg_23" plantUmlBaseStyle="endArrow=classic;endFill=1;endSize=9;html=1;edgeStyle=sequenceEdgeStyle;libavoidRouting=0;curved=0;rounded=0;strokeColor=#181818;strokeWidth=1;fontColor=#000000;fontSize=13;verticalAlign=bottom;labelBackgroundColor=none;dashed=1;dashPattern=2 2;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="&lt;b&gt;10&lt;/b&gt; 10. Lưu thành công" id="EjonK90McMDZnr5hfrLV-19">
+          <mxCell edge="1" parent="EjonK90McMDZnr5hfrLV-1" source="EjonK90McMDZnr5hfrLV-25" style="endArrow=classic;endFill=1;endSize=9;html=1;edgeStyle=sequenceEdgeStyle;libavoidRouting=0;curved=0;rounded=0;strokeColor=#181818;strokeWidth=1;fontColor=#000000;fontSize=13;verticalAlign=bottom;labelBackgroundColor=none;dashed=1;dashPattern=2 2;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="EjonK90McMDZnr5hfrLV-23">
+            <mxGeometry relative="1" x="0.431" as="geometry">
+              <Array as="points">
+                <mxPoint x="1022.2641357857142" y="482" />
+              </Array>
+              <mxPoint x="1177.3651285714284" y="482" as="sourcePoint" />
+              <mxPoint x="867.1631428571427" y="482" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="&lt;b&gt;11&lt;/b&gt;. Trả về kết quả phân quyền thành công" plantUmlId="msg_24" plantUmlBaseStyle="endArrow=classic;endFill=1;endSize=9;html=1;edgeStyle=sequenceEdgeStyle;libavoidRouting=0;curved=0;rounded=0;strokeColor=#181818;strokeWidth=1;fontColor=#000000;fontSize=13;verticalAlign=bottom;labelBackgroundColor=none;dashed=1;dashPattern=2 2;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="&lt;b&gt;11&lt;/b&gt; 11. Trả về kết quả phân quyền thành công" id="EjonK90McMDZnr5hfrLV-20">
+          <mxCell edge="1" parent="EjonK90McMDZnr5hfrLV-1" source="EjonK90McMDZnr5hfrLV-23" style="endArrow=classic;endFill=1;endSize=9;html=1;edgeStyle=sequenceEdgeStyle;libavoidRouting=0;curved=0;rounded=0;strokeColor=#181818;strokeWidth=1;fontColor=#000000;fontSize=13;verticalAlign=bottom;labelBackgroundColor=none;dashed=1;dashPattern=2 2;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="EjonK90McMDZnr5hfrLV-22">
+            <mxGeometry relative="1" x="0.239" as="geometry">
+              <Array as="points">
+                <mxPoint x="645" y="540" />
+              </Array>
+              <mxPoint x="857.1631428571427" y="540" as="sourcePoint" />
+              <mxPoint x="432.94902142857126" y="540" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="&lt;b&gt;12&lt;/b&gt;. Hiển thị thông báo &quot;Phân quyền thành công&quot;" plantUmlId="msg_25" plantUmlBaseStyle="endArrow=classic;endFill=1;endSize=9;html=1;edgeStyle=sequenceEdgeStyle;libavoidRouting=0;curved=0;rounded=0;strokeColor=#181818;strokeWidth=1;fontColor=#000000;fontSize=13;verticalAlign=bottom;labelBackgroundColor=none;dashed=1;dashPattern=2 2;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="&lt;b&gt;12&lt;/b&gt; 12. Hiển thị thông báo &amp;quot;Phân quyền thành công&amp;quot;" id="EjonK90McMDZnr5hfrLV-21">
+          <mxCell edge="1" parent="EjonK90McMDZnr5hfrLV-1" source="EjonK90McMDZnr5hfrLV-22" style="endArrow=classic;endFill=1;endSize=9;html=1;edgeStyle=sequenceEdgeStyle;libavoidRouting=0;curved=0;rounded=0;strokeColor=#181818;strokeWidth=1;fontColor=#000000;fontSize=13;verticalAlign=bottom;labelBackgroundColor=none;dashed=1;dashPattern=2 2;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;">
+            <mxGeometry relative="1" x="0.076" as="geometry">
+              <Array as="points">
+                <mxPoint x="227" y="572" />
+              </Array>
+              <mxPoint x="422.94902142857126" y="572" as="sourcePoint" />
+              <mxPoint x="30.12935000000016" y="572" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="act_0" plantUmlBaseStyle="rounded=0;fillColor=#FFFFFF;strokeColor=#181818;strokeWidth=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;sequenceEdgeStyle&quot;,&quot;libavoidRouting&quot;:0,&quot;curved&quot;:0,&quot;rounded&quot;:0};" plantUmlBaseValue="" id="EjonK90McMDZnr5hfrLV-22">
+          <mxCell parent="EjonK90McMDZnr5hfrLV-1" style="rounded=0;fillColor=#FFFFFF;strokeColor=#181818;strokeWidth=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;sequenceEdgeStyle&quot;,&quot;libavoidRouting&quot;:0,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1">
+            <mxGeometry height="396" width="10" x="422.94902142857126" y="176" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="act_1" plantUmlBaseStyle="rounded=0;fillColor=#FFFFFF;strokeColor=#181818;strokeWidth=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;sequenceEdgeStyle&quot;,&quot;libavoidRouting&quot;:0,&quot;curved&quot;:0,&quot;rounded&quot;:0};" plantUmlBaseValue="" id="EjonK90McMDZnr5hfrLV-23">
+          <mxCell parent="EjonK90McMDZnr5hfrLV-1" style="rounded=0;fillColor=#FFFFFF;strokeColor=#181818;strokeWidth=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;sequenceEdgeStyle&quot;,&quot;libavoidRouting&quot;:0,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1">
+            <mxGeometry height="364" width="10" x="857.1631428571427" y="208" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="act_2" plantUmlBaseStyle="rounded=0;fillColor=#FFFFFF;strokeColor=#181818;strokeWidth=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;sequenceEdgeStyle&quot;,&quot;libavoidRouting&quot;:0,&quot;curved&quot;:0,&quot;rounded&quot;:0};" plantUmlBaseValue="" id="EjonK90McMDZnr5hfrLV-24">
+          <mxCell parent="EjonK90McMDZnr5hfrLV-1" style="rounded=0;fillColor=#FFFFFF;strokeColor=#181818;strokeWidth=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;sequenceEdgeStyle&quot;,&quot;libavoidRouting&quot;:0,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1">
+            <mxGeometry height="100" width="10" x="1177.37" y="240" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="act_3" plantUmlBaseStyle="rounded=0;fillColor=#FFFFFF;strokeColor=#181818;strokeWidth=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;sequenceEdgeStyle&quot;,&quot;libavoidRouting&quot;:0,&quot;curved&quot;:0,&quot;rounded&quot;:0};" plantUmlBaseValue="" id="EjonK90McMDZnr5hfrLV-25">
+          <mxCell parent="EjonK90McMDZnr5hfrLV-1" style="rounded=0;fillColor=#FFFFFF;strokeColor=#181818;strokeWidth=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;sequenceEdgeStyle&quot;,&quot;libavoidRouting&quot;:0,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1">
+            <mxGeometry height="32" width="10" x="1177.3651285714284" y="450" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="EjonK90McMDZnr5hfrLV-32" parent="EjonK90McMDZnr5hfrLV-1" style="rounded=0;whiteSpace=wrap;html=1;" value="Database" vertex="1">
+          <mxGeometry height="38" width="120" x="1122.37" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="EjonK90McMDZnr5hfrLV-35" parent="EjonK90McMDZnr5hfrLV-1" style="rounded=0;whiteSpace=wrap;html=1;" value="Hệ thống" vertex="1">
+          <mxGeometry height="38" width="120" x="802.1599999999999" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="EjonK90McMDZnr5hfrLV-38" parent="EjonK90McMDZnr5hfrLV-1" style="rounded=0;whiteSpace=wrap;html=1;" value="Giao diện" vertex="1">
+          <mxGeometry height="38" width="120" x="367.9499999999999" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="EjonK90McMDZnr5hfrLV-41" edge="1" parent="EjonK90McMDZnr5hfrLV-1" style="endArrow=none;dashed=1;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="27.449999999999832" y="620" as="sourcePoint" />
+            <mxPoint x="27.450000000000003" y="87.99999999999989" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="EjonK90McMDZnr5hfrLV-43" parent="EjonK90McMDZnr5hfrLV-1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" value="Quản trị viên" vertex="1">
+          <mxGeometry height="60" width="30" x="10" y="10" as="geometry" />
+        </mxCell>
+        <UserObject label="" plantUmlId="act_0" plantUmlBaseStyle="rounded=0;fillColor=#FFFFFF;strokeColor=#181818;strokeWidth=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;sequenceEdgeStyle&quot;,&quot;libavoidRouting&quot;:0,&quot;curved&quot;:0,&quot;rounded&quot;:0};" plantUmlBaseValue="" id="EjonK90McMDZnr5hfrLV-48">
+          <mxCell parent="EjonK90McMDZnr5hfrLV-1" style="rounded=0;fillColor=#FFFFFF;strokeColor=#181818;strokeWidth=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;sequenceEdgeStyle&quot;,&quot;libavoidRouting&quot;:0,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1">
+            <mxGeometry height="402" width="10" x="22.950000000000003" y="170" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="&lt;b&gt;3&lt;/b&gt; Truy vấn danh sách Người dùng &amp;amp; Vai trò" plantUmlId="msg_18" plantUmlBaseStyle="endArrow=classic;endFill=1;endSize=9;html=1;edgeStyle=sequenceEdgeStyle;libavoidRouting=0;curved=0;rounded=0;strokeColor=#181818;strokeWidth=1;fontColor=#000000;fontSize=13;verticalAlign=bottom;labelBackgroundColor=none;align=center;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="&lt;b&gt;5&lt;/b&gt; Truy vấn danh sách Người dùng &amp;amp; Vai trò" id="EjonK90McMDZnr5hfrLV-50">
+          <mxCell edge="1" parent="EjonK90McMDZnr5hfrLV-1" style="endArrow=classic;endFill=1;endSize=9;html=1;edgeStyle=sequenceEdgeStyle;libavoidRouting=0;curved=0;rounded=0;strokeColor=#181818;strokeWidth=1;fontColor=#000000;fontSize=13;verticalAlign=bottom;labelBackgroundColor=none;align=center;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="EjonK90McMDZnr5hfrLV-24">
+            <mxGeometry relative="1" x="-0.0845" as="geometry">
+              <Array as="points">
+                <mxPoint x="1022.2649999999999" y="240" />
+              </Array>
+              <mxPoint x="867.16" y="240" as="sourcePoint" />
+              <mxPoint x="1170" y="240" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="&lt;b&gt;4&lt;/b&gt; Trả về dữ liệu danh sách Người dùng &amp;amp; Vai trò" plantUmlId="msg_19" plantUmlBaseStyle="endArrow=classic;endFill=1;endSize=9;html=1;edgeStyle=sequenceEdgeStyle;libavoidRouting=0;curved=0;rounded=0;strokeColor=#181818;strokeWidth=1;fontColor=#000000;fontSize=13;verticalAlign=bottom;labelBackgroundColor=none;dashed=1;dashPattern=2 2;align=center;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="&lt;b&gt;6&lt;/b&gt; Trả về dữ liệu danh sách Người dùng &amp;amp; Vai trò" id="EjonK90McMDZnr5hfrLV-51">
+          <mxCell edge="1" parent="EjonK90McMDZnr5hfrLV-1" source="EjonK90McMDZnr5hfrLV-24" style="endArrow=classic;endFill=1;endSize=9;html=1;edgeStyle=sequenceEdgeStyle;libavoidRouting=0;curved=0;rounded=0;strokeColor=#181818;strokeWidth=1;fontColor=#000000;fontSize=13;verticalAlign=bottom;labelBackgroundColor=none;dashed=1;dashPattern=2 2;align=center;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;">
+            <mxGeometry relative="1" x="-0.0499" as="geometry">
+              <mxPoint as="offset" />
+              <Array as="points">
+                <mxPoint x="1022.2649999999999" y="270" />
+              </Array>
+              <mxPoint x="1140" y="270" as="sourcePoint" />
+              <mxPoint x="867.16" y="270" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
