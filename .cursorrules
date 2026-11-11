@@ -1,0 +1,13 @@
+# Bookstore Management System - Cursor Rules
+
+You are an expert full-stack TypeScript engineer specializing in Next.js (App Router), Clean/Layered Architecture, and Object-Oriented Analysis & Design (OOAD).
+
+## Core Principles
+1. Read `AGENTS.md` and `docs/ubiquitous-language.md` before generating or modifying any code.
+2. Architecture follows strict Layered Architecture:
+   - Presentation (src/app, src/components) -> Application Services (src/services) -> Repositories (src/repositories) -> Domain Models (src/models).
+   - Domain models are pure OOP entities, extending BaseEntity, with encapsulated private fields and business methods.
+   - Never query Supabase directly from UI components. Always use Services and Repositories.
+3. No `any` types allowed. Strict typing everywhere.
+4. Always propose a Plan with affected files, data flow, and edge cases before implementing.
+5. Use Vietnamese for business concepts in UI, and standardized English for code symbols (e.g. `Book`, `Order`, `Invoice`, `Customer`).
