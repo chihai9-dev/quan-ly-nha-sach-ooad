@@ -1,43 +1,48 @@
 # MODULE: DOMAIN MODELS (`frontend/src/models`)
 
-Tầng Mô hình Thực thể Nghiệp vụ (Core Domain Layer) là hạt nhân chứa logic nghiệp vụ và dữ liệu thuần khiết của hệ thống theo nguyên lý Phân tích & Thiết kế Hướng đối tượng (OOAD).
+Tầng Mô hình Thực thể Nghiệp vụ (Core Domain Layer) hiện thực hóa toàn bộ các lớp từ `docs/diagrams/Class diagram.drawio` theo nguyên lý Phân tích & Thiết kế Hướng đối tượng (OOAD).
 
 ---
 
 ## 1. TRÁCH NHIỆM CHÍNH (SINGLE RESPONSIBILITY)
-- Đóng gói dữ liệu và các quy tắc ràng buộc nghiệp vụ (Business Invariants).
-- Cung cấp các phương thức tính toán nội tại (ví dụ: tính tổng tiền đơn hàng, giảm trừ tồn kho, tính điểm thưởng).
-- Đảm bảo thực thể luôn ở trạng thái hợp lệ ngay từ khi khởi tạo (Constructor Invariants).
+- Đóng gói dữ liệu (`private _field` + `getter` / `setter`) và các quy tắc ràng buộc nghiệp vụ (Business Invariants).
+- Thể hiện đầy đủ các mối quan hệ trong Class Diagram:
+  - **Kế thừa (Inheritance):** `BaseEntity` -> `NguoiDung` -> `NhanVien`, `KhachHang`.
+  - **Hợp thành (Composition ◆):** `HoaDon` ◆— `ChiTietHoaDon`, `PhieuNhap` ◆— `ChiTietPhieuNhap`, `PhieuKiemKe` ◆— `ChiTietKiemKe`, `PhieuDoiTra` ◆— `ChiTietDoiTra`.
+  - **Kết tập (Aggregation ◇) & Liên kết (Association):** `Sach` liên kết `TheLoai`, `NhaXuatBan`, `TacGia[]`, `ChuongTrinhKhuyenMai`; `TaiKhoan` liên kết `VaiTro`, `NhanVien`.
 
 ---
 
-## 2. CÁC THỰC THỂ CUNG CẤP RA NGOÀI (PUBLIC ENTITIES)
+## 2. DANH SÁCH CÁC LỚP THEO CLASS DIAGRAM
 
-| File / Class | Kế thừa | Trách nhiệm chính | Phương thức nghiệp vụ cốt lõi |
+| File / Class | Kế thừa | Bảng SQL (`supabase/schema.sql`) | Phương thức nghiệp vụ cốt lõi |
 |---|---|---|---|
-| `BaseEntity.ts` | *(Abstract)* | Cung cấp ID (`UUID`), thời gian tạo (`createdAt`), cập nhật (`updatedAt`) | `getId()`, `getCreatedAt()`, `getUpdatedAt()`, `touch()` |
-| `Book.ts` | `BaseEntity` | Quản lý thông tin sách, kiểm tra tồn kho, điều chỉnh giá | `reduceStock(qty)`, `increaseStock(qty)`, `hasEnoughStock(qty)` |
-| `Category.ts` | `BaseEntity` | Quản lý thể loại / danh mục phân loại sách | `updateInfo(name, description)` |
-| `Customer.ts` | `BaseEntity` | Quản lý thông tin khách, tích điểm và tự động nâng hạng thẻ | `addLoyaltyPoints(amount)`, `calculateDiscountPercentage()` |
-| `Order.ts` | `BaseEntity` | Quản lý đơn hàng bán lẻ, tính toán tổng tiền, thuế, chiết khấu | `addItem(item)`, `removeItem(bookId)`, `calculateTotals()`, `complete()` |
-| `OrderItem.ts` | `BaseEntity` | Chi tiết một đầu sách trong đơn hàng | `updateQuantity(qty)`, `getSubtotal()` |
-| `Invoice.ts` | `BaseEntity` | Hóa đơn thanh toán, ghi nhận tiền khách đưa và tiền thừa | `markAsPaid()`, `getChangeAmount()` |
+| `BaseEntity.ts` | *(Abstract)* | — | `getId()`, `getCreatedAt()`, `getUpdatedAt()`, `touch()` |
+| `NguoiDung.ts` | `BaseEntity` | *(Abstract)* | Quản lý `hoTen`, `soDienThoai`, `email` cho `NhanVien` & `KhachHang` |
+| `VaiTro.ts` | `BaseEntity` | `vai_tro` | `phanQuyen()`, `coQuyen()` |
+| `TaiKhoan.ts` | `BaseEntity` | `tai_khoan` | `dangNhap()`, `dangXuat()`, `quenMatKhau()`, `doiMatKhau()` |
+| `NhanVien.ts` | `NguoiDung` | `nhan_vien` | `capNhatThongTin()`, `traCuuNhanVien()` |
+| `TheLoai.ts` | `BaseEntity` | `the_loai` | `quanLyTheLoai()` |
+| `TacGia.ts` | `BaseEntity` | `tac_gia` | `quanLyTacGia()` |
+| `NhaXuatBan.ts` | `BaseEntity` | `nha_xuat_ban` | `quanLyNXB()` |
+| `Sach.ts` | `BaseEntity` | `sach`, `sach_tac_gia` | `capNhatThongTinSach()`, `traCuuSach()`, `kiemTraCanhBaoTonKho()`, `capNhatSoLuongTon()` |
+| `PhieuKiemKe.ts` | `BaseEntity` | `phieu_kiem_ke` | `taoPhieuKiemKe()`, `canBangKho()`, `layDanhSachCanhBaoTon()` |
+| `ChiTietKiemKe.ts` | — | `chi_tiet_kiem_ke` | `tinhChenhLech()` |
+| `NhaCungCap.ts` | `BaseEntity` | `nha_cung_cap` | `capNhatThongTinNCC()`, `traCuuNCC()`, `traCuuLichSuNhapHang()`, `capNhatCongNo()` |
+| `PhieuNhap.ts` | `BaseEntity` | `phieu_nhap` | `lapPhieuNhap()`, `traCuuPhieuNhap()`, `tinhTongTien()`, `calculateTotal()` |
+| `ChiTietPhieuNhap.ts` | — | `chi_tiet_phieu_nhap` | `tinhThanhTien()` |
+| `PhieuThanhToanNCC.ts` | `BaseEntity` | `phieu_thanh_toan_ncc` | `ghiNhanThanhToanNCC()` |
+| `KhachHang.ts` | `NguoiDung` | `khach_hang` | `capNhatThongTinKH()`, `traCuuKH()`, `traCuuLichSuMuaHang()` |
+| `ChuongTrinhKhuyenMai.ts` | `BaseEntity` | `chuong_trinh_khuyen_mai` | `thietLapChuongTrinhKM()`, `dangHieuLuc()` |
+| `MaGiamGia.ts` | `BaseEntity` | `ma_giam_gia` | `quanLyMaGiamGia()`, `kiemTraHopLe()` |
+| `HoaDon.ts` | `BaseEntity` | `hoa_don` | `lapHoaDon()`, `traCuuHoaDon()`, `tinhTongThanhToan()`, `calculateTotal()`, `applyDiscount()` |
+| `ChiTietHoaDon.ts` | — | `chi_tiet_hoa_don` | `tinhThanhTien()` |
+| `ThanhToan.ts` | `BaseEntity` | `thanh_toan` | `ghiNhanThanhToan()` |
+| `PhieuDoiTra.ts` | `BaseEntity` | `phieu_doi_tra` | `lapPhieuDoiTra()`, `quanLyDoiTraHang()` |
+| `ChiTietDoiTra.ts` | — | `chi_tiet_doi_tra` | `tinhTienHoan()` |
 
 ---
 
 ## 3. CÁC DEPENDENCIES PHỤ THUỘC (DEPENDENCY RESTRICTIONS)
-- **Được phép phụ thuộc:**
-  - `src/types/database.types.ts` (chỉ dùng để type check nếu cần)
-  - Các Entity nội bộ khác trong thư mục `src/models/`
-- **TUYỆT ĐỐI CẤM:**
-  - Không import bất kỳ file nào từ `src/services/`
-  - Không import bất kỳ file nào từ `src/repositories/`
-  - Không import Supabase Client (`@supabase/supabase-js`)
-  - Không import React hoặc Next.js components/hooks
-
----
-
-## 4. QUY TẮC THIẾT KẾ OOP BẮT BUỘC
-1. Mọi thuộc tính dữ liệu phải khai báo `private` hoặc `protected` với tiền tố gạch dưới `_`.
-2. Truy xuất dữ liệu ra ngoài thông qua `getter`. Chỉ tạo `setter` khi thực sự cần thiết kèm validation hợp lệ.
-3. Không để Entity trở thành Anemic Model (chỉ chứa data mà không có hành vi).
+- **Được phép phụ thuộc:** Các Entity nội bộ trong `src/models/` và type thuần trong `src/types/`.
+- **TUYỆT ĐỐI CẤM:** Không import từ `src/services/`, `src/repositories/`, `@supabase/supabase-js`, hoặc React/Next.js.
