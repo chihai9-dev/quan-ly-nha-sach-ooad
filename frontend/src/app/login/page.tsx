@@ -14,13 +14,6 @@ interface DemoActor {
 
 const DEMO_ACTORS: DemoActor[] = [
   {
-    username: 'admin',
-    password: '123456',
-    role: 'Quản trị viên',
-    description: 'Quản lý hệ thống, phân quyền hệ thống, quản lý tài khoản',
-    badgeColor: 'bg-purple-50 text-purple-700 border-purple-200',
-  },
-  {
     username: 'quanly',
     password: '123456',
     role: 'Quản lý',
@@ -158,7 +151,7 @@ export default function LoginPage() {
                   required
                   value={tenDangNhap}
                   onChange={(e) => setTenDangNhap(e.target.value)}
-                  placeholder="Ví dụ: admin, quanly, banhang, thukho"
+                  placeholder="Ví dụ: quanly, banhang, thukho"
                   className="w-full px-3.5 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
@@ -226,7 +219,7 @@ export default function LoginPage() {
                   required
                   value={recoveryEmail}
                   onChange={(e) => setRecoveryEmail(e.target.value)}
-                  placeholder="admin@bookstore.vn"
+                  placeholder="quanly@bookstore.vn"
                   className="w-full px-3.5 py-2 border border-slate-300 rounded-lg text-sm"
                 />
               </div>

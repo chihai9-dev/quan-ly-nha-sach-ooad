@@ -4,7 +4,7 @@ import { NhanVien } from '@/models/NhanVien';
 import { TaiKhoan } from '@/models/TaiKhoan';
 
 /**
- * Mật khẩu mặc định cho 4 tài khoản mẫu khi chạy Mock Fallback: "123456"
+ * Mật khẩu mặc định cho 3 tài khoản mẫu khi chạy Mock Fallback: "123456"
  */
 const DEFAULT_SEED_HASH =
   'seed_salt_2026:c1f7ae0fcc0acc157bdd3c1a6a82acd46a15e4882b67d49311921217de791b675cd4ec3bb6bb8c3ba0eb9ca6410da1b7c2cb1ebf9744641ae09855996de2802e';
@@ -15,7 +15,7 @@ class MockAuthStore {
   public accounts: Map<string, TaiKhoan> = new Map();
 
   constructor() {
-    // Khởi tạo 5 Actor khớp sơ đồ Use Case Tổng quát
+    // Khởi tạo các Actor khớp sơ đồ Use Case Tổng quát
     (Object.keys(ACTOR_CODES) as Array<keyof typeof ACTOR_CODES>).forEach((code) => {
       const meta = ACTOR_METADATA[code];
       this.roles.set(
@@ -28,14 +28,6 @@ class MockAuthStore {
       );
     });
 
-    const nvAdmin = new NhanVien({
-      maNV: 'NV001',
-      hoTen: 'Trần Quản Trị',
-      soDienThoai: '0901000001',
-      email: 'admin@bookstore.vn',
-      diaChi: 'Q.1, TP.HCM',
-      ngayVaoLam: '2024-01-10',
-    });
     const nvQuanLy = new NhanVien({
       maNV: 'NV002',
       hoTen: 'Lê Thị Quản Lý',
@@ -61,16 +53,8 @@ class MockAuthStore {
       ngayVaoLam: '2024-06-01',
     });
 
-    [nvAdmin, nvQuanLy, nvBanHang, nvKho].forEach((nv) => this.staff.set(nv.maNV, nv));
+    [nvQuanLy, nvBanHang, nvKho].forEach((nv) => this.staff.set(nv.maNV, nv));
 
-    const accAdmin = new TaiKhoan({
-      tenDangNhap: 'admin',
-      matKhauHash: DEFAULT_SEED_HASH,
-      emailKhoiPhuc: 'admin@bookstore.vn',
-      trangThai: true,
-      vaiTro: this.roles.get(ACTOR_CODES.QUAN_TRI_VIEN) ?? null,
-      maNV: nvAdmin.maNV,
-    });
     const accQuanLy = new TaiKhoan({
       tenDangNhap: 'quanly',
       matKhauHash: DEFAULT_SEED_HASH,
@@ -96,7 +80,7 @@ class MockAuthStore {
       maNV: nvKho.maNV,
     });
 
-    [accAdmin, accQuanLy, accBanHang, accThuKho].forEach((acc) =>
+    [accQuanLy, accBanHang, accThuKho].forEach((acc) =>
       this.accounts.set(acc.tenDangNhap, acc)
     );
   }

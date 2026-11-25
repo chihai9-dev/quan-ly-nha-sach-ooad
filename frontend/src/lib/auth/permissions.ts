@@ -5,7 +5,6 @@
 
 export const ACTOR_CODES = {
   NGUOI_DUNG_HE_THONG: 'NGUOI_DUNG_HE_THONG',
-  QUAN_TRI_VIEN: 'QUAN_TRI_VIEN',
   QUAN_LY: 'QUAN_LY',
   NHAN_VIEN_BAN_HANG: 'NHAN_VIEN_BAN_HANG',
   NHAN_VIEN_KHO: 'NHAN_VIEN_KHO',
@@ -19,11 +18,6 @@ export const PERMISSIONS = {
   DANG_XUAT: 'DANG_XUAT',
   QUEN_MAT_KHAU: 'QUEN_MAT_KHAU',
   DOI_MAT_KHAU: 'DOI_MAT_KHAU',
-
-  // Quản trị viên
-  QUAN_LY_HE_THONG: 'QUAN_LY_HE_THONG',
-  PHAN_QUYEN: 'PHAN_QUYEN',
-  QUAN_LY_TAI_KHOAN: 'QUAN_LY_TAI_KHOAN',
 
   // Quản lý
   QUAN_LY_NHAN_VIEN: 'QUAN_LY_NHAN_VIEN',
@@ -65,17 +59,6 @@ export const ACTOR_METADATA: Record<
     moTa: 'Actor tổng quát (cha) — quyền đăng nhập, đăng xuất, quên mật khẩu, đổi mật khẩu.',
     keThua: null,
     defaultPermissions: [...BASE_USER_PERMISSIONS],
-  },
-  QUAN_TRI_VIEN: {
-    tenVaiTro: 'Quản trị viên',
-    moTa: 'Quản lý hệ thống, phân quyền hệ thống và quản lý tài khoản nhân viên.',
-    keThua: 'NGUOI_DUNG_HE_THONG',
-    defaultPermissions: [
-      ...BASE_USER_PERMISSIONS,
-      PERMISSIONS.QUAN_LY_HE_THONG,
-      PERMISSIONS.PHAN_QUYEN,
-      PERMISSIONS.QUAN_LY_TAI_KHOAN,
-    ],
   },
   QUAN_LY: {
     tenVaiTro: 'Quản lý',
@@ -125,9 +108,6 @@ export const ALL_PERMISSIONS_LIST: ReadonlyArray<{
   { code: PERMISSIONS.DANG_XUAT, label: 'Đăng xuất', group: 'Người dùng hệ thống' },
   { code: PERMISSIONS.QUEN_MAT_KHAU, label: 'Quên mật khẩu', group: 'Người dùng hệ thống' },
   { code: PERMISSIONS.DOI_MAT_KHAU, label: 'Đổi mật khẩu', group: 'Người dùng hệ thống' },
-  { code: PERMISSIONS.QUAN_LY_HE_THONG, label: 'Quản lý hệ thống', group: 'Quản trị viên' },
-  { code: PERMISSIONS.PHAN_QUYEN, label: 'Phân quyền hệ thống', group: 'Quản trị viên' },
-  { code: PERMISSIONS.QUAN_LY_TAI_KHOAN, label: 'Quản lý tài khoản', group: 'Quản trị viên' },
   { code: PERMISSIONS.QUAN_LY_BAN_HANG, label: 'Quản lý bán hàng', group: 'Bán hàng & Khách hàng' },
   { code: PERMISSIONS.QUAN_LY_KHACH_HANG, label: 'Quản lý khách hàng', group: 'Bán hàng & Khách hàng' },
   { code: PERMISSIONS.QUAN_LY_SACH, label: 'Quản lý sách', group: 'Sách & Kho' },

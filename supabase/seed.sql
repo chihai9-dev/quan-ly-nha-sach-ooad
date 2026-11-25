@@ -1,25 +1,17 @@
 -- =============================================================================
--- DỮ LIỆU MẪU (SEED DATA) — 5 ACTOR THEO SƠ ĐỒ USE CASE TỔNG QUÁT
+-- DỮ LIỆU MẪU (SEED DATA) — CÁC ACTOR THEO SƠ ĐỒ USE CASE TỔNG QUÁT
 -- Nguồn: docs/diagrams/Sơ đồ usecase/usecase Tổng quát.drawio
 -- Chạy file này trên Supabase SQL Editor SAU KHI chạy supabase/schema.sql
 -- Mật khẩu mặc định của tất cả tài khoản mẫu là: 123456
 -- =============================================================================
 
--- 1. VAI TRÒ (5 Actor khớp chính xác tên trong Sơ đồ Use Case)
+-- 1. VAI TRÒ (Khớp chính xác tên trong Sơ đồ Use Case)
 insert into public.vai_tro (ma_vai_tro, ten_vai_tro, danh_sach_quyen)
 values
   (
     'NGUOI_DUNG_HE_THONG',
     'Người dùng hệ thống',
     array['DANG_NHAP', 'DANG_XUAT', 'QUEN_MAT_KHAU', 'DOI_MAT_KHAU']
-  ),
-  (
-    'QUAN_TRI_VIEN',
-    'Quản trị viên',
-    array[
-      'DANG_NHAP', 'DANG_XUAT', 'QUEN_MAT_KHAU', 'DOI_MAT_KHAU',
-      'QUAN_LY_HE_THONG', 'PHAN_QUYEN', 'QUAN_LY_TAI_KHOAN'
-    ]
   ),
   (
     'QUAN_LY',
@@ -54,7 +46,6 @@ set ten_vai_tro = excluded.ten_vai_tro,
 -- 2. NHÂN VIÊN ĐẠI DIỆN CHO CÁC ACTOR
 insert into public.nhan_vien (ma_nv, ho_ten, so_dien_thoai, email, dia_chi, ngay_vao_lam)
 values
-  ('NV001', 'Trần Quản Trị',     '0901000001', 'admin@bookstore.vn',   'Q.1, TP.HCM', '2024-01-10'),
   ('NV002', 'Lê Thị Quản Lý',    '0901000002', 'quanly@bookstore.vn',  'Q.3, TP.HCM', '2024-02-15'),
   ('NV003', 'Nguyễn Văn Bán Hàng','0901000003','banhang@bookstore.vn', 'Q.5, TP.HCM', '2024-05-20'),
   ('NV004', 'Phạm Minh Thủ Kho', '0901000004', 'thukho@bookstore.vn',  'Q.10, TP.HCM','2024-06-01')
@@ -65,14 +56,6 @@ set ho_ten = excluded.ho_ten,
 -- 3. TÀI KHOẢN MẪU (Mật khẩu: 123456)
 insert into public.tai_khoan (ten_dang_nhap, mat_khau_hash, email_khoi_phuc, trang_thai, ma_vai_tro, ma_nv)
 values
-  (
-    'admin',
-    'seed_salt_2026:c1f7ae0fcc0acc157bdd3c1a6a82acd46a15e4882b67d49311921217de791b675cd4ec3bb6bb8c3ba0eb9ca6410da1b7c2cb1ebf9744641ae09855996de2802e',
-    'admin@bookstore.vn',
-    true,
-    'QUAN_TRI_VIEN',
-    'NV001'
-  ),
   (
     'quanly',
     'seed_salt_2026:c1f7ae0fcc0acc157bdd3c1a6a82acd46a15e4882b67d49311921217de791b675cd4ec3bb6bb8c3ba0eb9ca6410da1b7c2cb1ebf9744641ae09855996de2802e',
