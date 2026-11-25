@@ -39,13 +39,9 @@
    2. **Tra cứu thông tin KH:** Tìm kiếm nhanh khách hàng thông qua số điện thoại, họ tên.  
    3. **Tra cứu lịch sử mua hàng:** Tra cứu toàn bộ danh sách hóa đơn giao dịch trước đây của khách hàng; theo dõi tổng chi tiêu, tần suất mua sắm và các yêu cầu đổi trả của khách.  
 9.  **Quản lý nhân viên**  
-   1. **Cập nhật thông tin nhân viên:** Quản lý hồ sơ nhân sự (thêm mới mã nhân viên, họ tên, số điện thoại, vị trí công việc, chức vụ); chỉnh sửa thông tin hoặc cập nhật trạng thái làm việc (đang làm việc, tạm nghỉ, thôi việc).  
+   1. **Cập nhật thông tin nhân viên:** Quản lý hồ sơ nhân sự (thêm mới mã nhân viên, họ tên, số điện thoại, vị trí công việc, chức vụ, vai trò trên hệ thống như Quản lý, Quản lý kho, Thu ngân, Nhân viên bán hàng); chỉnh sửa thông tin hoặc cập nhật trạng thái làm việc (đang làm việc, tạm nghỉ, thôi việc).  
    2. **Tra cứu thông tin nhân viên:** Tìm kiếm danh sách nhân sự theo bộ phận, chức danh, mã hoặc tên; xem chi tiết hồ sơ cá nhân và lịch sử hoạt động tác nghiệp trong hệ thống.  
-10.  **Quản trị hệ thống**  
-    1. **Đăng xuất/ Đăng nhập:** Xác thực tài khoản người dùng bằng tên đăng nhập và mật khẩu hợp lệ để phân chia phiên làm việc an toàn; hỗ trợ đăng xuất nhằm bảo mật dữ liệu sau ca trực.  
-    2. **Phân quyền:** Cấu hình các nhóm vai trò (Quản trị viên, Quản lý kho, Thu ngân, Nhân viên bán hàng...); gán quyền truy cập và giới hạn thao tác (xem, thêm, sửa, xóa, duyệt đơn) cho từng nhóm hoặc tài khoản.  
-    3. **Quên mật khẩu**: Cung cấp tính năng gửi yêu cầu đặt lại mật khẩu qua thông tin xác thực an toàn hoặc chuyển tiếp cho quản trị viên cấp quyền khởi tạo lại mật khẩu mới.  
-11.  **Thống kê – báo cáo**  
+10. **Thống kê – báo cáo**  
     1. **Thống kê doanh thu:** Tổng hợp số liệu và trực quan hóa doanh số bán lẻ theo khoảng thời gian (ngày, tháng, quý, năm); phân tích tỷ trọng doanh thu theo hình thức thanh toán hoặc nhân viên bán hàng.  
     2. **Thống kê sách bán chạy**: Lập danh sách xếp hạng các tựa sách có số lượng tiêu thụ cao nhất theo từng mốc thời gian; hỗ trợ phân tích nhu cầu thị trường để tối ưu kế hoạch kinh doanh và nhập sách.  
     3. **Báo cáo tồn kho**: Trích xuất báo cáo tổng thể kho bãi (tồn đầu kỳ, nhập trong kỳ, xuất trong kỳ và tồn cuối kỳ); thống kê giá trị tài sản tồn kho và danh sách những mặt hàng bán chậm.  

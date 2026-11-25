@@ -116,12 +116,12 @@ Tài liệu này chuẩn hóa toàn bộ ngôn ngữ nghiệp vụ trong toàn b
 
 ---
 
-### 2.8. Phân hệ Nhân viên & Quản trị Hệ thống (Staff & System Admin)
+### 2.8. Phân hệ Nhân viên (Staff)
 
 | Thuật ngữ chuẩn | Thuật ngữ Tiếng Việt | Từ KHÔNG dùng / Bị cấm | Tương ứng trong Code / DB | Mô tả nghiệp vụ |
 |---|---|---|---|---|
 | `Staff` / `Employee` | Nhân viên nhà sách | `User` (chung chung), `Account` | Model: `Staff`<br>Table: `staff` | Nhân viên làm việc tại nhà sách. |
-| `Role` | Vai trò hệ thống | `UserGroup`, `PermissionGroup` | Type: `Role` | `ADMIN` (Quản trị viên), `WAREHOUSE_MANAGER` (Quản lý kho), `CASHIER` (Thu ngân), `SALES_STAFF` (Nhân viên bán hàng). |
+| `Role` | Vai trò hệ thống | `UserGroup`, `PermissionGroup` | Type: `Role` | `MANAGER` (Quản lý), `WAREHOUSE_MANAGER` (Quản lý kho), `CASHIER` (Thu ngân), `SALES_STAFF` (Nhân viên bán hàng). |
 | `EmploymentStatus` | Trạng thái làm việc | `WorkState` | Type: `EmploymentStatus` | `ACTIVE` (Đang làm việc), `ON_LEAVE` (Nghỉ phép), `TERMINATED` (Đã thôi việc). |
 
 ---
