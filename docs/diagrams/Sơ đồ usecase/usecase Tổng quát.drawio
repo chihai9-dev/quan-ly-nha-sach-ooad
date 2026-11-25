@@ -4,7 +4,7 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <UserObject label="" plantUmlData="{&#xa;  &quot;data&quot;: &quot;@startuml\nleft to right direction\nskinparam packageStyle rectangle\nskinparam actorStyle awesome\n\n&#39; === DANH SÁCH TÁC NHÂN (ACTORS) ===\nactor \&quot;Nhân viên bán hàng\&quot; as Staff\nactor \&quot;Nhân viên kho\&quot; as Stocker\nactor \&quot;Quản lý\&quot; as Manager\nactor \&quot;Quản trị viên\&quot; as Admin\n\nrectangle \&quot;Hệ thống Quản lý Nhà sách (Mức tổng quát)\&quot; {\n    \n    &#39; Nhóm kỹ thuật\n    usecase \&quot;Quản trị hệ thống\&quot; as UC_System\n    \n    &#39; Nhóm nghiệp vụ vận hành hàng ngày\n    usecase \&quot;Quản lý bán hàng\&quot; as UC_Sales\n    usecase \&quot;Quản lý khách hàng\&quot; as UC_Customers\n    usecase \&quot;Quản lý sách\&quot; as UC_Books\n    usecase \&quot;Quản lý danh mục sách\&quot; as UC_Categories\n    usecase \&quot;Quản lý nhập hàng\&quot; as UC_Imports\n    usecase \&quot;Quản lý nhà cung cấp\&quot; as UC_Suppliers\n    usecase \&quot;Quản lý kho\&quot; as UC_Warehouse\n    \n    &#39; Nhóm chiến lược &amp; quản trị nhân sự\n    usecase \&quot;Quản lý khuyến mãi\&quot; as UC_Promotions\n    usecase \&quot;Quản lý nhân viên\&quot; as UC_Employees\n    usecase \&quot;Thống kê - Báo cáo\&quot; as UC_Reports\n\n}\n\n&#39; === PHÂN QUYỀN TƯƠNG ỨNG ===\n\n&#39; 1. Quản trị viên (Chỉ lo về mặt bảo mật và tài khoản hệ thống)\nAdmin --&gt; UC_System\n\n&#39; 2. Quản lý (Điều hành kinh doanh, nhân sự và báo cáo tài chính)\nManager --&gt; UC_Promotions\nManager --&gt; UC_Employees\nManager --&gt; UC_Reports\nManager --&gt; UC_Suppliers\nManager --&gt; UC_Imports\n\n&#39; 3. Nhân viên bán hàng\nStaff --&gt; UC_Sales\nStaff --&gt; UC_Books\nStaff --&gt; UC_Customers\n\n&#39; 4. Nhân viên kho\nStocker --&gt; UC_Books\nStocker --&gt; UC_Categories\nStocker --&gt; UC_Imports\nStocker --&gt; UC_Suppliers\nStocker --&gt; UC_Warehouse\n\n@enduml&quot;,&#xa;  &quot;config&quot;: null&#xa;}" id="DTG6X3jtEG6FsDp1dn3w-1">
+        <UserObject label="" plantUmlData="{&#xa;  &quot;data&quot;: &quot;@startuml\nleft to right direction\nskinparam packageStyle rectangle\nskinparam actorStyle awesome\n\n&#39; === DANH SÁCH TÁC NHÂN (ACTORS) ===\nactor \&quot;Nhân viên bán hàng\&quot; as Staff\nactor \&quot;Nhân viên kho\&quot; as Stocker\nactor \&quot;Quản lý\&quot; as Manager\n\nrectangle \&quot;Hệ thống Quản lý Nhà sách (Mức tổng quát)\&quot; {\n    \n    &#39; Nhóm nghiệp vụ vận hành hàng ngày\n    usecase \&quot;Quản lý bán hàng\&quot; as UC_Sales\n    usecase \&quot;Quản lý khách hàng\&quot; as UC_Customers\n    usecase \&quot;Quản lý sách\&quot; as UC_Books\n    usecase \&quot;Quản lý danh mục sách\&quot; as UC_Categories\n    usecase \&quot;Quản lý nhập hàng\&quot; as UC_Imports\n    usecase \&quot;Quản lý nhà cung cấp\&quot; as UC_Suppliers\n    usecase \&quot;Quản lý kho\&quot; as UC_Warehouse\n    \n    &#39; Nhóm chiến lược &amp; quản trị nhân sự\n    usecase \&quot;Quản lý khuyến mãi\&quot; as UC_Promotions\n    usecase \&quot;Quản lý nhân viên\&quot; as UC_Employees\n    usecase \&quot;Thống kê - Báo cáo\&quot; as UC_Reports\n\n}\n\n&#39; === PHÂN QUYỀN TƯƠNG ỨNG ===\n\n&#39; 2. Quản lý (Điều hành kinh doanh, nhân sự và báo cáo tài chính)\nManager --&gt; UC_Promotions\nManager --&gt; UC_Employees\nManager --&gt; UC_Reports\nManager --&gt; UC_Suppliers\nManager --&gt; UC_Imports\n\n&#39; 3. Nhân viên bán hàng\nStaff --&gt; UC_Sales\nStaff --&gt; UC_Books\nStaff --&gt; UC_Customers\n\n&#39; 4. Nhân viên kho\nStocker --&gt; UC_Books\nStocker --&gt; UC_Categories\nStocker --&gt; UC_Imports\nStocker --&gt; UC_Suppliers\nStocker --&gt; UC_Warehouse\n\n@enduml&quot;,&#xa;  &quot;config&quot;: null&#xa;}" id="DTG6X3jtEG6FsDp1dn3w-1">
           <mxCell connectable="0" parent="1" style="group;transparentBounds=1;editIcon=1;lockedGroup=0;groupPadding=10;" vertex="1">
             <mxGeometry as="geometry" />
           </mxCell>
@@ -62,11 +62,6 @@
         <UserObject label="Thống kê - Báo cáo" plantUmlId="uc_10" plantUmlBaseStyle="ellipse;html=1;fillColor=#F1F1F1;strokeColor=#181818;whiteSpace=wrap;fontColor=#000000;fontSize=14;" plantUmlBaseValue="Thống kê - Báo cáo" id="DTG6X3jtEG6FsDp1dn3w-12">
           <mxCell parent="DTG6X3jtEG6FsDp1dn3w-2" style="ellipse;html=1;fillColor=#F1F1F1;strokeColor=#181818;whiteSpace=wrap;fontColor=#000000;fontSize=14;" vertex="1">
             <mxGeometry height="38" width="165" x="29.5" y="728" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Quản lý hệ thống" plantUmlId="uc_11" plantUmlBaseStyle="ellipse;html=1;fillColor=#F1F1F1;strokeColor=#181818;whiteSpace=wrap;fontColor=#000000;fontSize=14;" plantUmlBaseValue="Quản trị hệ thống" id="DTG6X3jtEG6FsDp1dn3w-13">
-          <mxCell parent="DTG6X3jtEG6FsDp1dn3w-2" style="ellipse;html=1;fillColor=#F1F1F1;strokeColor=#181818;whiteSpace=wrap;fontColor=#000000;fontSize=14;" vertex="1">
-            <mxGeometry height="35" width="153" x="35.5" y="806" as="geometry" />
           </mxCell>
         </UserObject>
         <mxCell id="DTG6X3jtEG6FsDp1dn3w-36" edge="1" parent="DTG6X3jtEG6FsDp1dn3w-2" source="DTG6X3jtEG6FsDp1dn3w-3" style="endArrow=classic;html=1;rounded=0;dashed=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.399;entryY=0.016;entryDx=0;entryDy=0;entryPerimeter=0;" target="DTG6X3jtEG6FsDp1dn3w-50" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;">
@@ -134,13 +129,7 @@
             <mxPoint x="478.5" y="515.02" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="DTG6X3jtEG6FsDp1dn3w-60" edge="1" parent="DTG6X3jtEG6FsDp1dn3w-2" source="DTG6X3jtEG6FsDp1dn3w-13" style="endArrow=classic;html=1;rounded=0;dashed=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="DTG6X3jtEG6FsDp1dn3w-50" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;">
-          <mxGeometry height="50" relative="1" width="50" as="geometry">
-            <mxPoint x="219.5" y="795.08" as="sourcePoint" />
-            <mxPoint x="475.5" y="480.08000000000004" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <UserObject label="Đăng xuất" plantUmlId="uc_11" plantUmlBaseStyle="ellipse;html=1;fillColor=#F1F1F1;strokeColor=#181818;whiteSpace=wrap;fontColor=#000000;fontSize=14;" plantUmlBaseValue="Quản trị hệ thống" id="EDgBRws2xJigZWOMKqEB-9">
+        <UserObject label="Đăng xuất" plantUmlId="uc_11" plantUmlBaseStyle="ellipse;html=1;fillColor=#F1F1F1;strokeColor=#181818;whiteSpace=wrap;fontColor=#000000;fontSize=14;" plantUmlBaseValue="Đăng xuất" id="EDgBRws2xJigZWOMKqEB-9">
           <mxCell parent="DTG6X3jtEG6FsDp1dn3w-2" style="ellipse;html=1;fillColor=#F1F1F1;strokeColor=#181818;whiteSpace=wrap;fontColor=#000000;fontSize=14;" vertex="1">
             <mxGeometry height="35" width="153" x="35.5" y="860" as="geometry" />
           </mxCell>
@@ -179,21 +168,6 @@
         <UserObject label="Quản lý" plantUmlId="actorlbl_17" plantUmlBaseStyle="text;html=1;align=center;verticalAlign=top;fontColor=#000000;fontSize=14;" plantUmlBaseValue="Quản lý" id="DTG6X3jtEG6FsDp1dn3w-19">
           <mxCell parent="DTG6X3jtEG6FsDp1dn3w-1" style="text;html=1;align=center;verticalAlign=top;fontColor=#000000;fontSize=14;" vertex="1">
             <mxGeometry height="17" width="59" x="90.5" y="685" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="" plantUmlId="actor_18" plantUmlBaseStyle="shape=umlActor;html=1;fillColor=#F1F1F1;strokeColor=#181818;fontColor=#000000;fontSize=14;" plantUmlBaseValue="" id="DTG6X3jtEG6FsDp1dn3w-20">
-          <mxCell parent="DTG6X3jtEG6FsDp1dn3w-1" style="shape=umlActor;html=1;fillColor=#F1F1F1;strokeColor=#181818;fontColor=#000000;fontSize=14;" vertex="1">
-            <mxGeometry height="60" width="40" x="100" y="854" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="Quản trị viên" plantUmlId="actorlbl_19" plantUmlBaseStyle="text;html=1;align=center;verticalAlign=top;fontColor=#000000;fontSize=14;" plantUmlBaseValue="Quản trị viên" id="DTG6X3jtEG6FsDp1dn3w-21">
-          <mxCell parent="DTG6X3jtEG6FsDp1dn3w-1" style="text;html=1;align=center;verticalAlign=top;fontColor=#000000;fontSize=14;" vertex="1">
-            <mxGeometry height="17" width="99" x="70.5" y="916" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <UserObject label="" plantUmlId="rel_20" plantUmlBaseStyle="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=11;edgeStyle=none;rounded=0;html=1;curved=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="" id="DTG6X3jtEG6FsDp1dn3w-22">
-          <mxCell edge="1" parent="DTG6X3jtEG6FsDp1dn3w-1" source="DTG6X3jtEG6FsDp1dn3w-20" style="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=11;edgeStyle=none;rounded=0;html=1;curved=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="DTG6X3jtEG6FsDp1dn3w-13">
-            <mxGeometry relative="1" as="geometry" />
           </mxCell>
         </UserObject>
         <UserObject label="" plantUmlId="rel_21" plantUmlBaseStyle="endArrow=block;endFill=1;strokeColor=#181818;fontColor=#000000;fontSize=11;edgeStyle=none;rounded=0;html=1;curved=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="" id="DTG6X3jtEG6FsDp1dn3w-23">
@@ -255,14 +229,6 @@
             <mxGeometry relative="1" as="geometry">
               <mxPoint x="90" y="630" as="sourcePoint" />
               <mxPoint y="560" as="targetPoint" />
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="" plantUmlId="rel_13" plantUmlBaseStyle="endArrow=block;endFill=0;strokeColor=#181818;fontColor=#000000;fontSize=11;edgeStyle=none;rounded=0;html=1;curved=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="" id="EDgBRws2xJigZWOMKqEB-7">
-          <mxCell edge="1" parent="DTG6X3jtEG6FsDp1dn3w-1" style="endArrow=block;endFill=0;strokeColor=#181818;fontColor=#000000;fontSize=11;edgeStyle=none;rounded=0;html=1;curved=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;">
-            <mxGeometry relative="1" as="geometry">
-              <mxPoint x="90" y="880" as="sourcePoint" />
-              <mxPoint y="610" as="targetPoint" />
             </mxGeometry>
           </mxCell>
         </UserObject>
