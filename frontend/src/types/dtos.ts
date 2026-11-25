@@ -51,3 +51,44 @@ export interface PaginatedResult<T> {
   page: number;
   pageSize: number;
 }
+
+// --- Auth & RBAC DTOs (Theo 5 Actor trong Sơ đồ Use Case) ---
+export interface SessionUserDTO {
+  tenDangNhap: string;
+  maNV: string;
+  hoTen: string;
+  email: string;
+  maVaiTro: string;
+  tenVaiTro: string;
+  danhSachQuyen: string[];
+}
+
+export interface LoginDTO {
+  tenDangNhap: string;
+  matKhau: string;
+}
+
+export interface ChangePasswordDTO {
+  matKhauCu: string;
+  matKhauMoi: string;
+}
+
+export interface ForgotPasswordDTO {
+  tenDangNhap: string;
+  emailKhoiPhuc: string;
+}
+
+export interface CreateAccountDTO {
+  tenDangNhap: string;
+  matKhau: string;
+  emailKhoiPhuc: string;
+  maVaiTro: string;
+  maNV: string;
+  hoTen: string;
+  soDienThoai?: string;
+  diaChi?: string;
+}
+
+export interface UpdatePermissionsDTO {
+  danhSachQuyen: string[];
+}

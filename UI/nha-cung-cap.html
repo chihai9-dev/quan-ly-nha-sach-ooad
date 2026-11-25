@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nhà cung cấp &amp; Công nợ · mộc.</title>
+  <link rel="stylesheet" href="assets/moc.css" />
+  <style>
+    tr.sel td { background: var(--green-50) !important; }
+  </style>
+</head>
+<body data-page="nha-cung-cap" data-group="nhap-hang" data-crumb="Nhập hàng > Nhà cung cấp &amp; Công nợ">
+<template id="page">
+  <div class="page-head">
+    <div><h1>Nhà cung cấp &amp; Công nợ</h1><p>Quản lý danh sách đối tác xuất bản, theo dõi số dư công nợ và kế hoạch chi trả.</p></div>
+    <div class="actions">
+      <a class="btn" href="nhap-hang.html"><i data-i="left"></i>Xem phiếu nhập</a>
+      <button class="btn"><i data-i="download"></i>Xuất sổ công nợ</button>
+      <button class="btn primary"><i data-i="plus"></i>Thêm nhà cung cấp</button>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat hero"><div class="lbl">Tổng công nợ hiện tại <i data-i="wallet"></i></div><div class="val">72,6 <small>triệu đồng</small></div><div class="sub">5/8 nhà cung cấp có dư nợ</div></div>
+    <div class="stat"><div class="lbl">Đến hạn trong 7 ngày <i data-i="alert"></i></div><div class="val" style="color:var(--red)">48,2 <small>triệu</small></div><div class="sub"><span class="bad">3 khoản</span> cần ưu tiên thanh toán</div></div>
+    <div class="stat"><div class="lbl">Đã thanh toán tháng này <i data-i="checkCircle"></i></div><div class="val">54,0 <small>triệu</small></div><div class="sub"><span class="up">↗ 12%</span> so với tháng trước</div></div>
+    <div class="stat"><div class="lbl">Đối tác cung ứng <i data-i="building"></i></div><div class="val">8 <small>đơn vị</small></div><div class="sub">100% hợp đồng còn hiệu lực</div></div>
+  </div>
+
+  <div class="g-2-1">
+    <div class="panel">
+      <div class="tabs">
+        <a class="on">Tất cả đối tác <span class="n">8</span></a>
+        <a>Đang có nợ <span class="n" style="background:var(--amber-bg);color:var(--amber)">5</span></a>
+        <a>Đã tất toán</a>
+      </div>
+      <div class="filters">
+        <div class="search"><i data-i="search"></i><input class="input" placeholder="Tìm tên nhà cung cấp, mã số thuế, SĐT..." /></div>
+        <select class="select"><option>Tất cả nhóm</option><option>NXB Quốc gia</option><option>Công ty phát hành tư nhân</option></select>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Nhà cung cấp</th>
+            <th>Liên hệ</th>
+            <th class="num">Tổng tiền nhập</th>
+            <th class="num">Công nợ hiện tại</th>
+            <th>Hạn thanh toán</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="sel">
+            <td>
+              <div class="row">
+                <span class="avatar" style="background:#fff;border:1px solid var(--line)"><i data-i="building" class="sm"></i></span>
+                <div><b>Công ty Sách Phương Nam</b><div class="sub">MST 0301234567 · NCC-001</div></div>
+              </div>
+            </td>
+            <td>028 3822 1234<div class="sub">Chị Hồng (Kế toán)</div></td>
+            <td class="num">124.500.000 đ</td>
+            <td class="num"><b style="color:var(--red)">19.800.000 đ</b></td>
+            <td><span class="badge bad">Hạn 12/11 (3 ngày)</span></td>
+            <td><button class="btn sm primary">Trả nợ</button></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="row">
+                <span class="avatar" style="background:#fff;border:1px solid var(--line)"><i data-i="building" class="sm"></i></span>
+                <div><b>NXB Kim Đồng</b><div class="sub">MST 0100112233 · NCC-002</div></div>
+              </div>
+            </td>
+            <td>024 3943 4490<div class="sub">Anh Tuấn</div></td>
+            <td class="num">88.200.000 đ</td>
+            <td class="num"><b style="color:var(--amber)">17.400.000 đ</b></td>
+            <td><span class="badge warn">Hạn 14/11 (5 ngày)</span></td>
+            <td><button class="btn sm">Trả nợ</button></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="row">
+                <span class="avatar" style="background:#fff;border:1px solid var(--line)"><i data-i="building" class="sm"></i></span>
+                <div><b>Công ty Cổ phần Văn hóa Nhã Nam</b><div class="sub">MST 0101654321 · NCC-003</div></div>
+              </div>
+            </td>
+            <td>024 3514 6875<div class="sub">Chị Mai Phương</div></td>
+            <td class="num">62.000.000 đ</td>
+            <td class="num"><b style="color:var(--amber)">11.000.000 đ</b></td>
+            <td><span class="badge warn">Hạn 15/11 (6 ngày)</span></td>
+            <td><button class="btn sm">Trả nợ</button></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="row">
+                <span class="avatar" style="background:#fff;border:1px solid var(--line)"><i data-i="building" class="sm"></i></span>
+                <div><b>Alpha Books</b><div class="sub">MST 0101898765 · NCC-004</div></div>
+              </div>
+            </td>
+            <td>024 3722 6234<div class="sub">Anh Hoàng</div></td>
+            <td class="num">54.000.000 đ</td>
+            <td class="num"><b>14.200.000 đ</b></td>
+            <td><span class="badge ok">Hạn 30/11</span></td>
+            <td><button class="btn sm">Trả nợ</button></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="row">
+                <span class="avatar" style="background:#fff;border:1px solid var(--line)"><i data-i="building" class="sm"></i></span>
+                <div><b>First News – Trí Việt</b><div class="sub">MST 0302345678 · NCC-005</div></div>
+              </div>
+            </td>
+            <td>028 3822 7979<div class="sub">Chị Thảo</div></td>
+            <td class="num">41.800.000 đ</td>
+            <td class="num"><b>10.200.000 đ</b></td>
+            <td><span class="badge ok">Hạn 05/12</span></td>
+            <td><button class="btn sm">Trả nợ</button></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="row">
+                <span class="avatar" style="background:#fff;border:1px solid var(--line)"><i data-i="building" class="sm"></i></span>
+                <div><b>NXB Trẻ</b><div class="sub">MST 0300456789 · NCC-006</div></div>
+              </div>
+            </td>
+            <td>028 3931 6289<div class="sub">Chị Lan</div></td>
+            <td class="num">76.300.000 đ</td>
+            <td class="num">0 đ</td>
+            <td><span class="badge gray">Đã thanh toán hết</span></td>
+            <td><button class="btn sm ghost"><i data-i="more"></i></button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Cột phải: Chi tiết công nợ nhà cung cấp đang chọn -->
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h3>Công ty Sách Phương Nam</h3>
+            <p>Đối tác phân phối chiến lược · Từ năm 2021</p>
+          </div>
+          <span class="badge bad">Dư nợ 19,8 tr</span>
+        </div>
+        <dl class="kv">
+          <dt>Mã số thuế</dt><dd>0301234567</dd>
+          <dt>Tài khoản NH</dt><dd>0071 0000 99888 (VCB)</dd>
+          <dt>Địa chỉ</dt><dd>940 Đường 3/2, P.15, Q.11, TP.HCM</dd>
+          <dt>Hạn mức nợ</dt><dd>50.000.000 đ (An toàn)</dd>
+          <dt>Thời hạn nợ</dt><dd>30 ngày kể từ ngày nhập kho</dd>
+        </dl>
+        <hr class="sep" />
+        <div class="card-head" style="margin-bottom:8px">
+          <h3>Các phiếu nhập chưa trả hết</h3>
+        </div>
+        <div class="li">
+          <div class="grow">
+            <b>Phiếu nhập PN-0042</b>
+            <small>Nhập 09/11 · Tổng 28.350.000 đ (Đã cọc 30%)</small>
+          </div>
+          <b style="color:var(--red)">19.845.000 đ</b>
+        </div>
+        <div class="li">
+          <div class="grow">
+            <b>Phiếu nhập PN-0038</b>
+            <small>Nhập 12/10 · Tổng 15.200.000 đ</small>
+          </div>
+          <span class="badge ok">Đã trả đủ</span>
+        </div>
+        <button class="btn primary block" style="margin-top:14px"><i data-i="wallet"></i>Lập phiếu chi thanh toán 19.800.000 đ</button>
+      </div>
+    </div>
+  </div>
+</template>
+<script src="assets/shell.js"></script>
+</body>
+</html>

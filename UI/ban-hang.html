@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bán hàng (POS) · mộc.</title>
+  <link rel="stylesheet" href="assets/moc.css" />
+  <style>
+    .pos { display: grid; grid-template-columns: 1fr 380px; gap: 16px; align-items: start; }
+    .books { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .tile { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 10px; cursor: pointer; position: relative; }
+    .tile:hover { border-color: var(--green-600); box-shadow: 0 0 0 3px var(--green-50); }
+    .tile.in { border-color: var(--green-800); }
+    .tile.in .qty-pill { display: grid; }
+    .tile.out { opacity: .5; cursor: not-allowed; }
+    .tile .cover-wrap { background: #f6f5ee; border-radius: 8px; height: 96px; display: grid; place-items: center; }
+    .tile .cover.lg { width: 52px; height: 72px; }
+    .tile b { font-size: 12.5px; line-height: 1.3; }
+    .tile .meta { display: flex; justify-content: space-between; align-items: center; }
+    .tile .price { font-weight: 700; color: var(--green-800); }
+    .qty-pill { display: none; position: absolute; top: 8px; right: 8px; width: 22px; height: 22px; border-radius: 50%; background: var(--green-800); color: #fff; font-size: 11px; font-weight: 700; place-items: center; }
+    .cart { position: sticky; top: 76px; display: flex; flex-direction: column; gap: 12px; }
+    .cart-item { display: flex; gap: 10px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line-2); }
+    .stepper { display: inline-flex; align-items: center; border: 1px solid var(--line); border-radius: 7px; height: 28px; }
+    .stepper button { width: 26px; height: 26px; border: 0; background: none; cursor: pointer; display: grid; place-items: center; color: var(--ink-2); }
+    .stepper span { min-width: 22px; text-align: center; font-weight: 600; }
+    .pay-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .pay { border: 1px solid var(--line); border-radius: 9px; padding: 10px 4px 8px; display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; cursor: pointer; color: var(--ink-2); text-align: center; }
+    .pay.on { border-color: var(--green-800); background: var(--green-50); color: var(--green-800); }
+    .order-tabs { display: flex; gap: 6px; }
+    .order-tabs span { padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line); background: #fff; font-weight: 600; font-size: 12px; display: inline-flex; gap: 6px; align-items: center; }
+    .order-tabs span.on { background: var(--green-800); color: #fff; border-color: var(--green-800); }
+    kbd { font-family: inherit; font-size: 10px; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 1px 5px; color: var(--muted); background: #fff; }
+  </style>
+</head>
+<body data-page="ban-hang" data-crumb="Bán hàng">
+<template id="page">
+  <div class="page-head">
+    <div><h1>Bán hàng tại quầy</h1><p>Ca sáng · Quầy POS 01 · Mở ca lúc 07:30 bởi Lan Anh</p></div>
+    <div class="actions">
+      <div class="order-tabs"><span class="on">Đơn #1 <i data-i="x" class="sm"></i></span><span>Đơn #2</span><span><i data-i="plus" class="sm"></i></span></div>
+      <a class="btn" href="ban-hang-hoa-don.html"><i data-i="receipt"></i>Hóa đơn hôm nay</a>
+    </div>
+  </div>
+
+  <div class="pos">
+    <!-- Cột trái: tìm & chọn sách -->
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="row">
+        <div class="search grow"><i data-i="search"></i><input class="input" style="height:42px;background:#fff" placeholder="Tìm theo tên sách, tác giả, mã sách hoặc ISBN..." /></div>
+        <button class="btn" style="height:42px"><i data-i="scan"></i>Quét mã vạch <kbd>F2</kbd></button>
+      </div>
+      <div class="chips">
+        <span class="chip on">Tất cả</span><span class="chip">Văn học</span><span class="chip">Kỹ năng sống</span><span class="chip">Thiếu nhi</span><span class="chip">Tâm lý học</span><span class="chip">Kinh tế</span><span class="chip">Giáo khoa</span>
+      </div>
+      <div class="books">
+        <div class="tile in"><span class="qty-pill">2</span><div class="cover-wrap"><span class="cover lg c1"></span></div><div><b>Nhà giả kim</b><div class="small muted">Paulo Coelho</div></div><div class="meta"><span class="price">79.000 đ</span><span class="small muted">128 cuốn</span></div></div>
+        <div class="tile in"><span class="qty-pill">1</span><div class="cover-wrap"><span class="cover lg c2"></span></div><div><b>Đắc nhân tâm</b><div class="small muted">Dale Carnegie</div></div><div class="meta"><span class="price">86.000 đ</span><span class="small muted">85 cuốn</span></div></div>
+        <div class="tile"><div class="cover-wrap"><span class="cover lg c3"></span></div><div><b>Cây cam ngọt của tôi</b><div class="small muted">José Mauro de Vasconcelos</div></div><div class="meta"><span class="price">108.000 đ</span><span class="badge warn plain">Còn 6</span></div></div>
+        <div class="tile"><div class="cover-wrap"><span class="cover lg c4"></span></div><div><b>Dế Mèn phiêu lưu ký</b><div class="small muted">Tô Hoài</div></div><div class="meta"><span class="price">65.000 đ</span><span class="small muted">52 cuốn</span></div></div>
+        <div class="tile in"><span class="qty-pill">1</span><div class="cover-wrap"><span class="cover lg c5"></span></div><div><b>Tư duy nhanh và chậm</b><div class="small muted">Daniel Kahneman</div></div><div class="meta"><span class="price">269.000 đ</span><span class="small muted">34 cuốn</span></div></div>
+        <div class="tile"><div class="cover-wrap"><span class="cover lg c6"></span></div><div><b>Tuổi trẻ đáng giá bao nhiêu?</b><div class="small muted">Rosie Nguyễn</div></div><div class="meta"><span class="price">90.000 đ</span><span class="badge warn plain">Còn 8</span></div></div>
+        <div class="tile"><div class="cover-wrap"><span class="cover lg c7"></span></div><div><b>Hoàng tử bé</b><div class="small muted">Antoine de Saint-Exupéry</div></div><div class="meta"><span class="price">75.000 đ</span><span class="small muted">41 cuốn</span></div></div>
+        <div class="tile out"><div class="cover-wrap"><span class="cover lg c8"></span></div><div><b>Bố già</b><div class="small muted">Mario Puzo</div></div><div class="meta"><span class="price">198.000 đ</span><span class="badge bad plain">Hết hàng</span></div></div>
+      </div>
+      <div class="row small muted" style="justify-content:center;gap:18px">
+        <span><kbd>F2</kbd> Quét mã</span><span><kbd>F4</kbd> Tìm khách hàng</span><span><kbd>F8</kbd> Mã giảm giá</span><span><kbd>F9</kbd> Thanh toán</span>
+      </div>
+    </div>
+
+    <!-- Cột phải: đơn hàng -->
+    <div class="cart">
+      <div class="card" style="padding:14px 16px">
+        <div class="row">
+          <span class="avatar">MA</span>
+          <div class="grow"><b>Nguyễn Minh Anh</b> <span class="tier GOLD">GOLD</span><div class="small muted">0901 234 567 · 1.280 điểm</div></div>
+          <button class="btn ghost sm"><i data-i="x" class="sm"></i></button>
+        </div>
+        <div class="callout ok small" style="margin-top:12px;padding:10px 12px"><i data-i="gift" class="sm"></i><span>Hạng GOLD được giảm <b style="display:inline">5%</b> trên tổng đơn.</span></div>
+      </div>
+
+      <div class="card" style="padding:14px 16px">
+        <div class="card-head" style="margin-bottom:4px"><h3>Đơn hàng <span class="muted" style="font-weight:500">· 3 đầu sách, 4 cuốn</span></h3><a class="link small">Xóa tất cả</a></div>
+        <div class="cart-item"><span class="cover c1"></span><div class="grow"><b>Nhà giả kim</b><div class="small muted">79.000 đ</div></div><div class="stepper"><button><i data-i="minus" class="sm"></i></button><span>2</span><button><i data-i="plus" class="sm"></i></button></div><b style="width:76px;text-align:right">158.000 đ</b></div>
+        <div class="cart-item"><span class="cover c2"></span><div class="grow"><b>Đắc nhân tâm</b><div class="small muted">86.000 đ</div></div><div class="stepper"><button><i data-i="minus" class="sm"></i></button><span>1</span><button><i data-i="plus" class="sm"></i></button></div><b style="width:76px;text-align:right">86.000 đ</b></div>
+        <div class="cart-item" style="border:0"><span class="cover c5"></span><div class="grow"><b>Tư duy nhanh và chậm</b><div class="small muted">269.000 đ</div></div><div class="stepper"><button><i data-i="minus" class="sm"></i></button><span>1</span><button><i data-i="plus" class="sm"></i></button></div><b style="width:76px;text-align:right">269.000 đ</b></div>
+
+        <div class="row" style="margin:10px 0 12px;gap:8px">
+          <div class="search grow"><i data-i="ticket"></i><input class="input" value="MOC10" /></div>
+          <button class="btn">Áp dụng</button>
+        </div>
+        <div class="sum"><span>Tạm tính</span><span>513.000 đ</span></div>
+        <div class="sum"><span>Ưu đãi hạng GOLD (5%)</span><span class="minus">−25.650 đ</span></div>
+        <div class="sum"><span>Mã giảm giá MOC10 (10%)</span><span class="minus">−51.300 đ</span></div>
+        <div class="sum"><span>VAT (8%)</span><span>34.884 đ</span></div>
+        <div class="sum total"><span>Khách cần trả</span><span>470.934 đ</span></div>
+      </div>
+
+      <div class="card" style="padding:14px 16px">
+        <div class="card-head" style="margin-bottom:10px"><h3>Phương thức thanh toán</h3></div>
+        <div class="pay-grid">
+          <div class="pay on"><i data-i="cash" class="lg"></i>Tiền mặt</div>
+          <div class="pay"><i data-i="bank" class="lg"></i>Chuyển khoản</div>
+          <div class="pay"><i data-i="wallet" class="lg"></i>MoMo</div>
+          <div class="pay"><i data-i="card" class="lg"></i>Thẻ</div>
+        </div>
+        <div class="form-grid" style="margin-top:12px">
+          <div class="field"><label>Khách đưa</label><input class="input" value="500.000" /></div>
+          <div class="field"><label>Tiền thừa</label><input class="input" value="29.066" readonly style="background:#fafaf6;font-weight:600" /></div>
+        </div>
+      </div>
+
+      <a class="btn primary block" href="ban-hang-hoa-don.html">Thanh toán · 470.934 đ <kbd style="background:transparent;color:#fff;border-color:rgba(255,255,255,.4)">F9</kbd></a>
+    </div>
+  </div>
+</template>
+<script src="assets/shell.js"></script>
+</body>
+</html>

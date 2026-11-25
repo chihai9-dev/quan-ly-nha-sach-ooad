@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Khuyến mãi &amp; Voucher · mộc.</title>
+  <link rel="stylesheet" href="assets/moc.css" />
+  <style>
+    .coupon-code { display: inline-flex; align-items: center; gap: 6px; padding: 4px 8px; border: 1px dashed var(--green-700); background: var(--green-50); border-radius: 6px; font-family: monospace; font-size: 13px; font-weight: 700; color: var(--green-900); }
+  </style>
+</head>
+<body data-page="khuyen-mai" data-crumb="Khuyến mãi &amp; Mã giảm giá">
+<template id="page">
+  <div class="page-head">
+    <div><h1>Khuyến mãi &amp; Voucher</h1><p>Quản lý các chương trình ưu đãi, mã giảm giá tại quầy và điều kiện áp dụng.</p></div>
+    <div class="actions">
+      <button class="btn"><i data-i="calendar"></i>Lịch chiến dịch</button>
+      <button class="btn primary"><i data-i="plus"></i>Tạo mã giảm giá</button>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat hero"><div class="lbl">Chiến dịch đang chạy <i data-i="gift"></i></div><div class="val">3 <small>chương trình</small></div><div class="sub">Áp dụng trên toàn bộ hóa đơn</div></div>
+    <div class="stat"><div class="lbl">Voucher đã phát hành <i data-i="ticket"></i></div><div class="val">1.500 <small>lượt</small></div><div class="sub"><span class="up">Đã dùng 64%</span> (960 lượt)</div></div>
+    <div class="stat"><div class="lbl">Doanh thu qua voucher <i data-i="wallet"></i></div><div class="val">68,4 <small>triệu đồng</small></div><div class="sub">Chiếm 34,4% doanh thu tháng</div></div>
+    <div class="stat"><div class="lbl">Tổng tiền chiết khấu <i data-i="percent"></i></div><div class="val">8,2 <small>triệu đồng</small></div><div class="sub">Tỷ lệ giảm trung bình 10,7%</div></div>
+  </div>
+
+  <div class="g-2-1">
+    <div class="panel">
+      <div class="tabs">
+        <a class="on">Mã giảm giá (Coupon) <span class="n">5</span></a>
+        <a>Chiến dịch combo</a>
+        <a>Ưu đãi sinh nhật</a>
+      </div>
+      <div class="filters">
+        <div class="search"><i data-i="search"></i><input class="input" placeholder="Tìm tên chương trình hoặc mã coupon..." /></div>
+        <select class="select"><option>Tất cả trạng thái</option><option>Đang kích hoạt</option><option>Đã hết hạn</option></select>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Mã giảm giá</th>
+            <th>Loại ưu đãi</th>
+            <th>Điều kiện áp dụng</th>
+            <th class="num">Đã dùng</th>
+            <th>Thời hạn</th>
+            <th>Trạng thái</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="coupon-code">MOC10</div>
+              <div class="sub">Chào bạn mới tháng 11</div>
+            </td>
+            <td><b>Giảm 10%</b><div class="sub">Tối đa 50.000 đ</div></td>
+            <td>Đơn từ 200.000 đ</td>
+            <td class="num"><b>412</b> / 500</td>
+            <td>01/11 – 30/11</td>
+            <td><span class="badge ok">Đang chạy</span></td>
+            <td><button class="btn sm ghost"><i data-i="more"></i></button></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="coupon-code">SACH10</div>
+              <div class="sub">Ưu đãi sách Văn học</div>
+            </td>
+            <td><b>Giảm 10%</b></td>
+            <td>Áp dụng danh mục Văn học</td>
+            <td class="num"><b>288</b> / 400</td>
+            <td>05/11 – 20/11</td>
+            <td><span class="badge ok">Đang chạy</span></td>
+            <td><button class="btn sm ghost"><i data-i="more"></i></button></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="coupon-code">VIPMEMBER</div>
+              <div class="sub">Đặc quyền GOLD &amp; PLATINUM</div>
+            </td>
+            <td><b>Giảm 15.000 đ</b></td>
+            <td>Hạng GOLD trở lên</td>
+            <td class="num"><b>96</b> / 200</td>
+            <td>Hết năm 2026</td>
+            <td><span class="badge ok">Đang chạy</span></td>
+            <td><button class="btn sm ghost"><i data-i="more"></i></button></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="coupon-code">HALLOWEEN</div>
+              <div class="sub">Tuần lễ sách kinh dị</div>
+            </td>
+            <td><b>Giảm 20%</b></td>
+            <td>Sách trinh thám, kinh dị</td>
+            <td class="num"><b>300</b> / 300</td>
+            <td>25/10 – 31/10</td>
+            <td><span class="badge gray">Đã kết thúc</span></td>
+            <td><button class="btn sm ghost"><i data-i="more"></i></button></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="coupon-code">COMBO3</div>
+              <div class="sub">Mua 3 cuốn thiếu nhi</div>
+            </td>
+            <td><b>Đồng giá 50.000 đ/c</b></td>
+            <td>Mua tối thiểu 3 cuốn</td>
+            <td class="num"><b>85</b> / 100</td>
+            <td>30/11/2026</td>
+            <td><span class="badge ok">Đang chạy</span></td>
+            <td><button class="btn sm ghost"><i data-i="more"></i></button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Cột phải: Tạo nhanh hoặc chính sách -->
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="card">
+        <div class="card-head"><h3>Tạo nhanh mã giảm giá</h3></div>
+        <div class="form-grid">
+          <div class="field full"><label>Mã hiển thị *</label><input class="input" placeholder="VD: TRIAN20" style="text-transform:uppercase" /></div>
+          <div class="field"><label>Loại giảm giá</label><select class="select"><option>Theo phần trăm (%)</option><option>Theo số tiền cố định</option></select></div>
+          <div class="field"><label>Giá trị giảm *</label><input class="input" placeholder="10" /></div>
+          <div class="field"><label>Đơn tối thiểu</label><input class="input" placeholder="150.000" /></div>
+          <div class="field"><label>Số lượt tối đa</label><input class="input" placeholder="200" /></div>
+          <div class="field full"><label>Thời gian áp dụng</label><input class="input" value="10/11/2026 – 25/11/2026" /></div>
+        </div>
+        <button class="btn primary block" style="margin-top:16px"><i data-i="check"></i>Phát hành mã ngay</button>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>Nguyên tắc tính chiết khấu</h3></div>
+        <p class="small muted" style="line-height:1.6">
+          1. Ưu đãi hạng thẻ (STANDARD, SILVER, GOLD, PLATINUM) được tính trước.<br/>
+          2. Mã giảm giá áp dụng tiếp trên giá trị tạm tính còn lại.<br/>
+          3. Thuế VAT (8%) luôn được tính trên số tiền thực thu sau khi đã trừ toàn bộ ưu đãi.
+        </p>
+      </div>
+    </div>
+  </div>
+</template>
+<script src="assets/shell.js"></script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thêm sách mới · mộc.</title>
+  <link rel="stylesheet" href="assets/moc.css" />
+  <style>
+    .upload-zone { border: 2px dashed var(--line); border-radius: 12px; padding: 24px 16px; text-align: center; background: #fafaf6; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .upload-zone:hover { border-color: var(--green-700); background: var(--green-50); }
+    .upload-preview { width: 110px; height: 154px; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,.12); background: linear-gradient(160deg, #c99a4b, #8e6421); color: #fff; display: flex; flex-direction: column; justify-content: flex-end; padding: 10px; font-weight: 700; font-size: 11px; margin-bottom: 8px; }
+  </style>
+</head>
+<body data-page="quan-ly-sach-them" data-group="quan-ly-sach" data-crumb="Quản lý sách > Thêm sách mới">
+<template id="page">
+  <div class="page-head">
+    <div><h1>Thêm sách mới</h1><p>Nhập thông tin tác phẩm, thiết lập giá bán niêm yết và định vị vị trí lưu kho.</p></div>
+    <div class="actions">
+      <a class="btn" href="quan-ly-sach.html">Hủy</a>
+      <button class="btn">Lưu nháp</button>
+      <a class="btn primary" href="quan-ly-sach.html"><i data-i="check"></i>Lưu sách</a>
+    </div>
+  </div>
+
+  <div class="g-2-1">
+    <!-- Cột trái: Form thông tin -->
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="card">
+        <div class="card-head"><h3>Thông tin tác phẩm</h3></div>
+        <div class="form-grid">
+          <div class="field full">
+            <label>Tên sách *</label>
+            <input class="input" placeholder="Ví dụ: Hoàng tử bé" value="Rừng Na Uy" />
+          </div>
+          <div class="field">
+            <label>Mã sách (Tự động sinh hoặc nhập)</label>
+            <input class="input" value="S-0009" />
+          </div>
+          <div class="field">
+            <label>Mã vạch / ISBN *</label>
+            <input class="input" placeholder="978-604-..." value="978-604-56-7890-1" />
+          </div>
+          <div class="field">
+            <label>Tác giả *</label>
+            <input class="input" placeholder="Nhập tên tác giả..." value="Haruki Murakami" />
+          </div>
+          <div class="field">
+            <label>Nhà xuất bản *</label>
+            <select class="select">
+              <option selected>NXB Hội Nhà Văn</option>
+              <option>NXB Kim Đồng</option>
+              <option>NXB Trẻ</option>
+              <option>NXB Thế Giới</option>
+              <option>NXB Tổng Hợp</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Thể loại *</label>
+            <select class="select">
+              <option selected>Văn học</option>
+              <option>Kỹ năng sống</option>
+              <option>Tâm lý học</option>
+              <option>Thiếu nhi</option>
+              <option>Kinh tế</option>
+              <option>Giáo khoa</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Năm xuất bản</label>
+            <input class="input" value="2024" />
+          </div>
+          <div class="field full">
+            <label>Tóm tắt nội dung</label>
+            <textarea class="input" rows="3" placeholder="Giới thiệu đôi nét về tác phẩm...">Câu chuyện về những hồi ức tuổi trẻ đầy trăn trở, tình yêu và sự trưởng thành của nhân vật Toru Watanabe giữa lòng Tokyo thập niên 60.</textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>Định giá &amp; Quản lý kho</h3></div>
+        <div class="form-grid">
+          <div class="field">
+            <label>Giá nhập dự kiến (₫) *</label>
+            <input class="input" value="77.000" />
+            <span class="help">Giá mua từ nhà phân phối hoặc NXB</span>
+          </div>
+          <div class="field">
+            <label>Giá bán niêm yết (₫) *</label>
+            <input class="input" value="110.000" style="font-weight:700;color:var(--green-800)" />
+            <span class="help" style="color:var(--green-700)">Lợi nhuận gộp dự kiến: +42,8%</span>
+          </div>
+          <div class="field">
+            <label>Tồn kho ban đầu</label>
+            <input class="input" value="45" />
+          </div>
+          <div class="field">
+            <label>Ngưỡng cảnh báo tối thiểu</label>
+            <input class="input" value="10" />
+            <span class="help">Hệ thống sẽ nhắc nhập hàng khi dưới mức này</span>
+          </div>
+          <div class="field">
+            <label>Vị trí trưng bày / Kệ</label>
+            <input class="input" value="Kệ A3 – Tầng 2" />
+          </div>
+          <div class="field">
+            <label>Trọng lượng (gram)</label>
+            <input class="input" value="380" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cột phải: Ảnh bìa & Trạng thái -->
+    <div style="display:flex;flex-direction:column;gap:16px;position:sticky;top:76px">
+      <div class="card">
+        <div class="card-head"><h3>Ảnh bìa sách</h3></div>
+        <div style="display:flex;flex-direction:column;align-items:center">
+          <div class="cover xl c9" style="margin-bottom:14px"></div>
+          <div class="upload-zone" style="width:100%">
+            <i data-i="upload" class="lg" style="color:var(--muted)"></i>
+            <b>Tải lên ảnh bìa mới</b>
+            <span class="small muted">Hỗ trợ JPG, PNG, WebP (Tối đa 2MB)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>Trạng thái &amp; Hiển thị</h3></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line-2)">
+          <div>
+            <b>Đang kinh doanh</b>
+            <div class="small muted">Cho phép bán tại quầy POS</div>
+          </div>
+          <span class="toggle on"></span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line-2)">
+          <div>
+            <b>Áp dụng mã giảm giá</b>
+            <div class="small muted">Hưởng chung các CTKM toàn cửa hàng</div>
+          </div>
+          <span class="toggle on"></span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0">
+          <div>
+            <b>Đầu sách nổi bật</b>
+            <div class="small muted">Gợi ý tại màn hình POS</div>
+          </div>
+          <span class="toggle"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<script src="assets/shell.js"></script>
+</body>
+</html>

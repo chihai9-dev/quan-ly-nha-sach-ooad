@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Trung tâm trợ giúp · mộc.</title>
+  <link rel="stylesheet" href="assets/moc.css" />
+  <style>
+    .hero-help { background: var(--green-800); color: #fff; border-radius: 16px; padding: 32px 36px; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+    .hero-help h1 { font-size: 26px; letter-spacing: -.02em; }
+    .hero-help p { color: rgba(255,255,255,.78); margin-top: 6px; }
+    .hero-help .search { width: 460px; }
+    .hero-help .search .input { height: 46px; background: #fff; border: 0; font-size: 14px; }
+    .topic { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 10px; cursor: pointer; }
+    .topic:hover { border-color: var(--green-600); box-shadow: 0 0 0 3px var(--green-50); }
+    .topic .ic { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; background: var(--green-50); color: var(--green-800); }
+    .topic b { font-size: 14px; } .topic p { color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .g-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    details { border-bottom: 1px solid var(--line-2); padding: 14px 0; }
+    details:last-child { border-bottom: 0; }
+    summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+    summary::-webkit-details-marker { display: none; }
+    details[open] summary svg { transform: rotate(90deg); }
+    details p { color: var(--ink-2); margin-top: 8px; line-height: 1.6; }
+    .video { border-radius: 10px; height: 92px; background: linear-gradient(135deg, var(--green-700), var(--green-900)); display: grid; place-items: center; color: #fff; flex: none; width: 140px; }
+    .kb { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px dashed var(--line-2); }
+    kbd { font-family: inherit; font-size: 11px; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; padding: 1px 7px; background: #fff; color: var(--ink-2); }
+  </style>
+</head>
+<body data-page="tro-giup" data-crumb="Trung tâm trợ giúp">
+<template id="page">
+  <div class="hero-help">
+    <div><h1>Chúng tôi có thể giúp gì cho bạn?</h1><p>Hướng dẫn sử dụng, câu hỏi thường gặp và kênh hỗ trợ trực tiếp từ đội ngũ mộc.</p></div>
+    <div class="search"><i data-i="search"></i><input class="input" placeholder="Ví dụ: cách trả hàng cho khách, in lại hóa đơn..." /></div>
+  </div>
+
+  <div class="g-4">
+    <a class="topic" href="ban-hang.html"><span class="ic"><i data-i="bag"></i></span><b>Bán hàng tại quầy</b><p>Tạo đơn, áp mã giảm giá, thanh toán và in hóa đơn.</p><span class="small muted">12 bài viết</span></a>
+    <a class="topic" href="ton-kho.html"><span class="ic"><i data-i="boxes"></i></span><b>Tồn kho &amp; kiểm kê</b><p>Ngưỡng cảnh báo, kiểm kê định kỳ và cân bằng kho.</p><span class="small muted">9 bài viết</span></a>
+    <a class="topic" href="nhap-hang.html"><span class="ic"><i data-i="truck"></i></span><b>Nhập hàng &amp; công nợ</b><p>Lập phiếu nhập, nhận hàng, thanh toán nhà cung cấp.</p><span class="small muted">8 bài viết</span></a>
+    <a class="topic" href="khach-hang.html"><span class="ic"><i data-i="users"></i></span><b>Khách hàng thành viên</b><p>Tích điểm, hạng thẻ và ưu đãi sinh nhật.</p><span class="small muted">6 bài viết</span></a>
+  </div>
+
+  <div class="g-2-1">
+    <div class="card">
+      <div class="card-head"><div><h3>Câu hỏi thường gặp</h3><p>Được tra cứu nhiều nhất trong tháng</p></div></div>
+      <details open><summary>Làm sao để xử lý khách đổi / trả sách? <i data-i="right" class="sm"></i></summary><p>Vào <b>Bán hàng → Hóa đơn</b>, chọn hóa đơn cần xử lý rồi bấm <b>Đổi / trả</b>. Chọn đầu sách và số lượng trả, hệ thống sẽ tự cộng lại tồn kho và hoàn tiền theo phương thức ban đầu. Hóa đơn chỉ được đổi trả trong vòng 7 ngày.</p></details>
+      <details><summary>Vì sao không thêm được sách vào đơn hàng? <i data-i="right" class="sm"></i></summary><p>Sách đã hết hàng (tồn kho = 0) hoặc ở trạng thái “Ngừng kinh doanh” sẽ không thể thêm vào đơn. Kiểm tra lại tại màn hình Tồn kho.</p></details>
+      <details><summary>Ưu đãi hạng thẻ và mã giảm giá có được cộng dồn không? <i data-i="right" class="sm"></i></summary><p>Có. Ưu đãi hạng thẻ được trừ trước, sau đó áp dụng mã giảm giá trên tạm tính; VAT được tính trên số tiền sau giảm giá.</p></details>
+      <details><summary>Tồn kho được cập nhật khi nào sau khi nhập hàng? <i data-i="right" class="sm"></i></summary><p>Chỉ khi phiếu nhập được xác nhận <b>Đã nhập kho</b>. Phiếu ở trạng thái Nháp hoặc Chờ nhận hàng chưa làm thay đổi tồn kho.</p></details>
+      <details><summary>Tôi quên mật khẩu, phải làm sao? <i data-i="right" class="sm"></i></summary><p>Tại màn hình đăng nhập, chọn “Quên mật khẩu” và nhập email công việc. Liên kết đặt lại mật khẩu có hiệu lực trong 30 phút.</p></details>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="card">
+        <div class="card-head"><h3>Liên hệ hỗ trợ</h3><span class="badge ok">Đang trực tuyến</span></div>
+        <div class="li"><span class="ic"><i data-i="msg"></i></span><div class="grow"><b>Chat với hỗ trợ viên</b><small>Phản hồi trung bình 2 phút</small></div><i data-i="right" class="sm"></i></div>
+        <div class="li"><span class="ic"><i data-i="phone"></i></span><div class="grow"><b>1900 6868</b><small>07:00 – 22:00 mỗi ngày</small></div><i data-i="right" class="sm"></i></div>
+        <div class="li"><span class="ic"><i data-i="mail"></i></span><div class="grow"><b>hotro@mocbooks.vn</b><small>Phản hồi trong 24 giờ</small></div><i data-i="right" class="sm"></i></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h3>Phím tắt tại quầy POS</h3><i data-i="keyboard"></i></div>
+        <div class="kb"><span>Quét mã vạch</span><kbd>F2</kbd></div>
+        <div class="kb"><span>Tìm khách hàng</span><kbd>F4</kbd></div>
+        <div class="kb"><span>Nhập mã giảm giá</span><kbd>F8</kbd></div>
+        <div class="kb"><span>Thanh toán</span><kbd>F9</kbd></div>
+        <div class="kb" style="border:0"><span>Tạo đơn mới</span><span><kbd>Ctrl</kbd> + <kbd>N</kbd></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><div><h3>Video hướng dẫn nhanh</h3><p>Dành cho nhân viên mới</p></div><a class="link small">Xem tất cả</a></div>
+    <div class="g-3">
+      <div class="row" style="align-items:flex-start"><span class="video"><i data-i="play" class="lg"></i></span><div><b>Ca làm việc đầu tiên</b><div class="small muted" style="margin-top:4px">Mở ca, bán đơn đầu tiên và chốt ca · 4:12</div></div></div>
+      <div class="row" style="align-items:flex-start"><span class="video"><i data-i="play" class="lg"></i></span><div><b>Kiểm kê kho bằng mã vạch</b><div class="small muted" style="margin-top:4px">Đếm nhanh, xử lý chênh lệch · 6:30</div></div></div>
+      <div class="row" style="align-items:flex-start"><span class="video"><i data-i="play" class="lg"></i></span><div><b>Lập phiếu nhập hàng</b><div class="small muted" style="margin-top:4px">Từ gợi ý sắp hết đến nhận hàng · 5:05</div></div></div>
+    </div>
+  </div>
+</template>
+<script src="assets/shell.js"></script>
+</body>
+</html>

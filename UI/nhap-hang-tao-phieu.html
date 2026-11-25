@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tạo phiếu nhập · mộc.</title>
+  <link rel="stylesheet" href="assets/moc.css" />
+  <style>
+    .cell-input { height: 32px; text-align: right; width: 100px; }
+    .supplier { display: flex; gap: 12px; align-items: center; padding: 12px; border: 1px solid var(--green-800); background: var(--green-50); border-radius: 10px; }
+  </style>
+</head>
+<body data-page="nhap-hang-tao-phieu" data-group="nhap-hang" data-crumb="Nhập hàng > Tạo phiếu nhập">
+<template id="page">
+  <div class="page-head">
+    <div><h1>Tạo phiếu nhập PN-0046</h1><p>Lập phiếu nhập sách từ nhà cung cấp. Tồn kho chỉ được cộng khi phiếu chuyển sang “Đã nhập kho”.</p></div>
+    <div class="actions"><a class="btn" href="nhap-hang.html">Hủy</a><button class="btn">Lưu nháp</button><button class="btn primary"><i data-i="check"></i>Xác nhận đặt hàng</button></div>
+  </div>
+
+  <div class="g-2-1">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="card">
+        <div class="card-head"><h3>Thông tin chung</h3></div>
+        <div class="form-grid">
+          <div class="field full"><label>Nhà cung cấp *</label>
+            <div class="supplier"><span class="ic avatar" style="background:#fff"><i data-i="building"></i></span><div class="grow"><b>Công ty Sách Phương Nam</b><div class="small muted">MST 0301234567 · 028 3822 1234 · Công nợ hiện tại 43,3 triệu</div></div><button class="btn sm">Đổi</button></div>
+          </div>
+          <div class="field"><label>Ngày dự kiến nhận *</label><input class="input" value="12/11/2026" /></div>
+          <div class="field"><label>Kho nhận</label><select class="select"><option>Kho chính – Nguyễn Văn Cừ</option></select></div>
+          <div class="field"><label>Hạn thanh toán</label><select class="select"><option>30 ngày sau khi nhận</option></select></div>
+          <div class="field"><label>Số chứng từ NCC</label><input class="input" placeholder="VD: HĐ 0001234" /></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="card-head" style="padding:16px 20px 0"><h3>Danh sách sách nhập</h3><div class="row"><button class="btn sm"><i data-i="upload" class="sm"></i>Nhập từ Excel</button><button class="btn sm"><i data-i="alert" class="sm"></i>Thêm sách sắp hết (24)</button></div></div>
+        <div class="filters"><div class="search"><i data-i="search"></i><input class="input" placeholder="Tìm sách để thêm vào phiếu (tên, mã, ISBN)..." /></div></div>
+        <table>
+          <thead><tr><th>Sách</th><th class="num">Tồn hiện tại</th><th class="num">Số lượng</th><th class="num">Giá nhập</th><th class="num">Thành tiền</th><th></th></tr></thead>
+          <tbody>
+            <tr><td><div class="row"><span class="cover c3"></span><div><b>Cây cam ngọt của tôi</b><div class="sub">S-0003 · Giá bán 108.000 đ</div></div></div></td><td class="num"><span class="badge warn plain">6</span></td><td class="num"><input class="input cell-input" value="60" style="width:70px" /></td><td class="num"><input class="input cell-input" value="75.600" /></td><td class="num"><b>4.536.000 đ</b></td><td><button class="btn ghost sm"><i data-i="trash" class="sm"></i></button></td></tr>
+            <tr><td><div class="row"><span class="cover c6"></span><div><b>Tuổi trẻ đáng giá bao nhiêu?</b><div class="sub">S-0006 · Giá bán 90.000 đ</div></div></div></td><td class="num"><span class="badge warn plain">8</span></td><td class="num"><input class="input cell-input" value="40" style="width:70px" /></td><td class="num"><input class="input cell-input" value="63.000" /></td><td class="num"><b>2.520.000 đ</b></td><td><button class="btn ghost sm"><i data-i="trash" class="sm"></i></button></td></tr>
+            <tr><td><div class="row"><span class="cover c8"></span><div><b>Bố già</b><div class="sub">S-0008 · Giá bán 198.000 đ</div></div></div></td><td class="num"><span class="badge bad plain">0</span></td><td class="num"><input class="input cell-input" value="30" style="width:70px" /></td><td class="num"><input class="input cell-input" value="138.600" /></td><td class="num"><b>4.158.000 đ</b></td><td><button class="btn ghost sm"><i data-i="trash" class="sm"></i></button></td></tr>
+            <tr><td><div class="row"><span class="cover c1"></span><div><b>Nhà giả kim</b><div class="sub">S-0001 · Giá bán 79.000 đ</div></div></div></td><td class="num">128</td><td class="num"><input class="input cell-input" value="0" style="width:70px;border-color:var(--red)" /><div class="sub" style="color:var(--red)">Số lượng phải &gt; 0</div></td><td class="num"><input class="input cell-input" value="55.300" /></td><td class="num faint">0 đ</td><td><button class="btn ghost sm"><i data-i="trash" class="sm"></i></button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px;position:sticky;top:76px">
+      <div class="card">
+        <div class="card-head"><h3>Tổng kết phiếu nhập</h3><span class="badge gray">Nháp</span></div>
+        <div class="sum"><span>Số đầu sách</span><b>3</b></div>
+        <div class="sum"><span>Tổng số lượng</span><b>130 cuốn</b></div>
+        <div class="sum"><span>Tiền hàng</span><span>11.214.000 đ</span></div>
+        <div class="sum"><span>Chiết khấu NCC (2%)</span><span class="minus">−224.280 đ</span></div>
+        <div class="sum"><span>VAT đầu vào (5%)</span><span>549.486 đ</span></div>
+        <div class="sum total"><span>Tổng thanh toán</span><span>11.539.206 đ</span></div>
+        <hr class="sep" />
+        <div class="field"><label>Trả trước cho NCC</label><input class="input" value="0" /><span class="help">Phần còn lại sẽ được ghi vào công nợ nhà cung cấp.</span></div>
+        <div class="field" style="margin-top:12px"><label>Ghi chú</label><textarea class="input" rows="3" placeholder="Ghi chú cho bộ phận kho..."></textarea></div>
+      </div>
+      <div class="callout"><i data-i="alert"></i><div><b>1 dòng chưa hợp lệ</b><span class="small">“Nhà giả kim” có số lượng 0 — xóa dòng hoặc nhập số lượng lớn hơn 0 trước khi xác nhận.</span></div></div>
+    </div>
+  </div>
+</template>
+<script src="assets/shell.js"></script>
+</body>
+</html>

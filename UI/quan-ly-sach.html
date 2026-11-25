@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quản lý sách · mộc.</title>
+  <link rel="stylesheet" href="assets/moc.css" />
+  <style>
+    .book-status { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 11.5px; font-weight: 500; }
+    .book-status.on { background: #eaf4ed; color: #205036; }
+    .book-status.off { background: #f0f0ea; color: #6b7280; }
+  </style>
+</head>
+<body data-page="quan-ly-sach" data-crumb="Quản lý sách">
+<template id="page">
+  <div class="page-head">
+    <div><h1>Quản lý sách</h1><p>Quản lý danh mục, giá bán và tình trạng sách tại nhà sách.</p></div>
+    <div class="actions">
+      <button class="btn"><i data-i="upload"></i>Nhập danh sách</button>
+      <button class="btn"><i data-i="download"></i>Xuất danh sách</button>
+      <a class="btn primary" href="quan-ly-sach-them.html"><i data-i="plus"></i>Thêm sách</a>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat hero"><div class="lbl">Tổng đầu sách</div><div class="val">1.248</div><div class="sub">Đầu sách trong danh mục</div></div>
+    <div class="stat"><div class="lbl">Đang kinh doanh</div><div class="val">1.186</div><div class="sub">Sẵn sàng phục vụ bạn đọc</div></div>
+    <div class="stat"><div class="lbl">Sắp hết hàng</div><div class="val" style="color:var(--amber)">24</div><div class="sub">Tồn kho dưới 10 cuốn</div></div>
+    <div class="stat"><div class="lbl">Ngừng kinh doanh</div><div class="val">62</div><div class="sub">Được lưu trong danh mục</div></div>
+  </div>
+
+  <div class="panel">
+    <div class="tabs">
+      <a class="on">Tất cả sách <span class="n">1.248</span></a>
+      <a>Đang kinh doanh</a>
+      <a>Ngừng kinh doanh</a>
+    </div>
+
+    <div class="filters">
+      <div class="search" style="flex:1.8"><i data-i="search"></i><input class="input" placeholder="Tìm tên sách, mã sách hoặc ISBN..." /></div>
+      <select class="select"><option>Tất cả thể loại</option><option>Văn học</option><option>Kỹ năng sống</option><option>Thiếu nhi</option><option>Tâm lý học</option></select>
+      <select class="select"><option>Nhà xuất bản</option><option>NXB Hội Nhà Văn</option><option>NXB Tổng Hợp</option><option>NXB Kim Đồng</option><option>NXB Thế Giới</option></select>
+      <select class="select"><option>Tình trạng kho</option><option>Còn hàng</option><option>Sắp hết hàng</option><option>Hết hàng</option></select>
+      <select class="select" style="min-width:120px"><option>Mới nhất</option><option>Giá tăng dần</option><option>Giá giảm dần</option><option>Tồn kho nhiều nhất</option></select>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:36px"><input type="checkbox" class="cb" /></th>
+          <th>Tên sách / Mã sách</th>
+          <th>Thể loại</th>
+          <th>Nhà xuất bản</th>
+          <th class="num">Giá bán</th>
+          <th>Tồn kho</th>
+          <th>Trạng thái</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="checkbox" class="cb" /></td>
+          <td><div class="row"><span class="cover c1"></span><div><b>Nhà giả kim</b><div class="sub">Paulo Coelho · S-0001</div></div></div></td>
+          <td>Văn học</td>
+          <td>NXB Hội Nhà Văn</td>
+          <td class="num"><b>79.000 đ</b></td>
+          <td>128 cuốn</td>
+          <td><span class="book-status on">Đang kinh doanh</span></td>
+          <td><a class="link small" href="quan-ly-sach-them.html" style="color:var(--ink-2);font-weight:500;margin-right:8px">Chỉnh sửa</a> <i data-i="more" class="sm faint" style="cursor:pointer"></i></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" class="cb" /></td>
+          <td><div class="row"><span class="cover c2"></span><div><b>Đắc nhân tâm</b><div class="sub">Dale Carnegie · S-0002</div></div></div></td>
+          <td>Kỹ năng sống</td>
+          <td>NXB Tổng Hợp</td>
+          <td class="num"><b>86.000 đ</b></td>
+          <td>85 cuốn</td>
+          <td><span class="book-status on">Đang kinh doanh</span></td>
+          <td><a class="link small" href="quan-ly-sach-them.html" style="color:var(--ink-2);font-weight:500;margin-right:8px">Chỉnh sửa</a> <i data-i="more" class="sm faint" style="cursor:pointer"></i></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" class="cb" /></td>
+          <td><div class="row"><span class="cover c3"></span><div><b>Cây cam ngọt của tôi</b><div class="sub">José Mauro de Vasconcelos · S-0003</div></div></div></td>
+          <td>Văn học</td>
+          <td>NXB Hội Nhà Văn</td>
+          <td class="num"><b>108.000 đ</b></td>
+          <td><b style="color:var(--amber)">6 cuốn</b><div class="sub" style="color:var(--amber)">Sắp hết</div></td>
+          <td><span class="book-status on">Đang kinh doanh</span></td>
+          <td><a class="link small" href="quan-ly-sach-them.html" style="color:var(--ink-2);font-weight:500;margin-right:8px">Chỉnh sửa</a> <i data-i="more" class="sm faint" style="cursor:pointer"></i></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" class="cb" /></td>
+          <td><div class="row"><span class="cover c4"></span><div><b>Dế Mèn phiêu lưu ký</b><div class="sub">Tô Hoài · S-0004</div></div></div></td>
+          <td>Thiếu nhi</td>
+          <td>NXB Kim Đồng</td>
+          <td class="num"><b>65.000 đ</b></td>
+          <td>52 cuốn</td>
+          <td><span class="book-status on">Đang kinh doanh</span></td>
+          <td><a class="link small" href="quan-ly-sach-them.html" style="color:var(--ink-2);font-weight:500;margin-right:8px">Chỉnh sửa</a> <i data-i="more" class="sm faint" style="cursor:pointer"></i></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" class="cb" /></td>
+          <td><div class="row"><span class="cover c5"></span><div><b>Tư duy nhanh và chậm</b><div class="sub">Daniel Kahneman · S-0005</div></div></div></td>
+          <td>Tâm lý học</td>
+          <td>NXB Thế Giới</td>
+          <td class="num"><b>269.000 đ</b></td>
+          <td>34 cuốn</td>
+          <td><span class="book-status on">Đang kinh doanh</span></td>
+          <td><a class="link small" href="quan-ly-sach-them.html" style="color:var(--ink-2);font-weight:500;margin-right:8px">Chỉnh sửa</a> <i data-i="more" class="sm faint" style="cursor:pointer"></i></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" class="cb" /></td>
+          <td><div class="row"><span class="cover c6"></span><div><b>Tuổi trẻ đáng giá bao nhiêu?</b><div class="sub">Rosie Nguyễn · S-0006</div></div></div></td>
+          <td>Kỹ năng sống</td>
+          <td>NXB Hội Nhà Văn</td>
+          <td class="num"><b>90.000 đ</b></td>
+          <td><b style="color:var(--amber)">8 cuốn</b><div class="sub" style="color:var(--amber)">Sắp hết</div></td>
+          <td><span class="book-status on">Đang kinh doanh</span></td>
+          <td><a class="link small" href="quan-ly-sach-them.html" style="color:var(--ink-2);font-weight:500;margin-right:8px">Chỉnh sửa</a> <i data-i="more" class="sm faint" style="cursor:pointer"></i></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" class="cb" /></td>
+          <td><div class="row"><span class="cover c7"></span><div><b>Hoàng tử bé</b><div class="sub">Antoine de Saint-Exupéry · S-0007</div></div></div></td>
+          <td>Văn học</td>
+          <td>NXB Kim Đồng</td>
+          <td class="num"><b>75.000 đ</b></td>
+          <td>41 cuốn</td>
+          <td><span class="book-status on">Đang kinh doanh</span></td>
+          <td><a class="link small" href="quan-ly-sach-them.html" style="color:var(--ink-2);font-weight:500;margin-right:8px">Chỉnh sửa</a> <i data-i="more" class="sm faint" style="cursor:pointer"></i></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" class="cb" /></td>
+          <td><div class="row"><span class="cover c8"></span><div><b>Bố già</b><div class="sub">Mario Puzo · S-0008</div></div></div></td>
+          <td>Văn học</td>
+          <td>NXB Văn Học</td>
+          <td class="num"><b>198.000 đ</b></td>
+          <td><b style="color:var(--amber)">0 cuốn</b></td>
+          <td><span class="book-status off">Ngừng kinh doanh</span></td>
+          <td><a class="link small" href="quan-ly-sach-them.html" style="color:var(--ink-2);font-weight:500;margin-right:8px">Chỉnh sửa</a> <i data-i="more" class="sm faint" style="cursor:pointer"></i></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pager">
+      <span>Hiển thị 1–8 trong 1.248 đầu sách</span>
+      <div class="pages">
+        <span>‹</span><span class="on">1</span><span>2</span><span>3</span><span>…</span><span>156</span><span>›</span>
+      </div>
+    </div>
+  </div>
+</template>
+<script src="assets/shell.js"></script>
+</body>
+</html>

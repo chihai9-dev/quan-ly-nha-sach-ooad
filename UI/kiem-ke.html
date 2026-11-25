@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kiểm kê kho · mộc.</title>
+  <link rel="stylesheet" href="assets/moc.css" />
+  <style>
+    .count-input { width: 80px; height: 32px; text-align: right; font-weight: 600; }
+    .diff-neg { color: var(--red); font-weight: 700; } .diff-pos { color: var(--green-700); font-weight: 700; } .diff-zero { color: var(--muted); }
+    .steps { display: flex; gap: 0; align-items: center; }
+    .step { display: flex; align-items: center; gap: 8px; font-weight: 600; color: var(--muted); }
+    .step .dot { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--line); display: grid; place-items: center; font-size: 11px; background: #fff; }
+    .step.done .dot { background: var(--green-800); border-color: var(--green-800); color: #fff; }
+    .step.cur { color: var(--ink); } .step.cur .dot { border-color: var(--green-800); color: var(--green-800); }
+    .step-line { width: 48px; height: 1.5px; background: var(--line); margin: 0 10px; }
+    .step-line.done { background: var(--green-800); }
+  </style>
+</head>
+<body data-page="kiem-ke" data-group="ton-kho" data-crumb="Tồn kho > Kiểm kê KK-012">
+<template id="page">
+  <div class="page-head">
+    <div><h1>Phiếu kiểm kê KK-012</h1><p>Khu vực Kệ A (Văn học) · Bắt đầu 09/11/2026 15:00 · Người kiểm: Lan Anh, Minh Quân</p></div>
+    <div class="actions"><a class="btn" href="ton-kho.html"><i data-i="left"></i>Quay lại</a><button class="btn">Lưu nháp</button><button class="btn primary"><i data-i="check"></i>Hoàn tất &amp; cân bằng kho</button></div>
+  </div>
+
+  <div class="card" style="padding:14px 20px">
+    <div class="row" style="justify-content:space-between">
+      <div class="steps">
+        <div class="step done"><span class="dot"><i data-i="check" class="sm"></i></span>Chọn phạm vi</div><span class="step-line done"></span>
+        <div class="step cur"><span class="dot">2</span>Đếm thực tế</div><span class="step-line"></span>
+        <div class="step"><span class="dot">3</span>Đối chiếu chênh lệch</div><span class="step-line"></span>
+        <div class="step"><span class="dot">4</span>Duyệt điều chỉnh</div>
+      </div>
+      <div class="row" style="width:260px"><div class="grow"><div class="bar"><i style="width:68%"></i></div></div><b>68%</b><span class="small muted">142/208</span></div>
+    </div>
+  </div>
+
+  <div class="g-2-1">
+    <div class="panel">
+      <div class="filters">
+        <div class="search"><i data-i="scan"></i><input class="input" placeholder="Quét mã vạch hoặc nhập mã sách để đếm nhanh..." /></div>
+        <div class="seg"><a class="on">Tất cả</a><a>Chưa đếm</a><a>Có chênh lệch</a></div>
+      </div>
+      <table>
+        <thead><tr><th>Sách</th><th>Vị trí</th><th class="num">Hệ thống</th><th class="num">Thực tế</th><th class="num">Chênh lệch</th><th>Lý do</th></tr></thead>
+        <tbody>
+          <tr><td><div class="row"><span class="cover c1"></span><div><b>Nhà giả kim</b><div class="sub">S-0001</div></div></div></td><td>A1-03</td><td class="num">128</td><td class="num"><input class="input count-input" value="128" /></td><td class="num diff-zero">0</td><td class="muted">—</td></tr>
+          <tr><td><div class="row"><span class="cover c3"></span><div><b>Cây cam ngọt của tôi</b><div class="sub">S-0003</div></div></div></td><td>A2-01</td><td class="num">9</td><td class="num"><input class="input count-input" value="6" style="border-color:var(--red)" /></td><td class="num diff-neg">−3</td><td><select class="select" style="height:32px"><option>Hư hỏng</option><option>Thất lạc</option></select></td></tr>
+          <tr><td><div class="row"><span class="cover c7"></span><div><b>Hoàng tử bé</b><div class="sub">S-0007</div></div></div></td><td>A2-04</td><td class="num">40</td><td class="num"><input class="input count-input" value="41" style="border-color:var(--green-600)" /></td><td class="num diff-pos">+1</td><td><select class="select" style="height:32px"><option>Nhập sai số lượng</option></select></td></tr>
+          <tr><td><div class="row"><span class="cover c8"></span><div><b>Bố già</b><div class="sub">S-0008</div></div></div></td><td>A4-02</td><td class="num">0</td><td class="num"><input class="input count-input" value="0" /></td><td class="num diff-zero">0</td><td class="muted">—</td></tr>
+          <tr><td><div class="row"><span class="cover c6"></span><div><b>Người đua diều</b><div class="sub">S-0021</div></div></div></td><td>A3-05</td><td class="num">22</td><td class="num"><input class="input count-input" placeholder="—" /></td><td class="num faint">Chưa đếm</td><td class="muted">—</td></tr>
+          <tr><td><div class="row"><span class="cover c2"></span><div><b>Rừng Na Uy</b><div class="sub">S-0034</div></div></div></td><td>A3-06</td><td class="num">17</td><td class="num"><input class="input count-input" placeholder="—" /></td><td class="num faint">Chưa đếm</td><td class="muted">—</td></tr>
+        </tbody>
+      </table>
+      <div class="pager"><span>Hiển thị 1–6 trong 208 đầu sách thuộc phạm vi</span><div class="pages"><span>‹</span><span class="on">1</span><span>2</span><span>…</span><span>35</span><span>›</span></div></div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="card">
+        <div class="card-head"><h3>Tóm tắt chênh lệch</h3></div>
+        <div class="sum"><span>Đã đếm</span><b>142 / 208 đầu sách</b></div>
+        <div class="sum"><span>Khớp hệ thống</span><b>137</b></div>
+        <div class="sum"><span>Thiếu so với hệ thống</span><b class="diff-neg">4 đầu · −7 cuốn</b></div>
+        <div class="sum"><span>Thừa so với hệ thống</span><b class="diff-pos">1 đầu · +1 cuốn</b></div>
+        <div class="sum total"><span>Giá trị chênh lệch</span><span class="diff-neg">−486.000 đ</span></div>
+      </div>
+      <div class="callout"><i data-i="alert"></i><div><b>Cần quản lý duyệt</b><span class="small">Chênh lệch vượt 300.000 đ sẽ được gửi tới Quản trị viên để phê duyệt trước khi cân bằng kho.</span></div></div>
+      <div class="card">
+        <div class="card-head"><h3>Lịch sử kiểm kê</h3><a class="link small">Xem tất cả</a></div>
+        <div class="li"><span class="ic"><i data-i="checkCircle"></i></span><div class="grow"><b>KK-011 · Kệ B (Kỹ năng)</b><small>02/11/2026 · Chênh −120.000 đ</small></div><span class="badge ok">Đã duyệt</span></div>
+        <div class="li"><span class="ic"><i data-i="checkCircle"></i></span><div class="grow"><b>KK-010 · Kệ C (Thiếu nhi)</b><small>26/10/2026 · Khớp 100%</small></div><span class="badge ok">Đã duyệt</span></div>
+        <div class="li"><span class="ic warn"><i data-i="clock"></i></span><div class="grow"><b>KK-009 · Toàn kho</b><small>01/10/2026 · Chênh −1,2 triệu</small></div><span class="badge gray">Lưu trữ</span></div>
+      </div>
+    </div>
+  </div>
+</template>
+<script src="assets/shell.js"></script>
+</body>
+</html>

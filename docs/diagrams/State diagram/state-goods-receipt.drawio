@@ -1,0 +1,123 @@
+<mxfile host="Electron">
+  <diagram name="State - GoodsReceipt" id="state-goods-receipt">
+    <mxGraphModel dx="1776" dy="1079" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="800" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=16;" value="&lt;b&gt;STATE DIAGRAM – GOODS RECEIPT (PHIẾU NHẬP KHO &amp;amp; CÔNG NỢ NCC)&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="750" x="350" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="init" parent="1" style="ellipse;html=1;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="26" width="26" x="30" y="252" as="geometry" />
+        </mxCell>
+        <mxCell id="draft" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;DRAFT&lt;/b&gt;&lt;br&gt;(Đang lập phiếu nhập)" vertex="1">
+          <mxGeometry height="70" width="200" x="150" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="endCancel" parent="1" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="30" width="30" x="235" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="received" parent="1" style="swimlane;rounded=1;whiteSpace=wrap;html=1;startSize=30;arcSize=5;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" value="RECEIVED (Đã nhập kho – Quản lý công nợ NCC)" vertex="1">
+          <mxGeometry height="440" width="840" x="480" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="subinit" parent="received" style="ellipse;html=1;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="24" width="24" x="25" y="173" as="geometry" />
+        </mxCell>
+        <mxCell id="unpaid" parent="received" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#f8cecc;strokeColor=#b85450;" value="&lt;b&gt;UNPAID&lt;/b&gt;&lt;br&gt;(Chưa thanh toán)" vertex="1">
+          <mxGeometry height="70" width="190" x="90" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="partial" parent="received" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffe6cc;strokeColor=#d79b00;" value="&lt;b&gt;PARTIALLY_PAID&lt;/b&gt;&lt;br&gt;(Trả một phần)" vertex="1">
+          <mxGeometry height="70" width="190" x="380" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="overdue" parent="received" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#f8cecc;strokeColor=#b85450;" value="&lt;b&gt;OVERDUE&lt;/b&gt;&lt;br&gt;(Quá hạn công nợ)" vertex="1">
+          <mxGeometry height="70" width="190" x="380" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="paid" parent="received" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;PAID&lt;/b&gt;&lt;br&gt;(Đã tất toán)" vertex="1">
+          <mxGeometry height="70" width="180" x="630" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="eSubInit" edge="1" parent="received" source="subinit" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;" target="unpaid" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eUnpaidPartial" edge="1" parent="received" source="unpaid" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;labelBackgroundColor=#ffffff;" target="partial" value="Trả một phần&lt;br&gt;[0 &amp;lt; tiền trả &amp;lt; còn nợ]">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="-18" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eUnpaidPaid" edge="1" parent="received" source="unpaid" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" target="paid" value="Trả đủ ngay [tiền trả = tổng nợ]">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="-12" as="offset" />
+            <Array as="points">
+              <mxPoint x="185" y="65" />
+              <mxPoint x="720" y="65" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ePartialLoop" edge="1" parent="received" source="partial" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0.3;exitY=0;exitDx=0;exitDy=0;entryX=0.7;entryY=0;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" target="partial" value="Trả thêm [chưa hết nợ]">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="-12" as="offset" />
+            <Array as="points">
+              <mxPoint x="437" y="105" />
+              <mxPoint x="513" y="105" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ePartialPaid" edge="1" parent="received" source="partial" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;labelBackgroundColor=#ffffff;" target="paid" value="Trả hết nợ">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="-14" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eUnpaidOverdue" edge="1" parent="received" source="unpaid" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" target="overdue" value="Đến hạn thanh toán&lt;br&gt;/ phát cảnh báo công nợ">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="185" y="355" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ePartialOverdue" edge="1" parent="received" source="partial" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0.35;exitY=1;exitDx=0;exitDy=0;entryX=0.35;entryY=0;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" target="overdue" value="Đến hạn nợ">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-35" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eOverduePartial" edge="1" parent="received" source="overdue" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0.7;exitY=0;exitDx=0;exitDy=0;entryX=0.7;entryY=1;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" target="partial" value="Trả một phần">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="40" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eOverduePaid" edge="1" parent="received" source="overdue" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" target="paid" value="Trả đủ công nợ còn lại">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="720" y="355" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="endPaid" parent="1" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="30" width="30" x="1410" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="eInitDraft" edge="1" parent="1" source="init" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;labelBackgroundColor=#ffffff;" target="draft" value="Lập phiếu nhập">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="-14" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eDraftLoop" edge="1" parent="1" source="draft" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0.3;exitY=0;exitDx=0;exitDy=0;entryX=0.7;entryY=0;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" target="draft" value="Chọn NCC, nhập sách,&lt;br&gt;SL, đơn giá nhập, chiết khấu">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="-22" as="offset" />
+            <Array as="points">
+              <mxPoint x="210" y="175" />
+              <mxPoint x="290" y="175" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eDraftCancel" edge="1" parent="1" source="draft" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;labelBackgroundColor=#ffffff;" target="endCancel" value="Hủy thao tác&lt;br&gt;/ không lưu phiếu">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eDraftReceived" edge="1" parent="1" source="draft" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;labelBackgroundColor=#ffffff;" target="received" value="Lưu phiếu [dữ liệu hợp lệ]&lt;br&gt;/ cộng tồn kho sách">
+          <mxGeometry relative="1" x="0.2121" y="-34" as="geometry">
+            <mxPoint x="-15" y="-4" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ePaidEnd" edge="1" parent="1" source="paid" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;" target="endPaid" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

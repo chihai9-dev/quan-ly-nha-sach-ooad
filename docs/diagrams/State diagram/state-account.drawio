@@ -1,0 +1,73 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="State - TaiKhoan" id="state-tai-khoan">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1200" pageHeight="700" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="&lt;b&gt;STATE DIAGRAM – TÀI KHOẢN &amp;amp; PHIÊN XÁC THỰC (ACCOUNT &amp;amp; AUTH SESSION)&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="220" y="20" width="750" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="init" value="" style="ellipse;html=1;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="40" y="232" width="26" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="loggedOut" value="&lt;b&gt;LOGGED_OUT&lt;/b&gt;&lt;br&gt;(Chưa đăng nhập)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="230" y="210" width="210" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="loggedIn" value="&lt;b&gt;AUTHENTICATED&lt;/b&gt;&lt;br&gt;(Đang hoạt động / Ca trực)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="680" y="210" width="220" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="otp" value="&lt;b&gt;OTP_VERIFY&lt;/b&gt;&lt;br&gt;(Đang xác thực OTP / Đặt lại MK)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="230" y="430" width="210" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="locked" value="&lt;b&gt;LOCKED&lt;/b&gt;&lt;br&gt;(Tài khoản bị khóa / Vô hiệu hóa)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="680" y="430" width="220" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="Cấp tài khoản nhân viên" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="init" target="loggedOut">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="0" y="-14" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" value="Đăng nhập [đúng MK, TK mở]&lt;br&gt;/ khởi tạo session" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="loggedOut" target="loggedIn">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="0" y="-18" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" value="Đăng xuất / Hết hạn phiên&lt;br&gt;/ hủy session" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0;exitY=0.7;exitDx=0;exitDy=0;entryX=1;entryY=0.7;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="loggedIn" target="loggedOut">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="0" y="18" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" value="Chọn Quên mật khẩu&lt;br&gt;[email hợp lệ] / gửi OTP" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0.3;exitY=1;exitDx=0;exitDy=0;entryX=0.3;entryY=0;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="loggedOut" target="otp">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-65" y="0" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" value="OTP hợp lệ &amp;amp; Lưu MK mới&lt;br&gt;(hoặc sai OTP quá số lần)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="otp" target="loggedOut">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="75" y="0" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" value="Sai MK quá số lần quy định&lt;br&gt;hoặc Admin vô hiệu hóa" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="loggedOut" target="locked">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="560" y="280" />
+              <mxPoint x="560" y="451" />
+            </Array>
+            <mxPoint x="0" y="-18" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7" value="Admin mở khóa tài khoản" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="locked" target="loggedOut">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="790" y="550" />
+              <mxPoint x="960" y="550" />
+              <mxPoint x="960" y="140" />
+              <mxPoint x="335" y="140" />
+            </Array>
+            <mxPoint x="0" y="-12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

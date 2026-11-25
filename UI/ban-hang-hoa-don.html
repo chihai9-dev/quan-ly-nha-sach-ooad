@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hóa đơn · mộc.</title>
+  <link rel="stylesheet" href="assets/moc.css" />
+  <style>
+    tr.sel td { background: var(--green-50) !important; }
+    .paper { background: #fffef9; border: 1px dashed #d8d6c8; border-radius: 10px; padding: 18px; font-variant-numeric: tabular-nums; }
+    .paper .ln { display: flex; justify-content: space-between; padding: 3px 0; }
+    .paper .dash { border-top: 1px dashed #d8d6c8; margin: 10px 0; }
+  </style>
+</head>
+<body data-page="ban-hang-hoa-don" data-group="ban-hang" data-crumb="Bán hàng > Hóa đơn">
+<template id="page">
+  <div class="page-head">
+    <div><h1>Hóa đơn bán hàng</h1><p>Tra cứu, in lại và xử lý đổi trả cho các hóa đơn đã xuất tại quầy.</p></div>
+    <div class="actions"><button class="btn"><i data-i="download"></i>Xuất Excel</button><a class="btn primary" href="ban-hang.html"><i data-i="plus"></i>Tạo đơn hàng</a></div>
+  </div>
+
+  <div class="stats">
+    <div class="stat hero"><div class="lbl">Doanh thu hôm nay <i data-i="wallet"></i></div><div class="val">24.850.000<small>đ</small></div><div class="sub"><span class="up">↗ 20,0%</span> so với hôm qua</div></div>
+    <div class="stat"><div class="lbl">Hóa đơn đã xuất <i data-i="receipt"></i></div><div class="val">128<small>hóa đơn</small></div><div class="sub"><span class="up">↗ 12,3%</span> so với hôm qua</div></div>
+    <div class="stat"><div class="lbl">Chờ thanh toán <i data-i="clock"></i></div><div class="val">3<small>hóa đơn</small></div><div class="sub"><span class="warn">612.000 đ</span> chưa thu</div></div>
+    <div class="stat"><div class="lbl">Đổi / trả hàng <i data-i="refresh"></i></div><div class="val">2<small>phiếu</small></div><div class="sub">Hoàn lại 172.000 đ</div></div>
+  </div>
+
+  <div class="g-2-1">
+    <div class="panel">
+      <div class="tabs"><a class="on">Tất cả <span class="n">128</span></a><a>Đã thanh toán</a><a>Chờ thanh toán</a><a>Đã đổi trả</a></div>
+      <div class="filters">
+        <div class="search"><i data-i="search"></i><input class="input" placeholder="Mã hóa đơn, tên hoặc SĐT khách hàng..." /></div>
+        <select class="select"><option>Hôm nay</option><option>7 ngày qua</option></select>
+        <select class="select"><option>Mọi phương thức</option></select>
+      </div>
+      <table>
+        <thead><tr><th>Mã hóa đơn</th><th>Khách hàng</th><th>Thu ngân</th><th>Thanh toán</th><th class="num">Tổng tiền</th><th>Trạng thái</th></tr></thead>
+        <tbody>
+          <tr class="sel"><td><b>HD-0128</b><div class="sub">Hôm nay, 14:28</div></td><td>Nguyễn Minh Anh</td><td>Lan Anh</td><td>Chuyển khoản</td><td class="num"><b>361.152 đ</b></td><td><span class="badge ok">Đã thanh toán</span></td></tr>
+          <tr><td><b>HD-0127</b><div class="sub">Hôm nay, 14:21</div></td><td>Trần Hoàng Nam</td><td>Lan Anh</td><td>Tiền mặt</td><td class="num"><b>194.000 đ</b></td><td><span class="badge ok">Đã thanh toán</span></td></tr>
+          <tr><td><b>HD-0126</b><div class="sub">Hôm nay, 14:15</div></td><td>Lê Thu Hà</td><td>Minh Quân</td><td>Chuyển khoản</td><td class="num"><b>612.000 đ</b></td><td><span class="badge warn">Chờ thanh toán</span></td></tr>
+          <tr><td><b>HD-0125</b><div class="sub">Hôm nay, 14:08</div></td><td>Khách lẻ</td><td>Minh Quân</td><td>Tiền mặt</td><td class="num"><b>79.000 đ</b></td><td><span class="badge ok">Đã thanh toán</span></td></tr>
+          <tr><td><b>HD-0124</b><div class="sub">Hôm nay, 13:56</div></td><td>Phạm Quang Huy</td><td>Lan Anh</td><td>Thẻ ngân hàng</td><td class="num"><b>428.000 đ</b></td><td><span class="badge ok">Đã thanh toán</span></td></tr>
+          <tr><td><b>HD-0123</b><div class="sub">Hôm nay, 13:40</div></td><td>Võ Ngọc Trâm</td><td>Lan Anh</td><td>MoMo</td><td class="num"><b>172.000 đ</b></td><td><span class="badge gray">Đã đổi trả</span></td></tr>
+          <tr><td><b>HD-0122</b><div class="sub">Hôm nay, 13:22</div></td><td>Khách lẻ</td><td>Minh Quân</td><td>Tiền mặt</td><td class="num"><b>65.000 đ</b></td><td><span class="badge ok">Đã thanh toán</span></td></tr>
+        </tbody>
+      </table>
+      <div class="pager"><span>Hiển thị 1–7 trong 128 hóa đơn</span><div class="pages"><span>‹</span><span class="on">1</span><span>2</span><span>3</span><span>…</span><span>19</span><span>›</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div><h3>HD-0128</h3><p>09/11/2026 · 14:28 · Quầy POS 01</p></div><span class="badge ok">Đã thanh toán</span></div>
+      <div class="paper">
+        <div style="text-align:center;margin-bottom:10px"><b style="font-size:15px">mộc. — Nhà sách</b><div class="small muted">105 Nguyễn Văn Cừ, Q.5, TP.HCM</div></div>
+        <div class="ln small muted"><span>Khách hàng</span><span>Nguyễn Minh Anh · GOLD</span></div>
+        <div class="ln small muted"><span>Thu ngân</span><span>Lan Anh</span></div>
+        <div class="dash"></div>
+        <div class="ln"><span>Nhà giả kim × 2</span><span>158.000</span></div>
+        <div class="ln"><span>Đắc nhân tâm × 1</span><span>86.000</span></div>
+        <div class="ln"><span>Cây cam ngọt của tôi × 1</span><span>108.000</span></div>
+        <div class="dash"></div>
+        <div class="ln muted"><span>Tạm tính</span><span>352.000</span></div>
+        <div class="ln muted"><span>Ưu đãi GOLD (5%)</span><span>−17.600</span></div>
+        <div class="ln muted"><span>VAT (8%)</span><span>26.752</span></div>
+        <div class="dash"></div>
+        <div class="ln" style="font-size:16px"><b>TỔNG CỘNG</b><b>361.152 đ</b></div>
+        <div class="ln small muted"><span>Chuyển khoản · VCB</span><span>+361 điểm</span></div>
+      </div>
+      <div class="row" style="margin-top:14px">
+        <button class="btn grow" style="justify-content:center"><i data-i="printer"></i>In lại</button>
+        <button class="btn grow" style="justify-content:center"><i data-i="mail"></i>Gửi email</button>
+        <button class="btn danger grow" style="justify-content:center"><i data-i="refresh"></i>Đổi / trả</button>
+      </div>
+    </div>
+  </div>
+</template>
+<script src="assets/shell.js"></script>
+</body>
+</html>

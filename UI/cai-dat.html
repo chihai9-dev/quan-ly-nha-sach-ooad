@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cài đặt · mộc.</title>
+  <link rel="stylesheet" href="assets/moc.css" />
+  <style>
+    .set-nav { display: flex; flex-direction: column; gap: 2px; position: sticky; top: 76px; }
+    .set-nav a { display: flex; gap: 10px; align-items: center; padding: 9px 12px; border-radius: 8px; color: var(--ink-2); font-weight: 500; }
+    .set-nav a:hover { background: #ecebe3; }
+    .set-nav a.on { background: #fff; color: var(--green-800); font-weight: 600; box-shadow: 0 0 0 1px var(--line); }
+    .set-row { display: flex; align-items: center; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line-2); }
+    .set-row:last-child { border-bottom: 0; }
+    .set-row b { display: block; font-weight: 600; } .set-row small { color: var(--muted); font-size: 11.5px; }
+    .tier-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .tier-card { border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+    .tier-card .num { font-size: 18px; font-weight: 700; margin: 8px 0 2px; }
+  </style>
+</head>
+<body data-page="cai-dat" data-crumb="Cài đặt">
+<template id="page">
+  <div class="page-head">
+    <div><h1>Cài đặt</h1><p>Thông tin cửa hàng, thuế, hạng thành viên, nhân viên và phân quyền.</p></div>
+    <div class="actions"><button class="btn">Hủy thay đổi</button><button class="btn primary"><i data-i="check"></i>Lưu cài đặt</button></div>
+  </div>
+
+  <div class="g-1-2">
+    <nav class="set-nav">
+      <a class="on"><i data-i="store"></i>Thông tin cửa hàng</a>
+      <a><i data-i="percent"></i>Thuế &amp; thanh toán</a>
+      <a><i data-i="star"></i>Hạng thành viên</a>
+      <a><i data-i="users"></i>Nhân viên &amp; phân quyền</a>
+      <a><i data-i="printer"></i>Mẫu in hóa đơn</a>
+      <a><i data-i="bell"></i>Thông báo</a>
+      <a><i data-i="lock"></i>Bảo mật</a>
+      <a><i data-i="link"></i>Tích hợp</a>
+    </nav>
+
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="card">
+        <div class="card-head"><div><h3>Thông tin cửa hàng</h3><p>Hiển thị trên hóa đơn và báo cáo</p></div></div>
+        <div class="row" style="margin-bottom:16px"><span class="brand" style="padding:0"><span class="logo" style="width:56px;height:56px;border-radius:12px"><i data-i="book" class="lg"></i></span></span><div class="grow"><b>Logo cửa hàng</b><div class="small muted">PNG hoặc SVG, tối đa 1MB</div></div><button class="btn sm"><i data-i="upload" class="sm"></i>Tải lên</button></div>
+        <div class="form-grid">
+          <div class="field"><label>Tên cửa hàng *</label><input class="input" value="mộc. — Nhà sách Nguyễn Văn Cừ" /></div>
+          <div class="field"><label>Mã số thuế</label><input class="input" value="0312 345 678" /></div>
+          <div class="field full"><label>Địa chỉ *</label><input class="input" value="105 Nguyễn Văn Cừ, Phường 2, Quận 5, TP. Hồ Chí Minh" /></div>
+          <div class="field"><label>Số điện thoại</label><input class="input" value="028 3835 1234" /></div>
+          <div class="field"><label>Email</label><input class="input" value="nguyenvancu@mocbooks.vn" /></div>
+          <div class="field"><label>Giờ mở cửa</label><input class="input" value="07:30 – 22:00" /></div>
+          <div class="field"><label>Múi giờ</label><select class="select"><option>(GMT+07:00) Hà Nội, TP.HCM</option></select></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><div><h3>Thuế &amp; thanh toán</h3><p>Áp dụng cho tất cả đơn hàng tại quầy POS</p></div></div>
+        <div class="set-row"><div class="grow"><b>Thuế VAT mặc định</b><small>Áp dụng sau khi trừ chiết khấu hạng thẻ và mã giảm giá</small></div><div class="row" style="width:140px"><input class="input right" value="8" /><span class="muted">%</span></div></div>
+        <div class="set-row"><div class="grow"><b>Tiền mặt</b><small>Cho phép nhập tiền khách đưa và tính tiền thừa</small></div><span class="toggle on"></span></div>
+        <div class="set-row"><div class="grow"><b>Chuyển khoản (VietQR)</b><small>Vietcombank · 0071 0000 12345 · CTY TNHH MOC</small></div><span class="toggle on"></span></div>
+        <div class="set-row"><div class="grow"><b>Ví MoMo</b><small>Đã kết nối · Merchant ID MOC-0091</small></div><span class="toggle on"></span></div>
+        <div class="set-row"><div class="grow"><b>Thẻ ngân hàng (POS máy)</b><small>Ghi nhận thủ công mã chuẩn chi</small></div><span class="toggle on"></span></div>
+        <div class="set-row"><div class="grow"><b>Làm tròn tổng tiền</b><small>Làm tròn đến 1.000 đ gần nhất khi thanh toán tiền mặt</small></div><span class="toggle"></span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><div><h3>Hạng thành viên</h3><p>Ngưỡng chi tiêu tích lũy 12 tháng và ưu đãi tương ứng</p></div><a class="link small"><i data-i="edit" class="sm"></i>Chỉnh sửa</a></div>
+        <div class="tier-grid">
+          <div class="tier-card"><span class="tier STANDARD">STANDARD</span><div class="num">0%</div><div class="small muted">Từ 0 đ · 1 điểm / 10.000 đ</div></div>
+          <div class="tier-card"><span class="tier SILVER">SILVER</span><div class="num">3%</div><div class="small muted">Từ 5 triệu · 1,2 điểm / 10.000 đ</div></div>
+          <div class="tier-card"><span class="tier GOLD">GOLD</span><div class="num">5%</div><div class="small muted">Từ 10 triệu · 1,5 điểm / 10.000 đ</div></div>
+          <div class="tier-card"><span class="tier PLATINUM">PLATINUM</span><div class="num">8%</div><div class="small muted">Từ 20 triệu · 2 điểm / 10.000 đ</div></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="card-head" style="padding:16px 20px 12px;margin:0"><div><h3>Nhân viên &amp; phân quyền</h3><p>6 tài khoản đang hoạt động</p></div><button class="btn sm primary"><i data-i="userPlus" class="sm"></i>Mời nhân viên</button></div>
+        <table>
+          <thead><tr><th>Nhân viên</th><th>Vai trò</th><th>Quyền truy cập</th><th>Đăng nhập gần nhất</th><th>Trạng thái</th><th></th></tr></thead>
+          <tbody>
+            <tr><td><div class="row"><span class="avatar">LA</span><div><b>Lan Anh</b><div class="sub">lananh@mocbooks.vn</div></div></div></td><td>Quản trị viên</td><td class="muted">Toàn quyền</td><td>Đang trực tuyến</td><td><span class="badge ok">Hoạt động</span></td><td><i data-i="more"></i></td></tr>
+            <tr><td><div class="row"><span class="avatar">MQ</span><div><b>Minh Quân</b><div class="sub">minhquan@mocbooks.vn</div></div></div></td><td>Thu ngân</td><td class="muted">Bán hàng, Khách hàng</td><td>Hôm nay, 07:28</td><td><span class="badge ok">Hoạt động</span></td><td><i data-i="more"></i></td></tr>
+            <tr><td><div class="row"><span class="avatar">TT</span><div><b>Thu Trang</b><div class="sub">thutrang@mocbooks.vn</div></div></div></td><td>Thủ kho</td><td class="muted">Tồn kho, Nhập hàng, Kiểm kê</td><td>Hôm qua, 17:05</td><td><span class="badge ok">Hoạt động</span></td><td><i data-i="more"></i></td></tr>
+            <tr><td><div class="row"><span class="avatar">HP</span><div><b>Hữu Phước</b><div class="sub">huuphuoc@mocbooks.vn</div></div></div></td><td>Thu ngân</td><td class="muted">Bán hàng, Khách hàng</td><td>05/11/2026</td><td><span class="badge gray">Tạm khóa</span></td><td><i data-i="more"></i></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</template>
+<script src="assets/shell.js"></script>
+</body>
+</html>

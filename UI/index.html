@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>mộc. — Trọn bộ giao diện Quản lý Nhà sách</title>
+  <link rel="stylesheet" href="assets/moc.css" />
+  <style>
+    body { padding: 40px; background: var(--bg); }
+    .wrap { max-width: 1140px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .s { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: inherit; transition: all .15s ease; }
+    .s:hover { border-color: var(--green-600); box-shadow: 0 4px 14px rgba(29,70,48,.08); transform: translateY(-2px); }
+    .s b { font-size: 15px; color: var(--green-900); display: flex; align-items: center; justify-content: space-between; }
+    .s span.muted { font-size: 12px; line-height: 1.5; color: var(--muted); }
+    .s code { font-size: 11px; color: var(--muted); background: #fafaf6; padding: 3px 6px; border-radius: 4px; align-self: flex-start; margin-top: 4px; }
+    h2 { font-size: 12.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+    h2::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+    .badge-tag { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; background: var(--green-50); color: var(--green-800); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="row" style="gap:16px">
+      <span class="logo" style="width:48px;height:48px;border-radius:12px;background:var(--green-800);color:#fff;display:grid;place-items:center">
+        <svg class="i lg" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </span>
+      <div>
+        <h1 style="font-size:26px;letter-spacing:-.02em;font-weight:700">mộc. — Trọn bộ giao diện Quản lý Nhà sách</h1>
+        <p class="muted" style="margin-top:4px">Hệ thống giao diện đồng bộ 100% ngôn ngữ thiết kế xanh rêu ấm áp mộc mạc, chuẩn DDD &amp; Nghiệp vụ bán lẻ nhà sách.</p>
+      </div>
+    </div>
+
+    <h2>1. Các phân hệ chính (Không gian làm việc)</h2>
+    <div class="grid">
+      <a class="s" href="tong-quan.html">
+        <b>Tổng quan (Dashboard) <span class="badge-tag">Mẫu gốc</span></b>
+        <span class="muted">KPI doanh thu ngày, biểu đồ 7 ngày, sách bán chạy, giao dịch gần đây và mục tiêu tuần.</span>
+        <code>tong-quan.html</code>
+      </a>
+      <a class="s" href="quan-ly-sach.html">
+        <b>Quản lý sách <span class="badge-tag">Mẫu gốc</span></b>
+        <span class="muted">Danh mục 1.248 đầu sách, phân loại thể loại, NXB, giá bán, tồn kho và trạng thái.</span>
+        <code>quan-ly-sach.html</code>
+      </a>
+      <a class="s" href="ban-hang.html">
+        <b>Bán hàng tại quầy (POS) <span class="badge-tag">Core</span></b>
+        <span class="muted">Chọn sách nhanh, phím tắt F2/F4/F8/F9, khách VIP, áp voucher MOC10, tính VAT 8% và tiền thừa.</span>
+        <code>ban-hang.html</code>
+      </a>
+      <a class="s" href="ton-kho.html">
+        <b>Tồn kho &amp; Cảnh báo <span class="badge-tag">Core</span></b>
+        <span class="muted">Theo dõi 12.486 cuốn sách, cảnh báo 24 đầu sách sắp hết, gợi ý nhập hàng theo tốc độ bán.</span>
+        <code>ton-kho.html</code>
+      </a>
+      <a class="s" href="nhap-hang.html">
+        <b>Nhập hàng từ NCC <span class="badge-tag">Core</span></b>
+        <span class="muted">Theo dõi 18 phiếu nhập, quản lý hàng chờ nhận trong ngày và 72,6 triệu đồng công nợ.</span>
+        <code>nhap-hang.html</code>
+      </a>
+      <a class="s" href="khach-hang.html">
+        <b>Khách hàng thành viên <span class="badge-tag">Core</span></b>
+        <span class="muted">3.842 thành viên, phân hạng thẻ (STANDARD, SILVER, GOLD, PLATINUM), tích điểm và lịch sử mua.</span>
+        <code>khach-hang.html</code>
+      </a>
+      <a class="s" href="bao-cao.html">
+        <b>Báo cáo kinh doanh <span class="badge-tag">Analytics</span></b>
+        <span class="muted">Doanh thu thuần 198,6 triệu, biên lãi 30,1%, cơ cấu thể loại donut, hiệu suất thu ngân.</span>
+        <code>bao-cao.html</code>
+      </a>
+    </div>
+
+    <h2>2. Các giao diện quy trình nghiệp vụ con (Sub-flows)</h2>
+    <div class="grid">
+      <a class="s" href="quan-ly-sach-them.html">
+        <b>Thêm sách mới / Chỉnh sửa</b>
+        <span class="muted">Form nhập ISBN, tác giả, NXB, giá nhập, giá bán (+42,8% lãi), vị trí kệ trưng bày và ảnh bìa.</span>
+        <code>quan-ly-sach-them.html</code>
+      </a>
+      <a class="s" href="ban-hang-hoa-don.html">
+        <b>Hóa đơn &amp; Đổi trả hàng</b>
+        <span class="muted">Chi tiết hóa đơn HD-0128, phiếu in hóa đơn nhiệt tiêu chuẩn, quy trình đổi trả nhập lại kho.</span>
+        <code>ban-hang-hoa-don.html</code>
+      </a>
+      <a class="s" href="kiem-ke.html">
+        <b>Kiểm kê kho (StockAudit)</b>
+        <span class="muted">Quy trình 4 bước kiểm kê kệ A, đếm thực tế vs hệ thống, tính chênh lệch và gửi duyệt cân bằng.</span>
+        <code>kiem-ke.html</code>
+      </a>
+      <a class="s" href="nhap-hang-tao-phieu.html">
+        <b>Tạo phiếu nhập (GoodsReceipt)</b>
+        <span class="muted">Chọn đối tác Phương Nam, nhập dòng sách, kiểm tra giá nhập, chiết khấu NCC và VAT đầu vào.</span>
+        <code>nhap-hang-tao-phieu.html</code>
+      </a>
+      <a class="s" href="nha-cung-cap.html">
+        <b>Nhà cung cấp &amp; Công nợ</b>
+        <span class="muted">Danh sách 8 đối tác (Phương Nam, Kim Đồng, Nhã Nam...), kỳ hạn nợ và phiếu chi thanh toán.</span>
+        <code>nha-cung-cap.html</code>
+      </a>
+      <a class="s" href="khuyen-mai.html">
+        <b>Khuyến mãi &amp; Voucher</b>
+        <span class="muted">Quản lý mã coupon (MOC10, SACH10), chiến dịch combo sách, nguyên tắc tính chiết khấu kép.</span>
+        <code>khuyen-mai.html</code>
+      </a>
+    </div>
+
+    <h2>3. Hệ thống &amp; Tiện ích vận hành</h2>
+    <div class="grid">
+      <a class="s" href="cai-dat.html">
+        <b>Cài đặt hệ thống</b>
+        <span class="muted">Thông tin nhà sách Nguyễn Văn Cừ, thuế VAT 8%, cấu hình tỷ lệ 4 hạng thẻ, phân quyền nhân viên.</span>
+        <code>cai-dat.html</code>
+      </a>
+      <a class="s" href="tro-giup.html">
+        <b>Trung tâm trợ giúp (Help Desk)</b>
+        <span class="muted">Câu hỏi thường gặp FAQ, phím tắt POS nhanh, video hướng dẫn mở ca và kênh hỗ trợ trực tuyến.</span>
+        <code>tro-giup.html</code>
+      </a>
+      <a class="s" href="dang-nhap.html">
+        <b>Đăng nhập ca làm việc</b>
+        <span class="muted">Màn hình đăng nhập thương hiệu mộc., chọn chi nhánh làm việc, ghi nhớ ca và tài khoản mẫu.</span>
+        <code>dang-nhap.html</code>
+      </a>
+    </div>
+
+    <h2>4. Thiết kế mẫu tham chiếu (Original References)</h2>
+    <div class="grid">
+      <a class="s" href="reference/tong-quan.png" target="_blank">
+        <b>Ảnh tham chiếu: Tổng quan</b>
+        <span class="muted">Bản thiết kế mẫu màn hình Tổng quan gốc của người dùng.</span>
+        <code>reference/tong-quan.png</code>
+      </a>
+      <a class="s" href="reference/quan-ly-sach.png" target="_blank">
+        <b>Ảnh tham chiếu: Quản lý sách</b>
+        <span class="muted">Bản thiết kế mẫu màn hình Quản lý sách gốc của người dùng.</span>
+        <code>reference/quan-ly-sach.png</code>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

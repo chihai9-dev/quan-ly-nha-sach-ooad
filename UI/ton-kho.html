@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tồn kho · mộc.</title>
+  <link rel="stylesheet" href="assets/moc.css" />
+</head>
+<body data-page="ton-kho" data-crumb="Tồn kho">
+<template id="page">
+  <div class="page-head">
+    <div><h1>Tồn kho</h1><p>Theo dõi số lượng, ngưỡng cảnh báo và biến động kho sách theo thời gian thực.</p></div>
+    <div class="actions"><button class="btn"><i data-i="download"></i>Xuất báo cáo</button><a class="btn" href="kiem-ke.html"><i data-i="clipboard"></i>Kiểm kê kho</a><a class="btn primary" href="nhap-hang-tao-phieu.html"><i data-i="plus"></i>Tạo phiếu nhập</a></div>
+  </div>
+
+  <div class="stats">
+    <div class="stat hero"><div class="lbl">Tổng sách trong kho <i data-i="boxes"></i></div><div class="val">12.486<small>cuốn</small></div><div class="sub">1.186 đầu sách đang kinh doanh</div></div>
+    <div class="stat"><div class="lbl">Giá trị tồn kho <i data-i="wallet"></i></div><div class="val">1,28<small>tỷ đồng</small></div><div class="sub">Theo giá nhập bình quân</div></div>
+    <div class="stat"><div class="lbl">Sắp hết hàng <i data-i="alert"></i></div><div class="val">24<small>đầu sách</small></div><div class="sub"><span class="warn">Dưới ngưỡng tối thiểu</span></div></div>
+    <div class="stat"><div class="lbl">Hết hàng <i data-i="x"></i></div><div class="val">7<small>đầu sách</small></div><div class="sub"><span class="bad">Không thể bán tại quầy</span></div></div>
+  </div>
+
+  <div class="g-2-1">
+    <div class="panel">
+      <div class="tabs"><a class="on">Tất cả <span class="n">1.186</span></a><a>Sắp hết hàng <span class="n" style="background:var(--amber-bg);color:var(--amber)">24</span></a><a>Hết hàng</a><a>Tồn lâu (&gt; 90 ngày)</a></div>
+      <div class="filters">
+        <div class="search"><i data-i="search"></i><input class="input" placeholder="Tìm tên sách, mã sách hoặc ISBN..." /></div>
+        <select class="select"><option>Tất cả thể loại</option></select>
+        <select class="select"><option>Tất cả vị trí kệ</option></select>
+      </div>
+      <table>
+        <thead><tr><th>Sách</th><th>Vị trí</th><th class="num">Tồn kho</th><th style="width:150px">Mức tồn / Ngưỡng</th><th>Nhập gần nhất</th><th>Trạng thái</th></tr></thead>
+        <tbody>
+          <tr><td><div class="row"><span class="cover c3"></span><div><b>Cây cam ngọt của tôi</b><div class="sub">S-0003 · Văn học</div></div></div></td><td style="white-space:nowrap">Kệ A2</td><td class="num"><b>6</b></td><td><div class="bar warn"><i style="width:30%"></i></div><div class="sub">Ngưỡng 20</div></td><td>12/10/2026</td><td><span class="badge warn">Sắp hết</span></td></tr>
+          <tr><td><div class="row"><span class="cover c6"></span><div><b>Tuổi trẻ đáng giá bao nhiêu?</b><div class="sub">S-0006 · Kỹ năng sống</div></div></div></td><td style="white-space:nowrap">Kệ B1</td><td class="num"><b>8</b></td><td><div class="bar warn"><i style="width:40%"></i></div><div class="sub">Ngưỡng 20</div></td><td>02/10/2026</td><td><span class="badge warn">Sắp hết</span></td></tr>
+          <tr><td><div class="row"><span class="cover c8"></span><div><b>Bố già</b><div class="sub">S-0008 · Văn học</div></div></div></td><td style="white-space:nowrap">Kệ A4</td><td class="num"><b>0</b></td><td><div class="bar bad"><i style="width:2%"></i></div><div class="sub">Ngưỡng 10</div></td><td>15/08/2026</td><td><span class="badge bad">Hết hàng</span></td></tr>
+          <tr><td><div class="row"><span class="cover c1"></span><div><b>Nhà giả kim</b><div class="sub">S-0001 · Văn học</div></div></div></td><td style="white-space:nowrap">Kệ A1</td><td class="num"><b>128</b></td><td><div class="bar"><i style="width:100%"></i></div><div class="sub">Ngưỡng 30</div></td><td>05/11/2026</td><td><span class="badge ok">Đủ hàng</span></td></tr>
+          <tr><td><div class="row"><span class="cover c2"></span><div><b>Đắc nhân tâm</b><div class="sub">S-0002 · Kỹ năng sống</div></div></div></td><td style="white-space:nowrap">Kệ B1</td><td class="num"><b>85</b></td><td><div class="bar"><i style="width:85%"></i></div><div class="sub">Ngưỡng 25</div></td><td>28/10/2026</td><td><span class="badge ok">Đủ hàng</span></td></tr>
+          <tr><td><div class="row"><span class="cover c4"></span><div><b>Dế Mèn phiêu lưu ký</b><div class="sub">S-0004 · Thiếu nhi</div></div></div></td><td style="white-space:nowrap">Kệ C3</td><td class="num"><b>52</b></td><td><div class="bar"><i style="width:70%"></i></div><div class="sub">Ngưỡng 15</div></td><td>20/10/2026</td><td><span class="badge ok">Đủ hàng</span></td></tr>
+          <tr><td><div class="row"><span class="cover c5"></span><div><b>Tư duy nhanh và chậm</b><div class="sub">S-0005 · Tâm lý học</div></div></div></td><td style="white-space:nowrap">Kệ D2</td><td class="num"><b>34</b></td><td><div class="bar"><i style="width:60%"></i></div><div class="sub">Ngưỡng 10</div></td><td>18/09/2026</td><td><span class="badge ok">Đủ hàng</span></td></tr>
+        </tbody>
+      </table>
+      <div class="pager"><span>Hiển thị 1–7 trong 1.186 đầu sách</span><div class="pages"><span>‹</span><span class="on">1</span><span>2</span><span>3</span><span>…</span><span>170</span><span>›</span></div></div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="card">
+        <div class="card-head"><div><h3>Cần nhập bổ sung</h3><p>Gợi ý theo tốc độ bán 30 ngày</p></div><a class="link small" href="nhap-hang-tao-phieu.html">Tạo phiếu <i data-i="arrowUR" class="sm"></i></a></div>
+        <div class="li"><span class="cover c3"></span><div class="grow"><b>Cây cam ngọt của tôi</b><small>Bán 4,2 cuốn/ngày · còn ~1 ngày</small></div><b>+60</b></div>
+        <div class="li"><span class="cover c6"></span><div class="grow"><b>Tuổi trẻ đáng giá bao nhiêu?</b><small>Bán 2,8 cuốn/ngày · còn ~3 ngày</small></div><b>+40</b></div>
+        <div class="li"><span class="cover c8"></span><div class="grow"><b>Bố già</b><small>Đã hết · 12 khách hỏi mua</small></div><b>+30</b></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div><h3>Biến động kho hôm nay</h3><p>Nhập, xuất bán và điều chỉnh</p></div></div>
+        <div class="li"><span class="ic"><i data-i="download"></i></span><div class="grow"><b>Nhập kho PN-0042</b><small>NCC Phương Nam · 08:15</small></div><b style="color:var(--green-700)">+450</b></div>
+        <div class="li"><span class="ic info"><i data-i="bag"></i></span><div class="grow"><b>Xuất bán tại quầy</b><small>128 hóa đơn</small></div><b>−342</b></div>
+        <div class="li"><span class="ic warn"><i data-i="clipboard"></i></span><div class="grow"><b>Điều chỉnh kiểm kê KK-011</b><small>Kệ A2 · 11:40</small></div><b style="color:var(--red)">−3</b></div>
+        <div class="li"><span class="ic"><i data-i="refresh"></i></span><div class="grow"><b>Khách trả hàng HD-0123</b><small>Nhập lại kho · 13:45</small></div><b style="color:var(--green-700)">+2</b></div>
+      </div>
+    </div>
+  </div>
+</template>
+<script src="assets/shell.js"></script>
+</body>
+</html>

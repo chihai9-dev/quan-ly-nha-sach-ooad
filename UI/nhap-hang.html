@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nhập hàng · mộc.</title>
+  <link rel="stylesheet" href="assets/moc.css" />
+</head>
+<body data-page="nhap-hang" data-crumb="Nhập hàng">
+<template id="page">
+  <div class="page-head">
+    <div><h1>Nhập hàng</h1><p>Quản lý phiếu nhập sách từ nhà cung cấp và theo dõi công nợ phải trả.</p></div>
+    <div class="actions"><button class="btn"><i data-i="building"></i>Nhà cung cấp</button><a class="btn primary" href="nhap-hang-tao-phieu.html"><i data-i="plus"></i>Tạo phiếu nhập</a></div>
+  </div>
+
+  <div class="stats">
+    <div class="stat hero"><div class="lbl">Nhập trong tháng <i data-i="truck"></i></div><div class="val">186,4<small>triệu đồng</small></div><div class="sub">18 phiếu · 3.240 cuốn</div></div>
+    <div class="stat"><div class="lbl">Chờ nhận hàng <i data-i="clock"></i></div><div class="val">3<small>phiếu</small></div><div class="sub"><span class="warn">450 cuốn</span> dự kiến hôm nay</div></div>
+    <div class="stat"><div class="lbl">Công nợ nhà cung cấp <i data-i="wallet"></i></div><div class="val">72,6<small>triệu đồng</small></div><div class="sub">5 nhà cung cấp</div></div>
+    <div class="stat"><div class="lbl">Sắp đến hạn thanh toán <i data-i="alert"></i></div><div class="val">48,2<small>triệu đồng</small></div><div class="sub"><span class="bad">3 khoản</span> trong 7 ngày tới</div></div>
+  </div>
+
+  <div class="g-2-1">
+    <div class="panel">
+      <div class="tabs"><a class="on">Tất cả phiếu <span class="n">18</span></a><a>Nháp</a><a>Chờ nhận hàng</a><a>Đã nhập kho</a><a>Đã hủy</a></div>
+      <div class="filters">
+        <div class="search"><i data-i="search"></i><input class="input" placeholder="Mã phiếu nhập hoặc tên nhà cung cấp..." /></div>
+        <select class="select"><option>Tất cả nhà cung cấp</option></select>
+        <select class="select"><option>Tháng 11/2026</option></select>
+      </div>
+      <table>
+        <thead><tr><th>Mã phiếu</th><th>Nhà cung cấp</th><th class="num">Số lượng</th><th class="num">Tổng tiền</th><th>Thanh toán</th><th>Trạng thái</th></tr></thead>
+        <tbody>
+          <tr><td><b>PN-0045</b><div class="sub">Dự kiến 09/11/2026</div></td><td>Công ty Sách Phương Nam</td><td class="num">220 cuốn</td><td class="num"><b>14.960.000 đ</b></td><td><span class="badge gray plain">Chưa trả</span></td><td><span class="badge warn">Chờ nhận hàng</span></td></tr>
+          <tr><td><b>PN-0044</b><div class="sub">Dự kiến 09/11/2026</div></td><td>NXB Kim Đồng</td><td class="num">150 cuốn</td><td class="num"><b>7.425.000 đ</b></td><td><span class="badge gray plain">Chưa trả</span></td><td><span class="badge warn">Chờ nhận hàng</span></td></tr>
+          <tr><td><b>PN-0043</b><div class="sub">Dự kiến 10/11/2026</div></td><td>Nhã Nam</td><td class="num">80 cuốn</td><td class="num"><b>6.120.000 đ</b></td><td><span class="badge info plain">Trả 50%</span></td><td><span class="badge warn">Chờ nhận hàng</span></td></tr>
+          <tr><td><b>PN-0042</b><div class="sub">09/11/2026, 08:15</div></td><td>Công ty Sách Phương Nam</td><td class="num">450 cuốn</td><td class="num"><b>28.350.000 đ</b></td><td><span class="badge info plain">Trả 30%</span></td><td><span class="badge ok">Đã nhập kho</span></td></tr>
+          <tr><td><b>PN-0041</b><div class="sub">05/11/2026, 09:40</div></td><td>First News – Trí Việt</td><td class="num">300 cuốn</td><td class="num"><b>21.600.000 đ</b></td><td><span class="badge ok plain">Đã trả đủ</span></td><td><span class="badge ok">Đã nhập kho</span></td></tr>
+          <tr><td><b>PN-0040</b><div class="sub">02/11/2026</div></td><td>Alpha Books</td><td class="num">120 cuốn</td><td class="num"><b>9.840.000 đ</b></td><td><span class="badge gray plain">—</span></td><td><span class="badge gray">Nháp</span></td></tr>
+          <tr><td><b>PN-0039</b><div class="sub">28/10/2026</div></td><td>NXB Trẻ</td><td class="num">60 cuốn</td><td class="num"><b>4.200.000 đ</b></td><td><span class="badge gray plain">—</span></td><td><span class="badge bad">Đã hủy</span></td></tr>
+        </tbody>
+      </table>
+      <div class="pager"><span>Hiển thị 1–7 trong 18 phiếu nhập</span><div class="pages"><span>‹</span><span class="on">1</span><span>2</span><span>3</span><span>›</span></div></div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="card">
+        <div class="card-head"><div><h3>Công nợ nhà cung cấp</h3><p>Sắp xếp theo hạn thanh toán</p></div><a class="link small">Chi tiết <i data-i="arrowUR" class="sm"></i></a></div>
+        <div class="li"><span class="ic bad"><i data-i="building"></i></span><div class="grow"><b>Công ty Sách Phương Nam</b><small>Hạn 12/11/2026 · còn 3 ngày</small></div><div class="right"><b>19,8 tr</b><small class="muted">/ 43,3 tr</small></div></div>
+        <div class="li"><span class="ic warn"><i data-i="building"></i></span><div class="grow"><b>NXB Kim Đồng</b><small>Hạn 14/11/2026 · còn 5 ngày</small></div><div class="right"><b>17,4 tr</b></div></div>
+        <div class="li"><span class="ic warn"><i data-i="building"></i></span><div class="grow"><b>Nhã Nam</b><small>Hạn 15/11/2026 · còn 6 ngày</small></div><div class="right"><b>11,0 tr</b></div></div>
+        <div class="li"><span class="ic"><i data-i="building"></i></span><div class="grow"><b>Alpha Books</b><small>Hạn 30/11/2026</small></div><div class="right"><b>14,2 tr</b></div></div>
+        <div class="li"><span class="ic"><i data-i="building"></i></span><div class="grow"><b>First News – Trí Việt</b><small>Hạn 05/12/2026</small></div><div class="right"><b>10,2 tr</b></div></div>
+        <button class="btn block" style="margin-top:12px;height:38px;font-size:13px"><i data-i="wallet"></i>Ghi nhận thanh toán NCC</button>
+      </div>
+      <div class="card" style="background:var(--green-50);border-color:var(--green-100)">
+        <div class="card-head" style="margin-bottom:8px"><h3>Hàng sắp về hôm nay</h3><span class="small muted">3 phiếu</span></div>
+        <div class="li"><span class="ic"><i data-i="truck"></i></span><div class="grow"><b>PN-0045 · Phương Nam</b><small>220 cuốn · 14:00–16:00</small></div><button class="btn sm">Nhận hàng</button></div>
+        <div class="li"><span class="ic"><i data-i="truck"></i></span><div class="grow"><b>PN-0044 · Kim Đồng</b><small>150 cuốn · 16:30</small></div><button class="btn sm">Nhận hàng</button></div>
+      </div>
+    </div>
+  </div>
+</template>
+<script src="assets/shell.js"></script>
+</body>
+</html>

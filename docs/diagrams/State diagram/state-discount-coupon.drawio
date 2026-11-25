@@ -1,0 +1,58 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="State - DiscountCoupon" id="state-discount-coupon">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1100" pageHeight="650" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="&lt;b&gt;STATE DIAGRAM – DISCOUNT COUPON / VOUCHER (MÃ GIẢM GIÁ)&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="200" y="20" width="700" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="init" value="" style="ellipse;html=1;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="50" y="252" width="26" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="active" value="&lt;b&gt;ACTIVE&lt;/b&gt;&lt;br&gt;(Còn hiệu lực)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="250" y="230" width="210" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="exhausted" value="&lt;b&gt;EXHAUSTED&lt;/b&gt;&lt;br&gt;(Hết lượt sử dụng)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="640" y="150" width="210" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="expired" value="&lt;b&gt;EXPIRED&lt;/b&gt;&lt;br&gt;(Đã hết hạn)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="640" y="310" width="210" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="endNode" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="960" y="250" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="Phát hành mã&lt;br&gt;[mã chưa tồn tại]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="init" target="active">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="0" y="-22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" value="Áp dụng vào Order&lt;br&gt;[đủ minOrderAmount, lượt dùng &amp;lt; tối đa]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0.3;exitY=0;exitDx=0;exitDy=0;entryX=0.7;entryY=0;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="active" target="active">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="313" y="175" />
+              <mxPoint x="397" y="175" />
+            </Array>
+            <mxPoint x="0" y="-22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" value="Áp dụng [chạm số lần tối đa]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="active" target="exhausted">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="0" y="-14" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" value="Qua hạn sử dụng" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=1;exitY=0.7;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="active" target="expired">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="0" y="14" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;" edge="1" parent="1" source="exhausted" target="endNode">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;" edge="1" parent="1" source="expired" target="endNode">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

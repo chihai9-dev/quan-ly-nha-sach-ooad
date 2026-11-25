@@ -528,3 +528,29 @@ create index if not exists idx_hoa_don_nv              on public.hoa_don(ma_nv);
 create index if not exists idx_hoa_don_ma_code         on public.hoa_don(ma_code);
 create index if not exists idx_thanh_toan_hoa_don      on public.thanh_toan(ma_hoa_don);
 create index if not exists idx_phieu_doi_tra_hoa_don   on public.phieu_doi_tra(ma_hoa_don);
+
+
+-- =============================================================================
+-- 10. ROW LEVEL SECURITY (RLS) & POLICIES
+-- Bật RLS và cấp quyền cho anon / authenticated thuận tiện cho kiểm thử đồ án
+-- =============================================================================
+do $$
+declare
+  t text;
+begin
+  foreach t in array array[
+    'vai_tro', 'nhan_vien', 'tai_khoan', 'the_loai', 'tac_gia', 'nha_xuat_ban',
+    'chuong_trinh_khuyen_mai', 'sach', 'sach_tac_gia', 'phieu_kiem_ke',
+    'chi_tiet_kiem_ke', 'nha_cung_cap', 'phieu_nhap', 'chi_tiet_phieu_nhap',
+    'phieu_thanh_toan_ncc', 'khach_hang', 'ma_giam_gia', 'hoa_don',
+    'chi_tiet_hoa_don', 'thanh_toan', 'phieu_doi_tra', 'chi_tiet_doi_tra'
+  ]
+  loop
+    execute format('alter table public.%I enable row level security;', t);
+    execute format('drop policy if exists allow_all_operations on public.%I;', t);
+    execute format(
+      'create policy allow_all_operations on public.%I for all using (true) with check (true);', t
+    );
+  end loop;
+end;
+$$;

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Báo cáo · mộc.</title>
+  <link rel="stylesheet" href="assets/moc.css" />
+  <style>
+    .donut { width: 150px; height: 150px; border-radius: 50%; background: conic-gradient(var(--green-800) 0 38%, var(--green-600) 38% 62%, #9cbf9f 62% 78%, #d9b37c 78% 90%, #e3e2d8 90% 100%); position: relative; flex: none; }
+    .donut::after { content: ""; position: absolute; inset: 26px; background: #fff; border-radius: 50%; }
+    .donut span { position: absolute; inset: 0; display: grid; place-items: center; z-index: 1; text-align: center; font-size: 11px; color: var(--muted); }
+    .donut span b { display: block; font-size: 18px; color: var(--ink); }
+    .lg-row { display: flex; align-items: center; gap: 8px; padding: 5px 0; }
+    .lg-row i { width: 10px; height: 10px; border-radius: 3px; flex: none; }
+    .hbar { display: flex; align-items: center; gap: 10px; padding: 7px 0; }
+    .hbar .name { width: 120px; color: var(--ink-2); }
+    .hbar .bar { flex: 1; height: 8px; }
+    .hbar b { width: 72px; text-align: right; }
+  </style>
+</head>
+<body data-page="bao-cao" data-crumb="Báo cáo">
+<template id="page">
+  <div class="page-head">
+    <div><h1>Báo cáo kinh doanh</h1><p>Doanh thu, lợi nhuận, hiệu quả thể loại và nhân viên theo kỳ.</p></div>
+    <div class="actions">
+      <div class="seg"><a>Hôm nay</a><a>7 ngày</a><a class="on">Tháng này</a><a>Quý</a><a>Năm</a></div>
+      <button class="btn"><i data-i="calendar"></i>01/11 – 09/11/2026</button>
+      <button class="btn primary"><i data-i="download"></i>Xuất PDF</button>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat hero"><div class="lbl">Doanh thu thuần <i data-i="wallet"></i></div><div class="val">198,6<small>triệu đồng</small></div><div class="sub"><span class="up">↗ 14,2%</span> so với cùng kỳ</div></div>
+    <div class="stat"><div class="lbl">Lợi nhuận gộp <i data-i="trend"></i></div><div class="val">59,8<small>triệu đồng</small></div><div class="sub"><span class="up">Biên 30,1%</span> · ↗ 1,4 điểm</div></div>
+    <div class="stat"><div class="lbl">Số đơn hàng <i data-i="receipt"></i></div><div class="val">1.064<small>đơn</small></div><div class="sub"><span class="up">↗ 9,8%</span> · TB 186.700 đ/đơn</div></div>
+    <div class="stat"><div class="lbl">Đổi / trả hàng <i data-i="refresh"></i></div><div class="val">0,8<small>%</small></div><div class="sub"><span class="bad">↗ 0,2%</span> 9 phiếu đổi trả</div></div>
+  </div>
+
+  <div class="g-2-1">
+    <div class="card">
+      <div class="card-head"><div><h3>Doanh thu &amp; lợi nhuận theo ngày</h3><p>Đơn vị: triệu đồng</p></div><div class="legend"><span><i style="background:var(--green-800)"></i>Kỳ này</span><span><i style="background:var(--green-100)"></i>Cùng kỳ tháng trước</span></div></div>
+      <div class="chart-bars">
+        <div class="b"><i class="prev" style="height:58%"></i><i style="height:66%"></i></div>
+        <div class="b"><i class="prev" style="height:62%"></i><i style="height:70%"></i></div>
+        <div class="b"><i class="prev" style="height:50%"></i><i style="height:61%"></i></div>
+        <div class="b"><i class="prev" style="height:66%"></i><i style="height:79%"></i></div>
+        <div class="b"><i class="prev" style="height:71%"></i><i style="height:72%"></i></div>
+        <div class="b"><i class="prev" style="height:60%"></i><i style="height:68%"></i></div>
+        <div class="b"><i class="prev" style="height:64%"></i><i style="height:74%"></i></div>
+        <div class="b"><i class="prev" style="height:78%"></i><i style="height:88%"></i></div>
+        <div class="b"><i class="prev" style="height:80%"></i><i style="height:99%"></i></div>
+      </div>
+      <div class="chart-x"><span>01/11</span><span>02/11</span><span>03/11</span><span>04/11</span><span>05/11</span><span>06/11</span><span>07/11</span><span>08/11</span><span><b style="color:var(--ink)">09/11</b></span></div>
+      <div class="row small muted" style="margin-top:14px"><i data-i="trend" class="sm"></i>Cuối tuần (08–09/11) đóng góp 25% doanh thu kỳ — nên tăng ca thu ngân vào thứ Bảy, Chủ nhật.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div><h3>Cơ cấu doanh thu theo thể loại</h3><p>Tháng 11/2026</p></div></div>
+      <div class="row" style="gap:20px;align-items:center">
+        <div class="donut"><span><div><b>198,6 tr</b>doanh thu</div></span></div>
+        <div class="grow">
+          <div class="lg-row"><i style="background:var(--green-800)"></i><span class="grow">Văn học</span><b>38%</b></div>
+          <div class="lg-row"><i style="background:var(--green-600)"></i><span class="grow">Kỹ năng sống</span><b>24%</b></div>
+          <div class="lg-row"><i style="background:#9cbf9f"></i><span class="grow">Thiếu nhi</span><b>16%</b></div>
+          <div class="lg-row"><i style="background:#d9b37c"></i><span class="grow">Tâm lý học</span><b>12%</b></div>
+          <div class="lg-row"><i style="background:#e3e2d8"></i><span class="grow">Khác</span><b>10%</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g-3">
+    <div class="card">
+      <div class="card-head"><h3>Top sách theo doanh thu</h3><a class="link small">Chi tiết</a></div>
+      <div class="li"><span class="cover c5"></span><div class="grow"><b>Tư duy nhanh và chậm</b><small>62 cuốn</small></div><b>16,7 tr</b></div>
+      <div class="li"><span class="cover c1"></span><div class="grow"><b>Nhà giả kim</b><small>186 cuốn</small></div><b>14,7 tr</b></div>
+      <div class="li"><span class="cover c3"></span><div class="grow"><b>Cây cam ngọt của tôi</b><small>128 cuốn</small></div><b>13,8 tr</b></div>
+      <div class="li"><span class="cover c2"></span><div class="grow"><b>Đắc nhân tâm</b><small>154 cuốn</small></div><b>13,2 tr</b></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><h3>Doanh thu theo thu ngân</h3><span class="small muted">Tháng này</span></div>
+      <div class="hbar"><span class="name">Lan Anh</span><div class="bar"><i style="width:92%"></i></div><b>72,4 tr</b></div>
+      <div class="hbar"><span class="name">Minh Quân</span><div class="bar"><i style="width:78%"></i></div><b>61,3 tr</b></div>
+      <div class="hbar"><span class="name">Thu Trang</span><div class="bar"><i style="width:52%"></i></div><b>40,9 tr</b></div>
+      <div class="hbar"><span class="name">Hữu Phước</span><div class="bar"><i style="width:31%"></i></div><b>24,0 tr</b></div>
+      <hr class="sep" />
+      <div class="small muted">Tổng 198,6 triệu · 4 thu ngân · 27 ca làm việc</div>
+    </div>
+    <div class="card">
+      <div class="card-head"><h3>Phương thức thanh toán</h3><span class="small muted">Theo giá trị</span></div>
+      <div class="hbar"><span class="name">Chuyển khoản</span><div class="bar"><i style="width:44%"></i></div><b>44%</b></div>
+      <div class="hbar"><span class="name">Tiền mặt</span><div class="bar"><i style="width:31%"></i></div><b>31%</b></div>
+      <div class="hbar"><span class="name">MoMo</span><div class="bar"><i style="width:15%"></i></div><b>15%</b></div>
+      <div class="hbar"><span class="name">Thẻ ngân hàng</span><div class="bar"><i style="width:10%"></i></div><b>10%</b></div>
+      <hr class="sep" />
+      <div class="small muted">Thanh toán không tiền mặt tăng 6% so với tháng trước.</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="card-head" style="padding:16px 20px 12px;margin:0"><div><h3>Báo cáo có sẵn</h3><p>Tải xuống hoặc lên lịch gửi email định kỳ</p></div></div>
+    <table>
+      <thead><tr><th>Tên báo cáo</th><th>Mô tả</th><th>Cập nhật</th><th>Gửi định kỳ</th><th></th></tr></thead>
+      <tbody>
+        <tr><td><div class="row"><span class="ic avatar"><i data-i="chart"></i></span><b>Doanh thu theo ngày</b></div></td><td class="muted">Doanh thu, số đơn, giá trị đơn trung bình</td><td>Hôm nay, 15:00</td><td><span class="toggle on"></span></td><td class="right"><button class="btn sm"><i data-i="download" class="sm"></i>Excel</button></td></tr>
+        <tr><td><div class="row"><span class="ic avatar"><i data-i="boxes"></i></span><b>Xuất – nhập – tồn</b></div></td><td class="muted">Biến động kho theo từng đầu sách</td><td>Hôm nay, 15:00</td><td><span class="toggle on"></span></td><td class="right"><button class="btn sm"><i data-i="download" class="sm"></i>Excel</button></td></tr>
+        <tr><td><div class="row"><span class="ic avatar"><i data-i="building"></i></span><b>Công nợ nhà cung cấp</b></div></td><td class="muted">Số dư, hạn thanh toán, lịch sử trả</td><td>Hôm qua, 23:00</td><td><span class="toggle"></span></td><td class="right"><button class="btn sm"><i data-i="download" class="sm"></i>Excel</button></td></tr>
+        <tr><td><div class="row"><span class="ic avatar"><i data-i="percent"></i></span><b>Hiệu quả khuyến mãi</b></div></td><td class="muted">Doanh thu và chi phí theo chương trình khuyến mãi, mã giảm giá</td><td>01/11/2026</td><td><span class="toggle"></span></td><td class="right"><button class="btn sm"><i data-i="download" class="sm"></i>Excel</button></td></tr>
+      </tbody>
+    </table>
+  </div>
+</template>
+<script src="assets/shell.js"></script>
+</body>
+</html>
