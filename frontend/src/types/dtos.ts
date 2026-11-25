@@ -265,6 +265,8 @@ export interface CreateSupplierPaymentDTO {
 }
 
 // --- 6. Kho & Kiểm kê (Inventory & StockAudit) ---
+export type BookBusinessStatus = 'SELLING' | 'DISCONTINUED';
+
 export interface InventoryItemDTO {
   bookId: string;
   isbn: string;
@@ -275,6 +277,8 @@ export interface InventoryItemDTO {
   stockQuantity: number;
   minStockThreshold: number;
   maxStockThreshold: number;
+  soldQuantity: number;
+  businessStatus: BookBusinessStatus;
   alertStatus: 'LOW' | 'OVERSTOCK' | 'NORMAL';
 }
 
@@ -290,10 +294,12 @@ export interface StockAuditItemDTO {
 export interface StockAuditDTO {
   id: string;
   auditCode: string;
+  adjustmentType: 'AUDIT' | 'DAMAGED_WRITE_OFF';
   staffName: string;
   auditDate: string;
   status: 'BALANCED' | 'ADJUSTED';
   totalDiscrepancy: number;
+  lossValue: number;
   note?: string;
   items: StockAuditItemDTO[];
 }
@@ -306,6 +312,13 @@ export interface CreateStockAuditDTO {
     actualQuantity: number;
     reason?: string;
   }>;
+}
+
+export interface CreateDamagedWriteOffDTO {
+  staffName: string;
+  bookId: string;
+  damagedQuantity: number;
+  reason: string;
 }
 
 // --- 7. Khuyến mãi & Mã giảm giá (Promotion & DiscountCoupon) ---

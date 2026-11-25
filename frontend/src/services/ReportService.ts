@@ -43,6 +43,8 @@ export class ReportService {
       stockQuantity: b.stockQuantity,
       minStockThreshold: b.minStockThreshold,
       maxStockThreshold: b.maxStockThreshold,
+      soldQuantity: b.soldQuantity,
+      businessStatus: b.businessStatus,
       alertStatus: computeAlertStatus(b.stockQuantity, b.minStockThreshold, b.maxStockThreshold),
     }));
 

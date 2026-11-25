@@ -28,6 +28,7 @@ export interface MockBookRecord {
   minStockThreshold: number;
   maxStockThreshold: number;
   soldQuantity: number;
+  businessStatus: 'SELLING' | 'DISCONTINUED';
 }
 
 export function calculateTier(points: number): CustomerTier {
@@ -70,12 +71,12 @@ class BookstoreMockStore {
   ];
 
   public books: MockBookRecord[] = [
-    { id: 'b1', isbn: '978-0132350884', title: 'Clean Code', author: 'Robert C. Martin', publisher: 'NXB Dân Trí', categoryName: 'Công nghệ thông tin', price: 320000, costPrice: 220000, stockQuantity: 25, minStockThreshold: 10, maxStockThreshold: 100, soldQuantity: 42 },
-    { id: 'b2', isbn: '978-0134494166', title: 'Clean Architecture', author: 'Robert C. Martin', publisher: 'NXB Dân Trí', categoryName: 'Công nghệ thông tin', price: 350000, costPrice: 240000, stockQuantity: 6, minStockThreshold: 10, maxStockThreshold: 80, soldQuantity: 28 },
-    { id: 'b3', isbn: '978-0321125217', title: 'Domain-Driven Design', author: 'Eric Evans', publisher: 'NXB Thế Giới', categoryName: 'Công nghệ thông tin', price: 450000, costPrice: 310000, stockQuantity: 4, minStockThreshold: 8, maxStockThreshold: 60, soldQuantity: 19 },
-    { id: 'b4', isbn: '978-6041145678', title: 'Mắt Biếc', author: 'Nguyễn Nhật Ánh', publisher: 'NXB Trẻ', categoryName: 'Văn học', price: 110000, costPrice: 70000, stockQuantity: 85, minStockThreshold: 15, maxStockThreshold: 80, soldQuantity: 65 },
-    { id: 'b5', isbn: '978-0735211292', title: 'Thói Quen Nguyên Tử (Atomic Habits)', author: 'James Clear', publisher: 'NXB Thế Giới', categoryName: 'Kỹ năng sống', price: 185000, costPrice: 120000, stockQuantity: 32, minStockThreshold: 10, maxStockThreshold: 90, soldQuantity: 54 },
-    { id: 'b6', isbn: '978-6041098765', title: 'Cho Tôi Xin Một Vé Đi Tuổi Thơ', author: 'Nguyễn Nhật Ánh', publisher: 'NXB Trẻ', categoryName: 'Văn học', price: 95000, costPrice: 60000, stockQuantity: 18, minStockThreshold: 10, maxStockThreshold: 70, soldQuantity: 37 },
+    { id: 'b1', isbn: '978-0132350884', title: 'Clean Code', author: 'Robert C. Martin', publisher: 'NXB Dân Trí', categoryName: 'Công nghệ thông tin', price: 320000, costPrice: 220000, stockQuantity: 25, minStockThreshold: 10, maxStockThreshold: 100, soldQuantity: 42, businessStatus: 'SELLING' },
+    { id: 'b2', isbn: '978-0134494166', title: 'Clean Architecture', author: 'Robert C. Martin', publisher: 'NXB Dân Trí', categoryName: 'Công nghệ thông tin', price: 350000, costPrice: 240000, stockQuantity: 6, minStockThreshold: 10, maxStockThreshold: 80, soldQuantity: 28, businessStatus: 'SELLING' },
+    { id: 'b3', isbn: '978-0321125217', title: 'Domain-Driven Design', author: 'Eric Evans', publisher: 'NXB Thế Giới', categoryName: 'Công nghệ thông tin', price: 450000, costPrice: 310000, stockQuantity: 4, minStockThreshold: 8, maxStockThreshold: 60, soldQuantity: 19, businessStatus: 'SELLING' },
+    { id: 'b4', isbn: '978-6041145678', title: 'Mắt Biếc', author: 'Nguyễn Nhật Ánh', publisher: 'NXB Trẻ', categoryName: 'Văn học', price: 110000, costPrice: 70000, stockQuantity: 85, minStockThreshold: 15, maxStockThreshold: 80, soldQuantity: 65, businessStatus: 'SELLING' },
+    { id: 'b5', isbn: '978-0735211292', title: 'Thói Quen Nguyên Tử (Atomic Habits)', author: 'James Clear', publisher: 'NXB Thế Giới', categoryName: 'Kỹ năng sống', price: 185000, costPrice: 120000, stockQuantity: 32, minStockThreshold: 10, maxStockThreshold: 90, soldQuantity: 54, businessStatus: 'SELLING' },
+    { id: 'b6', isbn: '978-6041098765', title: 'Cho Tôi Xin Một Vé Đi Tuổi Thơ', author: 'Nguyễn Nhật Ánh', publisher: 'NXB Trẻ', categoryName: 'Văn học', price: 95000, costPrice: 60000, stockQuantity: 18, minStockThreshold: 10, maxStockThreshold: 70, soldQuantity: 37, businessStatus: 'SELLING' },
   ];
 
   public customers: CustomerDTO[] = [
@@ -156,10 +157,12 @@ class BookstoreMockStore {
     {
       id: 'kk-1',
       auditCode: 'KK-20261110-01',
+      adjustmentType: 'AUDIT',
       staffName: 'Phạm Minh Thủ Kho',
       auditDate: '2026-11-10T17:00:00Z',
       status: 'ADJUSTED',
       totalDiscrepancy: -1,
+      lossValue: 220000,
       note: 'Kiểm kê định kỳ giữa tháng 11',
       items: [
         { bookId: 'b1', bookTitle: 'Clean Code', systemQuantity: 26, actualQuantity: 25, discrepancyQuantity: -1, reason: '1 cuốn rách bìa xuất hủy' },
