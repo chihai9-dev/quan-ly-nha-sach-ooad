@@ -10,16 +10,16 @@
         <mxCell id="init" value="" style="ellipse;html=1;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="40" y="232" width="26" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="loggedOut" value="&lt;b&gt;LOGGED_OUT&lt;/b&gt;&lt;br&gt;(Chưa đăng nhập)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+        <mxCell id="loggedOut" value="&lt;b&gt;LOGGED_OUT&lt;/b&gt;&lt;br&gt;(Chưa đăng nhập)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="230" y="210" width="210" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="loggedIn" value="&lt;b&gt;AUTHENTICATED&lt;/b&gt;&lt;br&gt;(Đang hoạt động / Ca trực)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+        <mxCell id="loggedIn" value="&lt;b&gt;AUTHENTICATED&lt;/b&gt;&lt;br&gt;(Đang hoạt động / Ca trực)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="680" y="210" width="220" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="otp" value="&lt;b&gt;OTP_VERIFY&lt;/b&gt;&lt;br&gt;(Đang xác thực OTP / Đặt lại MK)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+        <mxCell id="otp" value="&lt;b&gt;OTP_VERIFY&lt;/b&gt;&lt;br&gt;(Đang xác thực OTP / Đặt lại MK)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="230" y="430" width="210" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="locked" value="&lt;b&gt;LOCKED&lt;/b&gt;&lt;br&gt;(Tài khoản bị khóa / Vô hiệu hóa)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+        <mxCell id="locked" value="&lt;b&gt;LOCKED&lt;/b&gt;&lt;br&gt;(Tài khoản bị khóa / Vô hiệu hóa)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="680" y="430" width="220" height="70" as="geometry" />
         </mxCell>
         <mxCell id="e1" value="Cấp tài khoản nhân viên" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="init" target="loggedOut">

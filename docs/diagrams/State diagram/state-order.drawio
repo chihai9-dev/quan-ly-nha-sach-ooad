@@ -10,20 +10,14 @@
         <mxCell id="init" parent="1" style="ellipse;html=1;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">
           <mxGeometry height="26" width="26" x="30" y="227" as="geometry" />
         </mxCell>
-        <mxCell id="pending" parent="1" style="swimlane;rounded=1;whiteSpace=wrap;html=1;startSize=30;arcSize=6;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" value="PENDING (Đang tạo đơn hàng)" vertex="1">
+        <mxCell id="pending" parent="1" style="swimlane;rounded=1;whiteSpace=wrap;html=1;startSize=30;arcSize=6;fillColor=#ffffff;strokeColor=#000000;fontStyle=1;" value="PENDING (Đang tạo đơn hàng)" vertex="1">
           <mxGeometry height="320" width="640" x="100" y="80" as="geometry" />
         </mxCell>
-        <mxCell id="subinit" parent="pending" style="ellipse;html=1;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">
-          <mxGeometry height="24" width="24" x="20" y="140" as="geometry" />
-        </mxCell>
-        <mxCell id="chonSach" parent="pending" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Đang chọn sách&lt;br&gt;(Giỏ hàng / Hóa đơn tạm)" vertex="1">
+        <mxCell id="chonSach" parent="pending" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" value="Đang chọn sách&lt;br&gt;(Giỏ hàng / Hóa đơn tạm)" vertex="1">
           <mxGeometry height="70" width="180" x="80" y="117" as="geometry" />
         </mxCell>
-        <mxCell id="thanhToan" parent="pending" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Đang thanh toán" vertex="1">
+        <mxCell id="thanhToan" parent="pending" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" value="Đang thanh toán" vertex="1">
           <mxGeometry height="70" width="180" x="420" y="117" as="geometry" />
-        </mxCell>
-        <mxCell id="e2" edge="1" parent="pending" source="subinit" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;" target="chonSach" value="">
-          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e3" edge="1" parent="pending" source="chonSach" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" target="thanhToan" value="Thanh toán [giỏ hàng không rỗng]">
           <mxGeometry relative="1" as="geometry">
@@ -53,13 +47,13 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="completed" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;COMPLETED&lt;/b&gt;&lt;br&gt;(Đã thanh toán)" vertex="1">
+        <mxCell id="completed" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" value="&lt;b&gt;COMPLETED&lt;/b&gt;&lt;br&gt;(Đã thanh toán)" vertex="1">
           <mxGeometry height="70" width="200" x="960" y="197" as="geometry" />
         </mxCell>
-        <mxCell id="cancelled" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#f8cecc;strokeColor=#b85450;" value="&lt;b&gt;CANCELLED&lt;/b&gt;&lt;br&gt;(Đã hủy)" vertex="1">
+        <mxCell id="cancelled" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" value="&lt;b&gt;CANCELLED&lt;/b&gt;&lt;br&gt;(Đã hủy)" vertex="1">
           <mxGeometry height="70" width="200" x="320" y="500" as="geometry" />
         </mxCell>
-        <mxCell id="returned" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#e1d5e7;strokeColor=#9673a6;" value="&lt;b&gt;RETURNED&lt;/b&gt;&lt;br&gt;(Đã trả hàng)" vertex="1">
+        <mxCell id="returned" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" value="&lt;b&gt;RETURNED&lt;/b&gt;&lt;br&gt;(Đã trả hàng)" vertex="1">
           <mxGeometry height="70" width="200" x="960" y="500" as="geometry" />
         </mxCell>
         <mxCell id="endCompleted" parent="1" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">
@@ -71,10 +65,10 @@
         <mxCell id="endReturned" parent="1" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">
           <mxGeometry height="30" width="30" x="1045" y="650" as="geometry" />
         </mxCell>
-        <mxCell id="note" parent="1" style="shape=note;whiteSpace=wrap;html=1;size=14;align=left;spacingLeft=8;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;" value="&lt;b&gt;Ghi chú&lt;/b&gt;&lt;br&gt;• PENDING / COMPLETED / CANCELLED khớp cột orders.status trong schema.sql.&lt;br&gt;• RETURNED là trạng thái đề xuất mở rộng (đi kèm Invoice.payment_status = REFUNDED).&lt;br&gt;• Yêu cầu đổi/trả không thỏa guard (quá 7 ngày, sách hư hỏng) bị từ chối, đơn giữ nguyên COMPLETED." vertex="1">
+        <mxCell id="note" parent="1" style="shape=note;whiteSpace=wrap;html=1;size=14;align=left;spacingLeft=8;fillColor=#ffffff;strokeColor=#000000;fontSize=11;" value="&lt;b&gt;Ghi chú&lt;/b&gt;&lt;br&gt;• PENDING / COMPLETED / CANCELLED khớp cột orders.status trong schema.sql.&lt;br&gt;• RETURNED là trạng thái đề xuất mở rộng (đi kèm Invoice.payment_status = REFUNDED).&lt;br&gt;• Yêu cầu đổi/trả không thỏa guard (quá 7 ngày, sách hư hỏng) bị từ chối, đơn giữ nguyên COMPLETED." vertex="1">
           <mxGeometry height="110" width="380" x="540" y="610" as="geometry" />
         </mxCell>
-        <mxCell id="e1" edge="1" parent="1" source="init" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;labelBackgroundColor=#ffffff;" target="pending" value="Quét / chọn sách đầu tiên">
+        <mxCell id="e1" edge="1" parent="1" source="init" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;labelBackgroundColor=#ffffff;" target="chonSach" value="Quét / chọn sách đầu tiên">
           <mxGeometry relative="1" x="1" y="71" as="geometry">
             <mxPoint x="50" y="21" as="offset" />
           </mxGeometry>

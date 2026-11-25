@@ -10,22 +10,22 @@
         <mxCell id="init" parent="1" style="ellipse;html=1;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">
           <mxGeometry height="26" width="26" x="30" y="282" as="geometry" />
         </mxCell>
-        <mxCell id="checking" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;CHECKING&lt;/b&gt;&lt;br&gt;(Kiểm tra điều kiện đổi/trả)" vertex="1">
+        <mxCell id="checking" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" value="&lt;b&gt;CHECKING&lt;/b&gt;&lt;br&gt;(Kiểm tra điều kiện đổi/trả)" vertex="1">
           <mxGeometry height="70" width="210" x="180" y="260" as="geometry" />
         </mxCell>
-        <mxCell id="choice" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="" vertex="1">
+        <mxCell id="choice" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;" value="" vertex="1">
           <mxGeometry height="40" width="40" x="500" y="275" as="geometry" />
         </mxCell>
-        <mxCell id="rejected" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#f8cecc;strokeColor=#b85450;" value="&lt;b&gt;REJECTED&lt;/b&gt;&lt;br&gt;(Từ chối xử lý)" vertex="1">
+        <mxCell id="rejected" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" value="&lt;b&gt;REJECTED&lt;/b&gt;&lt;br&gt;(Từ chối xử lý)" vertex="1">
           <mxGeometry height="70" width="210" x="680" y="110" as="geometry" />
         </mxCell>
-        <mxCell id="exchanging" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#fff2cc;strokeColor=#d6b656;" value="&lt;b&gt;EXCHANGING&lt;/b&gt;&lt;br&gt;(Đang đổi sách mới &amp;amp;&lt;br&gt;tính chênh lệch)" vertex="1">
+        <mxCell id="exchanging" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" value="&lt;b&gt;EXCHANGING&lt;/b&gt;&lt;br&gt;(Đang đổi sách mới &amp;amp;&lt;br&gt;tính chênh lệch)" vertex="1">
           <mxGeometry height="70" width="210" x="680" y="260" as="geometry" />
         </mxCell>
-        <mxCell id="refunding" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#e1d5e7;strokeColor=#9673a6;" value="&lt;b&gt;REFUNDING&lt;/b&gt;&lt;br&gt;(Đang trả hàng &amp;amp; hoàn tiền)" vertex="1">
+        <mxCell id="refunding" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" value="&lt;b&gt;REFUNDING&lt;/b&gt;&lt;br&gt;(Đang trả hàng &amp;amp; hoàn tiền)" vertex="1">
           <mxGeometry height="70" width="210" x="680" y="420" as="geometry" />
         </mxCell>
-        <mxCell id="completed" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;COMPLETED&lt;/b&gt;&lt;br&gt;(Hoàn tất đổi/trả)" vertex="1">
+        <mxCell id="completed" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" value="&lt;b&gt;COMPLETED&lt;/b&gt;&lt;br&gt;(Hoàn tất đổi/trả)" vertex="1">
           <mxGeometry height="70" width="190" x="1010" y="340" as="geometry" />
         </mxCell>
         <mxCell id="endNode" parent="1" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">

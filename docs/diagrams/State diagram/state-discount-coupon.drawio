@@ -10,13 +10,13 @@
         <mxCell id="init" value="" style="ellipse;html=1;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="50" y="252" width="26" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="active" value="&lt;b&gt;ACTIVE&lt;/b&gt;&lt;br&gt;(Còn hiệu lực)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+        <mxCell id="active" value="&lt;b&gt;ACTIVE&lt;/b&gt;&lt;br&gt;(Còn hiệu lực)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="250" y="230" width="210" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="exhausted" value="&lt;b&gt;EXHAUSTED&lt;/b&gt;&lt;br&gt;(Hết lượt sử dụng)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+        <mxCell id="exhausted" value="&lt;b&gt;EXHAUSTED&lt;/b&gt;&lt;br&gt;(Hết lượt sử dụng)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="640" y="150" width="210" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="expired" value="&lt;b&gt;EXPIRED&lt;/b&gt;&lt;br&gt;(Đã hết hạn)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+        <mxCell id="expired" value="&lt;b&gt;EXPIRED&lt;/b&gt;&lt;br&gt;(Đã hết hạn)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="640" y="310" width="210" height="70" as="geometry" />
         </mxCell>
         <mxCell id="endNode" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
