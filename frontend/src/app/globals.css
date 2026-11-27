@@ -2,32 +2,100 @@
 @tailwind components;
 @tailwind utilities;
 
+/* mộc. — Quản lý nhà sách · Design tokens & components (đồng bộ từ UI/assets/moc.css) */
 :root {
-  --foreground-rgb: 15, 23, 42;
-  --background-rgb: 248, 250, 252;
+  --green-900: #1d4630;
+  --green-800: #24533a;
+  --green-700: #2f6648;
+  --green-600: #3f7a58;
+  --green-100: #e3ede4;
+  --green-50: #eff4ee;
+  --bg: #f6f6f1;
+  --side: #f2f2eb;
+  --card: #ffffff;
+  --line: #e7e6dc;
+  --line-2: #efeee6;
+  --ink: #1e2a23;
+  --ink-2: #3b453f;
+  --muted: #737a72;
+  --faint: #a3a89f;
+  --amber: #b7791f;
+  --amber-bg: #fcf0d9;
+  --red: #b4472f;
+  --red-bg: #fae6e0;
+  --blue: #3b6a8f;
+  --blue-bg: #e5eef5;
+  --r: 10px;
+  --r-lg: 14px;
 }
 
+html,
 body {
-  color: rgb(var(--foreground-rgb));
-  background-color: rgb(var(--background-rgb));
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: Inter, "Segoe UI", system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Custom scrollbar for POS item lists */
+/* Layout shell giống UI/assets/moc.css */
+.moc-app {
+  display: grid;
+  grid-template-columns: 248px 1fr;
+  min-height: 100vh;
+}
+
+@media (max-width: 1024px) {
+  .moc-app {
+    grid-template-columns: 1fr;
+  }
+}
+
+.moc-sidebar {
+  background: var(--side);
+  border-right: 1px solid var(--line);
+  padding: 20px 14px;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.moc-topbar {
+  height: 60px;
+  background: #ffffff;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+
+.moc-stat-hero {
+  background: var(--green-800);
+  border-color: var(--green-800);
+  color: #ffffff;
+}
+
+/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: var(--side);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #cfcfc4;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #a3a89f;
 }

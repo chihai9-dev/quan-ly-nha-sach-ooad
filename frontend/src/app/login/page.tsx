@@ -2,49 +2,23 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { LogIn, ShieldCheck, KeyRound, AlertCircle, CheckCircle2, UserCog } from 'lucide-react';
+import { BookOpen, AlertCircle, CheckCircle2, KeyRound } from 'lucide-react';
 
-interface DemoActor {
-  username: string;
-  password: string;
-  role: string;
-  description: string;
-  badgeColor: string;
-}
-
-const DEMO_ACTORS: DemoActor[] = [
-  {
-    username: 'quanly',
-    password: '123456',
-    role: 'Quản lý',
-    description: 'Bán hàng, Kho, Nhập hàng, NCC, Khuyến mãi, Nhân viên, Báo cáo',
-    badgeColor: 'bg-amber-50 text-amber-700 border-amber-200',
-  },
-  {
-    username: 'banhang',
-    password: '123456',
-    role: 'Nhân viên bán hàng',
-    description: 'Quản lý bán hàng (POS, Hóa đơn, Đổi trả) & Khách hàng',
-    badgeColor: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-  },
-  {
-    username: 'thukho',
-    password: '123456',
-    role: 'Nhân viên kho',
-    description: 'Quản lý sách, Danh mục sách, Kiểm kê kho & Nhập hàng',
-    badgeColor: 'bg-sky-50 text-sky-700 border-sky-200',
-  },
+const DEMO_ACTORS = [
+  { username: 'quanly', password: '123456', role: 'Quản lý' },
+  { username: 'banhang', password: '123456', role: 'Nhân viên bán hàng' },
+  { username: 'thukho', password: '123456', role: 'Nhân viên kho' },
 ];
 
 export default function LoginPage() {
   const router = useRouter();
-  const [tenDangNhap, setTenDangNhap] = useState('');
-  const [matKhau, setMatKhau] = useState('');
+  const [tenDangNhap, setTenDangNhap] = useState('quanly');
+  const [matKhau, setMatKhau] = useState('123456');
+  const [branch, setBranch] = useState('Nhà sách Nguyễn Văn Cừ (Quận 5)');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
-  // Quên mật khẩu
   const [showForgot, setShowForgot] = useState(false);
   const [recoveryEmail, setRecoveryEmail] = useState('');
   const [forgotMsg, setForgotMsg] = useState<string | null>(null);
@@ -53,7 +27,6 @@ export default function LoginPage() {
     setLoading(true);
     setError(null);
     setSuccess(null);
-
     try {
       const res = await fetch('/api/auth/login', {
         method: 'POST',
@@ -61,18 +34,16 @@ export default function LoginPage() {
         body: JSON.stringify({ tenDangNhap: username, matKhau: password }),
       });
       const data = (await res.json()) as { message?: string; error?: string };
-
       if (!res.ok) {
         setError(data.error ?? 'Đăng nhập thất bại.');
         return;
       }
-
       setSuccess(data.message ?? 'Đăng nhập thành công.');
       window.dispatchEvent(new Event('auth-changed'));
       setTimeout(() => {
         router.push('/');
         router.refresh();
-      }, 400);
+      }, 300);
     } catch {
       setError('Không thể kết nối máy chủ xác thực.');
     } finally {
@@ -89,7 +60,6 @@ export default function LoginPage() {
     e.preventDefault();
     setForgotMsg(null);
     setError(null);
-
     try {
       const res = await fetch('/api/auth/forgot-password', {
         method: 'POST',
@@ -112,107 +82,154 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto py-4 space-y-6">
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden grid grid-cols-1 md:grid-cols-2">
-        {/* Cột trái: Form đăng nhập */}
-        <div className="p-6 sm:p-8 space-y-5">
+    <div className="min-h-screen bg-[#f6f6f1] grid place-items-center p-5">
+      <div className="w-full max-w-[960px] min-h-[560px] bg-white border border-[#e7e6dc] rounded-[20px] shadow-[0_16px_40px_-10px_rgba(29,70,48,0.12)] grid grid-cols-1 md:grid-cols-12 overflow-hidden">
+        {/* Cột trái: Thương hiệu mộc. giống UI/dang-nhap.html */}
+        <div className="md:col-span-6 bg-gradient-to-br from-[#1d4630] via-[#24533a] to-[#2f6648] text-white p-10 sm:p-12 flex flex-col justify-between relative overflow-hidden">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center">
-              <ShieldCheck className="w-5 h-5" />
+            <span className="w-10 h-10 rounded-[10px] bg-white text-[#24533a] grid place-items-center">
+              <BookOpen className="w-5 h-5" />
+            </span>
+            <span>
+              <b className="block text-2xl leading-none tracking-[-0.02em]">mộc.</b>
+              <small className="text-[10px] tracking-[0.14em] text-white/75 uppercase">
+                Quản lý nhà sách
+              </small>
+            </span>
+          </div>
+
+          <div className="my-10">
+            <div className="text-[28px] font-bold leading-[1.3] tracking-[-0.02em] mb-3.5">
+              Mỗi cuốn sách,
+              <br />
+              một khởi đầu mới.
             </div>
-            <div>
-              <h1 className="text-xl font-bold text-slate-900">Đăng nhập Hệ thống</h1>
-              <p className="text-xs text-slate-500">Use Case: Người dùng hệ thống</p>
-            </div>
+            <p className="text-white/80 text-[13.5px] leading-relaxed max-w-[380px]">
+              Đồng hành cùng nhân viên và quản lý nhà sách trong từng giao dịch tại quầy, kiểm soát
+              tồn kho thông minh và quản lý công nợ minh bạch.
+            </p>
+          </div>
+
+          <div className="text-[11px] text-white/60">
+            Phiên bản 2.4 · Thiết kế dành riêng cho nhà sách mộc.
+          </div>
+
+          <div className="absolute -right-14 -bottom-14 w-56 h-56 rounded-full bg-white/[0.04] pointer-events-none" />
+        </div>
+
+        {/* Cột phải: Form đăng nhập */}
+        <div className="md:col-span-6 p-10 sm:p-12 flex flex-col justify-center bg-white">
+          <div className="mb-6">
+            <h1 className="text-[22px] font-bold tracking-[-0.02em] text-[#1e2a23]">
+              {showForgot ? 'Khôi phục mật khẩu' : 'Đăng nhập ca làm việc'}
+            </h1>
+            <p className="text-[13px] text-[#737a72] mt-1">
+              {showForgot
+                ? 'Nhập tên đăng nhập và email khôi phục để nhận mã OTP.'
+                : 'Nhập tài khoản được cấp để bắt đầu ca.'}
+            </p>
           </div>
 
           {error && (
-            <div className="p-3 rounded-lg bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2">
+            <div className="mb-4 p-3 rounded-[8px] bg-[#fae6e0] text-[#b4472f] text-xs flex items-center gap-2">
               <AlertCircle className="w-4 h-4 shrink-0" />
               <span>{error}</span>
             </div>
           )}
-
           {success && (
-            <div className="p-3 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs flex items-center gap-2">
+            <div className="mb-4 p-3 rounded-[8px] bg-[#eff4ee] text-[#2f6648] text-xs flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 shrink-0" />
               <span>{success}</span>
             </div>
           )}
+          {forgotMsg && (
+            <div className="mb-4 p-3 rounded-[8px] bg-[#eff4ee] text-[#2f6648] text-xs">
+              {forgotMsg}
+            </div>
+          )}
 
           {!showForgot ? (
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-3.5">
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
-                  Tên đăng nhập
+                <label className="block text-xs font-semibold text-[#3b453f] mb-1.5">
+                  Tên đăng nhập *
                 </label>
                 <input
                   type="text"
                   required
                   value={tenDangNhap}
                   onChange={(e) => setTenDangNhap(e.target.value)}
-                  placeholder="Ví dụ: quanly, banhang, thukho"
-                  className="w-full px-3.5 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  placeholder="VD: quanly, banhang, thukho"
+                  className="w-full h-9 px-3 text-[13px] border border-[#e7e6dc] rounded-[8px] focus:outline-none focus:border-[#3f7a58] focus:ring-2 focus:ring-[#eff4ee]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
-                  Mật khẩu
+                <label className="block text-xs font-semibold text-[#3b453f] mb-1.5">
+                  Mật khẩu *
                 </label>
                 <input
                   type="password"
                   required
                   value={matKhau}
                   onChange={(e) => setMatKhau(e.target.value)}
-                  placeholder="Mật khẩu mẫu: 123456"
-                  className="w-full px-3.5 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full h-9 px-3 text-[13px] border border-[#e7e6dc] rounded-[8px] focus:outline-none focus:border-[#3f7a58] focus:ring-2 focus:ring-[#eff4ee]"
                 />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-[#3b453f] mb-1.5">
+                  Chi nhánh làm việc
+                </label>
+                <select
+                  value={branch}
+                  onChange={(e) => setBranch(e.target.value)}
+                  className="w-full h-9 px-3 text-[13px] border border-[#e7e6dc] rounded-[8px] bg-white focus:outline-none focus:border-[#3f7a58]"
+                >
+                  <option>Nhà sách Nguyễn Văn Cừ (Quận 5)</option>
+                  <option>Nhà sách Hai Bà Trưng (Quận 1)</option>
+                </select>
+              </div>
+
+              <div className="flex items-center justify-between pt-1">
+                <label className="flex items-center gap-2 text-xs text-[#3b453f] cursor-pointer">
+                  <input type="checkbox" defaultChecked className="accent-[#24533a]" />
+                  <span>Ghi nhớ ca làm việc</span>
+                </label>
+                <button
+                  type="button"
+                  onClick={() => setShowForgot(true)}
+                  className="text-xs font-semibold text-[#24533a] hover:underline"
+                >
+                  Quên mật khẩu?
+                </button>
               </div>
 
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-semibold flex items-center justify-center gap-2 transition-colors disabled:opacity-60"
+                className="w-full h-11 mt-2 rounded-[8px] bg-[#24533a] hover:bg-[#1d4630] disabled:opacity-60 text-white text-sm font-semibold transition-colors"
               >
-                <LogIn className="w-4 h-4" />
-                <span>{loading ? 'Đang xác thực...' : 'Đăng nhập'}</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setShowForgot(true)}
-                className="w-full text-xs text-indigo-600 hover:text-indigo-700 font-medium flex items-center justify-center gap-1 pt-1"
-              >
-                <KeyRound className="w-3.5 h-3.5" />
-                <span>Quên mật khẩu?</span>
+                {loading ? 'Đang đăng nhập...' : 'Bắt đầu ca làm việc'}
               </button>
             </form>
           ) : (
-            <form onSubmit={handleForgotPassword} className="space-y-4">
-              <p className="text-xs text-slate-600">
-                Nhập tên đăng nhập và email khôi phục để nhận mã OTP.
-              </p>
-              {forgotMsg && (
-                <div className="p-3 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs">
-                  {forgotMsg}
-                </div>
-              )}
+            <form onSubmit={handleForgotPassword} className="space-y-3.5">
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
-                  Tên đăng nhập
+                <label className="block text-xs font-semibold text-[#3b453f] mb-1.5">
+                  Tên đăng nhập *
                 </label>
                 <input
                   type="text"
                   required
                   value={tenDangNhap}
                   onChange={(e) => setTenDangNhap(e.target.value)}
-                  className="w-full px-3.5 py-2 border border-slate-300 rounded-lg text-sm"
+                  className="w-full h-9 px-3 text-[13px] border border-[#e7e6dc] rounded-[8px]"
                 />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
-                  Email khôi phục
+                <label className="block text-xs font-semibold text-[#3b453f] mb-1.5">
+                  Email khôi phục *
                 </label>
                 <input
                   type="email"
@@ -220,68 +237,45 @@ export default function LoginPage() {
                   value={recoveryEmail}
                   onChange={(e) => setRecoveryEmail(e.target.value)}
                   placeholder="quanly@bookstore.vn"
-                  className="w-full px-3.5 py-2 border border-slate-300 rounded-lg text-sm"
+                  className="w-full h-9 px-3 text-[13px] border border-[#e7e6dc] rounded-[8px]"
                 />
               </div>
-              <div className="flex gap-2">
+              <div className="flex gap-2 pt-2">
                 <button
                   type="button"
                   onClick={() => setShowForgot(false)}
-                  className="flex-1 py-2 border border-slate-300 rounded-lg text-xs font-semibold text-slate-700"
+                  className="flex-1 h-10 rounded-[8px] border border-[#e7e6dc] text-xs font-semibold text-[#3b453f]"
                 >
                   Quay lại
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 py-2 bg-indigo-600 text-white rounded-lg text-xs font-semibold"
+                  className="flex-1 h-10 rounded-[8px] bg-[#24533a] text-white text-xs font-semibold inline-flex items-center justify-center gap-1.5"
                 >
-                  Gửi mã OTP
+                  <KeyRound className="w-3.5 h-3.5" /> Gửi mã OTP
                 </button>
               </div>
             </form>
           )}
-        </div>
 
-        {/* Cột phải: Chọn nhanh Actor từ Sơ đồ Use Case */}
-        <div className="bg-slate-50 p-6 sm:p-8 border-t md:border-t-0 md:border-l border-slate-200 space-y-4">
-          <div className="flex items-center gap-2">
-            <UserCog className="w-4 h-4 text-indigo-600" />
-            <h2 className="text-sm font-bold text-slate-800">
-              Đăng nhập nhanh theo Actor (Sơ đồ Use Case)
-            </h2>
-          </div>
-          <p className="text-xs text-slate-500">
-            Cả 4 tài khoản con đều kế thừa quyền cơ bản của Actor cha{' '}
-            <strong className="text-slate-700">Người dùng hệ thống</strong> (mật khẩu chung:{' '}
-            <code className="bg-slate-200 px-1 rounded">123456</code>).
-          </p>
-
-          <div className="space-y-2.5">
-            {DEMO_ACTORS.map((actor) => (
-              <button
-                key={actor.username}
-                type="button"
-                disabled={loading}
-                onClick={() => {
-                  setTenDangNhap(actor.username);
-                  setMatKhau(actor.password);
-                  void performLogin(actor.username, actor.password);
-                }}
-                className="w-full text-left p-3 bg-white rounded-xl border border-slate-200 hover:border-indigo-400 hover:shadow-sm transition-all space-y-1"
-              >
-                <div className="flex items-center justify-between">
-                  <span
-                    className={`text-xs font-bold px-2 py-0.5 rounded-full border ${actor.badgeColor}`}
-                  >
-                    {actor.role}
-                  </span>
-                  <span className="text-xs font-mono text-slate-500">
-                    {actor.username} / {actor.password}
-                  </span>
-                </div>
-                <p className="text-xs text-slate-600 pt-1">{actor.description}</p>
-              </button>
-            ))}
+          {/* Demo pill giống UI/dang-nhap.html */}
+          <div className="mt-5 bg-[#fafaf6] border border-dashed border-[#e7e6dc] rounded-[8px] p-3 text-[11.5px] text-[#737a72] space-y-1.5">
+            <b className="text-[#1e2a23] block">Tài khoản thử nghiệm (bấm để điền nhanh):</b>
+            <div className="flex flex-wrap gap-1.5">
+              {DEMO_ACTORS.map((a) => (
+                <button
+                  key={a.username}
+                  type="button"
+                  onClick={() => {
+                    setTenDangNhap(a.username);
+                    setMatKhau(a.password);
+                  }}
+                  className="px-2.5 py-1 rounded-[6px] border border-[#e7e6dc] bg-white hover:bg-[#eff4ee] hover:border-[#24533a] text-[#1e2a23] font-medium transition-colors"
+                >
+                  {a.role}: <code className="font-mono text-[#24533a]">{a.username}</code>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>
