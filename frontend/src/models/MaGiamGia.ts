@@ -110,4 +110,13 @@ export class MaGiamGia extends BaseEntity {
     this._soLuongConLai -= 1;
     this.touch();
   }
+
+  /**
+   * Trạng thái mã giảm giá theo State Diagram (state-discount-coupon.drawio)
+   */
+  public layTrangThaiMa(thoiDiem: Date = new Date()): 'CON_HIEU_LUC' | 'HET_LUOT' | 'HET_HAN' {
+    if (thoiDiem > this._hanSuDung) return 'HET_HAN';
+    if (this._soLuongConLai <= 0) return 'HET_LUOT';
+    return 'CON_HIEU_LUC';
+  }
 }

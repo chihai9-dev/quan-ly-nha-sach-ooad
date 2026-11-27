@@ -1,28 +1,41 @@
 'use client';
 
 import React from 'react';
-import { Invoice } from '@/models/Invoice';
-import { Order } from '@/models/Order';
-import { CheckCircle2, Printer, X, Receipt } from 'lucide-react';
+import { CheckCircle2, Printer, X } from 'lucide-react';
+
+export interface PrintableInvoiceData {
+  maHoaDon: string;
+  maThanhToan: string;
+  ngayLap: string;
+  nguoiLap: string;
+  khachHangTen?: string;
+  phuongThuc: string;
+  tongTienHang: number;
+  tienGiamGia: number;
+  thanhToanCuoi: number;
+  tienKhachDua: number;
+  tienThoi: number;
+  chiTiet: Array<{
+    maSach: string;
+    tenSach: string;
+    soLuongBan: number;
+    donGiaBan: number;
+    giamGia: number;
+    thanhTien: number;
+  }>;
+}
 
 interface InvoiceModalProps {
   isOpen: boolean;
   onClose: () => void;
-  invoice: Invoice | null;
-  order: Order | null;
+  invoice: PrintableInvoiceData | null;
 }
 
-export const InvoiceModal: React.FC<InvoiceModalProps> = ({
-  isOpen,
-  onClose,
-  invoice,
-  order,
-}) => {
-  if (!isOpen || !invoice || !order) return null;
+export const InvoiceModal: React.FC<InvoiceModalProps> = ({ isOpen, onClose, invoice }) => {
+  if (!isOpen || !invoice) return null;
 
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
-  };
+  const formatCurrency = (amount: number) =>
+    new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
 
   const paymentMethodLabels: Record<string, string> = {
     CASH: 'Tiền mặt',
@@ -31,14 +44,9 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({
     CARD: 'Thẻ tín dụng / Ghi nợ',
   };
 
-  const handlePrint = () => {
-    window.print();
-  };
-
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 overflow-y-auto">
-      <div className="bg-white rounded-2xl max-w-lg w-full shadow-2xl overflow-hidden border border-slate-200 animate-in fade-in zoom-in duration-200">
-        {/* Header */}
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 overflow-y-auto">
+      <div className="bg-white rounded-2xl max-w-lg w-full shadow-2xl overflow-hidden border border-slate-200">
         <div className="bg-indigo-600 text-white p-5 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-indigo-500/50 rounded-lg">
@@ -46,51 +54,48 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({
             </div>
             <div>
               <h3 className="font-bold text-lg leading-tight">Thanh Toán Thành Công</h3>
-              <p className="text-xs text-indigo-100">Hóa đơn điện tử nhà sách</p>
+              <p className="text-xs text-indigo-100">Hóa đơn bán lẻ (HoaDon + ThanhToan)</p>
             </div>
           </div>
           <button
+            type="button"
             onClick={onClose}
-            className="p-1 rounded-lg hover:bg-indigo-700 text-indigo-200 hover:text-white transition-colors"
+            className="p-1 rounded-lg hover:bg-indigo-700 text-indigo-200 hover:text-white"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Invoice Receipt Body */}
-        <div className="p-6 space-y-5 text-sm" id="printable-invoice">
-          {/* Top metadata */}
+        <div className="p-6 space-y-4 text-sm" id="printable-invoice">
           <div className="text-center pb-4 border-b border-dashed border-slate-300">
             <h2 className="text-xl font-bold uppercase tracking-wider text-slate-900">
               NHÀ SÁCH TRÍ TUỆ
             </h2>
             <p className="text-xs text-slate-500 mt-0.5">Số 123 Đường Sách, Q.1, TP. Hồ Chí Minh</p>
-            <p className="text-xs text-slate-500">Hotline: 1900 1234 - ĐT: (028) 3822 9999</p>
             <div className="mt-3 inline-block bg-slate-100 px-3 py-1 rounded text-xs font-mono font-semibold text-slate-700">
-              Mã HĐ: {invoice.invoiceCode}
+              Mã HĐ: {invoice.maHoaDon} | Mã TT: {invoice.maThanhToan}
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-2 text-xs text-slate-600">
             <div>
-              <span className="text-slate-400">Mã đơn hàng:</span> {order.orderCode}
+              <span className="text-slate-400">Thu ngân:</span> {invoice.nguoiLap}
             </div>
             <div className="text-right">
               <span className="text-slate-400">Ngày lập:</span>{' '}
-              {invoice.issuedAt.toLocaleDateString('vi-VN')} {invoice.issuedAt.toLocaleTimeString('vi-VN')}
+              {new Date(invoice.ngayLap).toLocaleString('vi-VN')}
             </div>
             <div>
-              <span className="text-slate-400">Thu ngân:</span> {order.cashierName}
+              <span className="text-slate-400">Khách hàng:</span> {invoice.khachHangTen || 'Khách vãng lai'}
             </div>
             <div className="text-right">
               <span className="text-slate-400">Phương thức:</span>{' '}
               <span className="font-medium text-slate-800">
-                {paymentMethodLabels[invoice.paymentMethod] || invoice.paymentMethod}
+                {paymentMethodLabels[invoice.phuongThuc] || invoice.phuongThuc}
               </span>
             </div>
           </div>
 
-          {/* Items Table */}
           <div className="border-t border-b border-slate-200 py-3">
             <table className="w-full text-xs">
               <thead>
@@ -102,17 +107,13 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {order.items.map((item, idx) => (
-                  <tr key={idx} className="py-1">
-                    <td className="py-1.5 font-medium text-slate-800 max-w-[180px] truncate">
-                      {item.bookTitle}
-                    </td>
-                    <td className="py-1.5 text-center text-slate-600">{item.quantity}</td>
-                    <td className="py-1.5 text-right text-slate-600">
-                      {formatCurrency(item.unitPrice)}
-                    </td>
+                {invoice.chiTiet.map((item) => (
+                  <tr key={item.maSach}>
+                    <td className="py-1.5 font-medium text-slate-800 max-w-[180px] truncate">{item.tenSach}</td>
+                    <td className="py-1.5 text-center text-slate-600">{item.soLuongBan}</td>
+                    <td className="py-1.5 text-right text-slate-600">{formatCurrency(item.donGiaBan)}</td>
                     <td className="py-1.5 text-right font-semibold text-slate-800">
-                      {formatCurrency(item.getSubtotal())}
+                      {formatCurrency(item.thanhTien)}
                     </td>
                   </tr>
                 ))}
@@ -120,57 +121,44 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({
             </table>
           </div>
 
-          {/* Financial Breakdown */}
           <div className="space-y-1.5 text-xs">
             <div className="flex justify-between text-slate-600">
-              <span>Cộng tiền hàng:</span>
-              <span>{formatCurrency(order.calculateSubtotal())}</span>
+              <span>Tổng tiền hàng:</span>
+              <span>{formatCurrency(invoice.tongTienHang)}</span>
             </div>
-            {order.discountAmount > 0 && (
+            {invoice.tienGiamGia > 0 && (
               <div className="flex justify-between text-emerald-600 font-medium">
-                <span>Chiết khấu:</span>
-                <span>-{formatCurrency(order.discountAmount)}</span>
+                <span>Tiền giảm giá:</span>
+                <span>-{formatCurrency(invoice.tienGiamGia)}</span>
               </div>
             )}
-            <div className="flex justify-between text-slate-600">
-              <span>Thuế GTGT (VAT 8%):</span>
-              <span>{formatCurrency(order.calculateTax())}</span>
-            </div>
             <div className="flex justify-between text-sm font-bold text-slate-900 border-t border-slate-200 pt-2">
-              <span>TỔNG CỘNG:</span>
-              <span className="text-indigo-600 text-base">
-                {formatCurrency(order.calculateFinalTotal())}
-              </span>
+              <span>THANH TOÁN CUỐI:</span>
+              <span className="text-indigo-600 text-base">{formatCurrency(invoice.thanhToanCuoi)}</span>
             </div>
             <div className="flex justify-between text-slate-600 pt-1">
-              <span>Tiền khách thanh toán:</span>
-              <span className="font-medium">{formatCurrency(invoice.paidAmount)}</span>
+              <span>Tiền khách đưa:</span>
+              <span className="font-medium">{formatCurrency(invoice.tienKhachDua)}</span>
             </div>
             <div className="flex justify-between text-slate-600 font-semibold">
-              <span>Tiền thối lại khách:</span>
-              <span className="text-emerald-600 font-bold">
-                {formatCurrency(invoice.changeAmount)}
-              </span>
+              <span>Tiền thối lại:</span>
+              <span className="text-emerald-600 font-bold">{formatCurrency(invoice.tienThoi)}</span>
             </div>
-          </div>
-
-          {/* Greeting */}
-          <div className="text-center text-xs text-slate-400 italic pt-2 border-t border-dashed border-slate-200">
-            Cảm ơn Quý khách & Hẹn gặp lại!
           </div>
         </div>
 
-        {/* Modal Actions */}
         <div className="bg-slate-50 p-4 border-t border-slate-200 flex justify-end gap-3">
           <button
+            type="button"
             onClick={onClose}
-            className="px-4 py-2 border border-slate-300 rounded-lg text-slate-700 text-xs font-semibold hover:bg-slate-100 transition-colors"
+            className="px-4 py-2 border border-slate-300 rounded-lg text-slate-700 text-xs font-semibold hover:bg-slate-100"
           >
             Đóng
           </button>
           <button
-            onClick={handlePrint}
-            className="px-4 py-2 bg-indigo-600 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 hover:bg-indigo-700 shadow-sm transition-colors"
+            type="button"
+            onClick={() => window.print()}
+            className="px-4 py-2 bg-indigo-600 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 hover:bg-indigo-700"
           >
             <Printer className="w-4 h-4" />
             <span>In hóa đơn</span>

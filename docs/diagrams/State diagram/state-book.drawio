@@ -1,94 +1,95 @@
 <mxfile host="Electron">
-  <diagram name="State - Book" id="state-book">
-    <mxGraphModel dx="1018" dy="626" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="800" math="0" shadow="0">
+  <diagram name="Trạng thái - Sách" id="state-book">
+    <mxGraphModel dx="3721" dy="1304" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="860" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="title" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=16;" value="&lt;b&gt;STATE DIAGRAM – BOOK (ĐẦU SÁCH &amp;amp; TRẠNG THÁI TỒN KHO)&lt;/b&gt;" vertex="1">
-          <mxGeometry height="30" width="700" x="320" y="20" as="geometry" />
+        <mxCell id="title" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=16;" value="&lt;b&gt;SƠ ĐỒ TRẠNG THÁI – ĐẦU SÁCH &amp; TỒN KHO&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="900" x="350" y="15" as="geometry" />
         </mxCell>
         <mxCell id="init" parent="1" style="ellipse;html=1;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">
-          <mxGeometry height="26" width="26" x="30" y="242" as="geometry" />
+          <mxGeometry height="26" width="26" x="40" y="240" as="geometry" />
         </mxCell>
-        <mxCell id="selling" parent="1" style="swimlane;rounded=1;whiteSpace=wrap;html=1;startSize=30;arcSize=5;fillColor=#ffffff;strokeColor=#000000;fontStyle=1;" value="ACTIVE (Đang kinh doanh)" vertex="1">
-          <mxGeometry height="420" width="840" x="160" y="80" as="geometry" />
+        <mxCell id="outOfStock" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#ffffff;strokeColor=#000000;align=left;verticalAlign=top;spacing=0;fontSize=12;" value="&lt;p style=&quot;margin:0;padding:6px 8px;text-align:center;&quot;&gt;&lt;b&gt;Hết hàng&lt;/b&gt;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;soLuongTon : int = 0&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;entry/ gắn nhãn hết hàng&lt;br/&gt;do/ chặn bán tại quầy&lt;br/&gt;exit/ mở bán lại khi có tồn&lt;/p&gt;" vertex="1">
+          <mxGeometry height="145" width="240" x="160" y="180" as="geometry" />
         </mxCell>
-        <mxCell id="outOfStock" parent="selling" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" value="&lt;b&gt;OUT_OF_STOCK&lt;/b&gt;&lt;br&gt;(Hết hàng: tồn = 0)" vertex="1">
-          <mxGeometry height="70" width="190" x="90" y="140" as="geometry" />
+        <mxCell id="inStock" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#ffffff;strokeColor=#000000;align=left;verticalAlign=top;spacing=0;fontSize=12;" value="&lt;p style=&quot;margin:0;padding:6px 8px;text-align:center;&quot;&gt;&lt;b&gt;Còn hàng&lt;/b&gt;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;min &lt; soLuongTon &lt; max&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;entry/ cập nhật trạng thái sẵn bán&lt;br/&gt;do/ theo dõi biến động tồn kho&lt;br/&gt;exit/ kiểm tra ngưỡng cảnh báo&lt;/p&gt;" vertex="1">
+          <mxGeometry height="145" width="260" x="560" y="180" as="geometry" />
         </mxCell>
-        <mxCell id="inStock" parent="selling" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" value="&lt;b&gt;IN_STOCK&lt;/b&gt;&lt;br&gt;(Còn hàng trong ngưỡng)" vertex="1">
-          <mxGeometry height="70" width="190" x="380" y="140" as="geometry" />
+        <mxCell id="lowStock" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#ffffff;strokeColor=#000000;align=left;verticalAlign=top;spacing=0;fontSize=12;" value="&lt;p style=&quot;margin:0;padding:6px 8px;text-align:center;&quot;&gt;&lt;b&gt;Sắp hết hàng&lt;/b&gt;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;0 &lt; soLuongTon &lt;= min&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;entry/ phát cảnh báo tồn tối thiểu&lt;br/&gt;do/ đề xuất lập phiếu nhập thêm&lt;br/&gt;exit/ gỡ cảnh báo tồn thấp&lt;/p&gt;" vertex="1">
+          <mxGeometry height="145" width="260" x="560" y="470" as="geometry" />
         </mxCell>
-        <mxCell id="lowStock" parent="selling" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" value="&lt;b&gt;LOW_STOCK&lt;/b&gt;&lt;br&gt;(Cảnh báo sắp hết:&lt;br&gt;0 &amp;lt; tồn &amp;lt;= minThreshold)" vertex="1">
-          <mxGeometry height="75" width="190" x="380" y="310" as="geometry" />
+        <mxCell id="overStock" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#ffffff;strokeColor=#000000;align=left;verticalAlign=top;spacing=0;fontSize=12;" value="&lt;p style=&quot;margin:0;padding:6px 8px;text-align:center;&quot;&gt;&lt;b&gt;Tồn vượt mức&lt;/b&gt;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;soLuongTon &gt;= max&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;entry/ phát cảnh báo tồn tối đa&lt;br/&gt;do/ theo dõi hàng tồn cao&lt;br/&gt;exit/ gỡ cảnh báo tồn vượt mức&lt;/p&gt;" vertex="1">
+          <mxGeometry height="145" width="250" x="1000" y="180" as="geometry" />
         </mxCell>
-        <mxCell id="overStock" parent="selling" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" value="&lt;b&gt;OVER_STOCK&lt;/b&gt;&lt;br&gt;(Cảnh báo vượt mức:&lt;br&gt;tồn &amp;gt;= maxThreshold)" vertex="1">
-          <mxGeometry height="75" width="190" x="630" y="140" as="geometry" />
+        <mxCell id="discontinued" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#ffffff;strokeColor=#000000;align=left;verticalAlign=top;spacing=0;fontSize=12;" value="&lt;p style=&quot;margin:0;padding:6px 8px;text-align:center;&quot;&gt;&lt;b&gt;Đã ngưng kinh doanh&lt;/b&gt;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;trangThai : String = &quot;Ngưng bán&quot;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;entry/ ẩn sách khỏi danh mục bán&lt;br/&gt;do/ lưu trữ lịch sử giao dịch&lt;br/&gt;exit/ khôi phục kinh doanh&lt;/p&gt;" vertex="1">
+          <mxGeometry height="145" width="240" x="160" y="470" as="geometry" />
         </mxCell>
-        <mxCell id="eOutIn" edge="1" parent="selling" source="outOfStock" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;labelBackgroundColor=#ffffff;" target="inStock" value="Nhập kho">
+        <mxCell id="endNode" parent="1" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="30" width="30" x="265" y="730" as="geometry" />
+        </mxCell>
+        <mxCell id="eInit" edge="1" parent="1" source="init" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;" target="outOfStock" value="Thêm sách mới()">
           <mxGeometry relative="1" as="geometry">
             <mxPoint y="-14" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="eInLow" edge="1" parent="selling" source="inStock" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0.35;exitY=1;exitDx=0;exitDy=0;entryX=0.35;entryY=0;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" target="lowStock" value="Bán / Điều chỉnh&lt;br&gt;[tồn &amp;lt;= min]">
+        <mxCell id="eOutIn" edge="1" parent="1" source="outOfStock" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;" target="inStock" value="Nhập kho(soLuong)&lt;br/&gt;[soLuong &amp;gt; 0]">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="-45" as="offset" />
+            <mxPoint y="-20" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="eLowIn" edge="1" parent="selling" source="lowStock" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0.7;exitY=0;exitDx=0;exitDy=0;entryX=0.7;entryY=1;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" target="inStock" value="Nhập kho / Trả hàng&lt;br&gt;[về trong ngưỡng]">
+        <mxCell id="eInLow" edge="1" parent="1" source="inStock" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;exitX=0.3;exitY=1;entryX=0.3;entryY=0;" target="lowStock" value="Bán hoặc điều chỉnh()&lt;br/&gt;[tồn &amp;lt;= ngưỡng tối thiểu]">
+          <mxGeometry relative="1" x="0.0345" y="-68" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eLowIn" edge="1" parent="1" source="lowStock" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;exitX=0.7;exitY=0;entryX=0.7;entryY=1;" target="inStock" value="Nhập kho hoặc trả hàng()&lt;br/&gt;[tồn &amp;gt; ngưỡng tối thiểu]">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="80" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eLowOut" edge="1" parent="1" source="lowStock" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;exitX=0;exitY=0.3;entryX=0.75;entryY=1;libavoidRouting=1;" target="outOfStock" value="Bán hết() [tồn = 0]">
+          <mxGeometry relative="1" x="-0.1995" y="30" as="geometry">
+            <mxPoint y="1" as="offset" />
+            <Array as="points">
+              <mxPoint x="480" y="514" />
+              <mxPoint x="480" y="398" />
+              <mxPoint x="340" y="398" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eInOver" edge="1" parent="1" source="inStock" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;exitX=1;exitY=0.3;entryX=0;entryY=0.3;" target="overStock" value="Nhập kho(soLuong)&lt;br/&gt;[tồn &amp;gt;= ngưỡng tối đa]">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="-20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eOverIn" edge="1" parent="1" source="overStock" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;exitX=0;exitY=0.7;entryX=1;entryY=0.7;" target="inStock" value="Bán hàng()&lt;br/&gt;[tồn &amp;lt; ngưỡng tối đa]">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eOutDisc" edge="1" parent="1" source="outOfStock" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;exitX=0.35;exitY=1;entryX=0.35;entryY=0;" target="discontinued" value="Xóa sách()&lt;br/&gt;[đã có giao dịch]">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-55" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eDiscOut" edge="1" parent="1" source="discontinued" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;exitX=0.6;exitY=0;entryX=0.6;entryY=1;" target="outOfStock" value="Mở kinh doanh lại()">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="55" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="eLowOut" edge="1" parent="selling" source="lowStock" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" target="outOfStock" value="Bán hết [tồn = 0]">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="185" y="348" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="eInOver" edge="1" parent="selling" source="inStock" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" target="overStock" value="Nhập [tồn &amp;gt;= max]">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint y="-14" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="eOverIn" edge="1" parent="selling" source="overStock" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0;exitY=0.7;exitDx=0;exitDy=0;entryX=1;entryY=0.7;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" target="inStock" value="Bán [về ngưỡng]">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint y="14" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="eDiscSell" edge="1" parent="selling" source="discontinued" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0;exitY=0.5;exitDx=0;exitDy=0;fontSize=11;labelBackgroundColor=#ffffff;" value="Mở kinh doanh lại">
-          <mxGeometry relative="1" x="-0.3929" as="geometry">
-            <mxPoint x="60" as="offset" />
-            <mxPoint x="522" y="520" as="sourcePoint" />
-            <mxPoint x="240" y="210" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="discontinued" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" value="&lt;b&gt;DISCONTINUED&lt;/b&gt;&lt;br&gt;(Ngưng kinh doanh)" vertex="1">
-          <mxGeometry height="70" width="210" x="480" y="600" as="geometry" />
-        </mxCell>
-        <mxCell id="endNode" parent="1" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">
-          <mxGeometry height="30" width="30" x="1140" y="620" as="geometry" />
-        </mxCell>
-        <mxCell id="eInit" edge="1" parent="1" source="init" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;labelBackgroundColor=#ffffff;" target="outOfStock" value="Thêm sách mới">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint y="-14" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="eSellDisc" edge="1" parent="1" source="lowStock" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0.196;exitY=0.997;exitDx=0;exitDy=0;entryX=0.35;entryY=0;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;exitPerimeter=0;" target="discontinued" value="Xóa sách [đã phát sinh giao dịch]">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="-80" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="eSellEnd" edge="1" parent="1" source="selling" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" target="endNode" value="Xóa sách [chưa có giao dịch]">
-          <mxGeometry relative="1" as="geometry">
+        <mxCell id="eOutEnd" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;exitX=0;exitY=0.5;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="endNode" value="Xóa sách() [chưa có giao dịch]">
+          <mxGeometry relative="1" x="0.0364" as="geometry">
             <mxPoint y="-14" as="offset" />
             <Array as="points">
-              <mxPoint x="1155" y="290" />
+              <mxPoint x="60" y="280" />
+              <mxPoint x="60" y="745" />
             </Array>
+            <mxPoint x="160" y="279.9999999999999" as="sourcePoint" />
+            <mxPoint x="264.99999999999955" y="772.5000000000002" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="eDiscEnd" edge="1" parent="1" source="discontinued" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;" target="endNode" value="">
+        <mxCell id="eDiscEnd" edge="1" parent="1" source="discontinued" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;" target="endNode" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>

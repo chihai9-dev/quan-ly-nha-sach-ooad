@@ -1,42 +1,58 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { OrderService } from '@/services/OrderService';
-import { BookService } from '@/services/BookService';
+import { PromotionService } from '@/services/PromotionService';
+import { NhanVien } from '@/models/NhanVien';
+import { KhachHang } from '@/models/KhachHang';
+import { MaGiamGia } from '@/models/MaGiamGia';
 import { requirePermission } from '@/lib/auth/rbac';
 import { PERMISSIONS } from '@/lib/auth/permissions';
 import type { PaymentMethod } from '@/types/dtos';
 
 const orderService = new OrderService();
-const bookService = new BookService();
+const promotionService = new PromotionService();
 
 interface InvoiceItemRequest {
-  bookId: string;
-  quantity: number;
+  maSach: string;
+  soLuongBan: number;
 }
 
 interface CreateInvoiceRequest {
   items: InvoiceItemRequest[];
   paymentMethod: PaymentMethod;
   paidAmount: number;
-  customerId?: string;
+  khachHang?: { maKH: string; hoTen: string; soDienThoai: string; diemTichLuy: number } | null;
+  couponCode?: string;
+  directDiscountAmount?: number;
 }
 
-/**
- * GET /api/invoices: Xem danh sách hóa đơn — Yêu cầu quyền QUAN_LY_BAN_HANG (Nhân viên bán hàng / Quản lý)
- */
-export async function GET() {
+export async function GET(request: NextRequest) {
   const auth = requirePermission(PERMISSIONS.QUAN_LY_BAN_HANG);
   if (!auth.ok) return auth.response;
 
   try {
-    const orders = await orderService.getRecentOrders(20);
+    const q = request.nextUrl.searchParams.get('q') ?? undefined;
+    const hoaDons = await orderService.getRecentOrders(50, q);
     return NextResponse.json({
-      invoices: orders.map((o) => ({
-        id: o.getId(),
-        maHoaDon: o.orderCode,
-        nhanVienLap: o.cashierName,
-        trangThai: o.status,
-        tongTien: o.calculateFinalTotal(),
-        ngayLap: o.getCreatedAt().toISOString(),
+      invoices: hoaDons.map((hd) => ({
+        maHoaDon: hd.maHoaDon,
+        ngayLap: hd.ngayLap.toISOString(),
+        tongTienHang: hd.tongTienHang,
+        tienGiamGia: hd.tienGiamGia,
+        thanhToanCuoi: hd.thanhToanCuoi,
+        trangThai: hd.trangThai,
+        conTrongHanDoiTra: hd.conTrongHanDoiTra(7),
+        nhanVienLap: hd.nhanVien?.hoTen ?? 'Thu ngân',
+        khachHang: hd.khachHang ? { maKH: hd.khachHang.maKH, hoTen: hd.khachHang.hoTen } : null,
+        maGiamGia: hd.maGiamGia?.maCode ?? null,
+        phuongThuc: hd.danhSachThanhToan[0]?.phuongThuc ?? 'CASH',
+        chiTiet: hd.danhSachChiTiet.map((ct) => ({
+          maSach: ct.sach.maSach,
+          tenSach: ct.sach.tenSach,
+          soLuongBan: ct.soLuongBan,
+          donGiaBan: ct.donGiaBan,
+          giamGia: ct.giamGia,
+          thanhTien: ct.tinhThanhTien(),
+        })),
       })),
     });
   } catch (err) {
@@ -45,9 +61,6 @@ export async function GET() {
   }
 }
 
-/**
- * POST /api/invoices: Lập hóa đơn & thanh toán — Yêu cầu quyền QUAN_LY_BAN_HANG (Nhân viên bán hàng / Quản lý)
- */
 export async function POST(request: NextRequest) {
   const auth = requirePermission(PERMISSIONS.QUAN_LY_BAN_HANG);
   if (!auth.ok) return auth.response;
@@ -55,32 +68,71 @@ export async function POST(request: NextRequest) {
   try {
     const body = (await request.json()) as Partial<CreateInvoiceRequest>;
     if (!Array.isArray(body.items) || body.items.length === 0) {
-      return NextResponse.json(
-        { error: 'Hóa đơn phải có ít nhất 1 sản phẩm.' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Hóa đơn phải có ít nhất 1 đầu sách.' }, { status: 400 });
     }
 
-    const order = orderService.createNewOrder(auth.user.hoTen);
+    const nhanVien = new NhanVien({
+      maNV: auth.user.maNV,
+      hoTen: auth.user.hoTen,
+      soDienThoai: '',
+      email: auth.user.email,
+      diaChi: '',
+    });
 
-    for (const reqItem of body.items) {
-      const book = await bookService.getBookDetails(reqItem.bookId);
-      order.addItem(book, reqItem.quantity);
+    const khachHang = body.khachHang
+      ? new KhachHang({
+          maKH: body.khachHang.maKH,
+          hoTen: body.khachHang.hoTen,
+          soDienThoai: body.khachHang.soDienThoai,
+          diemTichLuy: body.khachHang.diemTichLuy,
+        })
+      : null;
+
+    let maGiamGia: MaGiamGia | null = null;
+    if (body.couponCode?.trim()) {
+      const { coupons } = await promotionService.getAll();
+      const matched = coupons.find((c) => c.code.toUpperCase() === body.couponCode?.trim().toUpperCase());
+      if (!matched) {
+        return NextResponse.json({ error: `Mã giảm giá "${body.couponCode}" không tồn tại.` }, { status: 400 });
+      }
+      maGiamGia = new MaGiamGia({
+        maCode: matched.code,
+        giaTriGiam: matched.discountAmount,
+        donToiThieu: matched.minOrderAmount,
+        soLuongConLai: Math.max(0, matched.maxUses - matched.usedCount),
+        hanSuDung: matched.expiryDate,
+      });
     }
 
-    const result = await orderService.checkout(
-      order,
-      body.paymentMethod ?? 'CASH',
-      Number(body.paidAmount ?? order.calculateFinalTotal())
-    );
+    const result = await orderService.checkout({
+      items: body.items,
+      paymentMethod: body.paymentMethod ?? 'CASH',
+      paidAmount: Number(body.paidAmount ?? 0),
+      nhanVien,
+      khachHang,
+      maGiamGia,
+      directDiscountAmount: body.directDiscountAmount,
+    });
 
     return NextResponse.json(
       {
-        maHoaDon: result.invoice.invoiceCode,
-        maDon: result.order.orderCode,
-        tongThanhToan: result.order.calculateFinalTotal(),
-        tienThoi: result.invoice.changeAmount,
+        maHoaDon: result.hoaDon.maHoaDon,
+        maThanhToan: result.thanhToan.maThanhToan,
+        tongTienHang: result.hoaDon.tongTienHang,
+        tienGiamGia: result.hoaDon.tienGiamGia,
+        thanhToanCuoi: result.hoaDon.thanhToanCuoi,
+        tienThoi: result.tienThoi,
+        phuongThuc: result.thanhToan.phuongThuc,
         nguoiLap: auth.user.hoTen,
+        ngayLap: result.hoaDon.ngayLap.toISOString(),
+        chiTiet: result.hoaDon.danhSachChiTiet.map((ct) => ({
+          maSach: ct.sach.maSach,
+          tenSach: ct.sach.tenSach,
+          soLuongBan: ct.soLuongBan,
+          donGiaBan: ct.donGiaBan,
+          giamGia: ct.giamGia,
+          thanhTien: ct.tinhThanhTien(),
+        })),
       },
       { status: 201 }
     );

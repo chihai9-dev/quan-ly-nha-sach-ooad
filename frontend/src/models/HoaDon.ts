@@ -195,4 +195,12 @@ export class HoaDon extends BaseEntity {
         hd.trangThai.toLowerCase().includes(kw)
     );
   }
+
+  /**
+   * Kiểm tra hóa đơn còn trong hạn đổi trả (mặc định 7 ngày theo state-order & state-return-exchange)
+   */
+  public conTrongHanDoiTra(soNgayToiDa: number = 7, thoiDiem: Date = new Date()): boolean {
+    const diffMs = thoiDiem.getTime() - this._ngayLap.getTime();
+    return diffMs >= 0 && diffMs <= soNgayToiDa * 24 * 60 * 60 * 1000;
+  }
 }

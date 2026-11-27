@@ -1,70 +1,70 @@
-<mxfile host="app.diagrams.net">
-  <diagram name="State - TaiKhoan" id="state-tai-khoan">
-    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1200" pageHeight="700" math="0" shadow="0">
+<mxfile host="Electron">
+  <diagram name="Trạng thái - Tài khoản" id="state-tai-khoan">
+    <mxGraphModel dx="1198" dy="736" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1350" pageHeight="780" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="title" value="&lt;b&gt;STATE DIAGRAM – TÀI KHOẢN &amp;amp; PHIÊN XÁC THỰC (ACCOUNT &amp;amp; AUTH SESSION)&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=16;" vertex="1" parent="1">
-          <mxGeometry x="220" y="20" width="750" height="30" as="geometry" />
+        <mxCell id="title" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=16;" value="&lt;b&gt;SƠ ĐỒ TRẠNG THÁI – TÀI KHOẢN &amp; PHIÊN ĐĂNG NHẬP&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="900" x="225" y="15" as="geometry" />
         </mxCell>
-        <mxCell id="init" value="" style="ellipse;html=1;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="40" y="232" width="26" height="26" as="geometry" />
+        <mxCell id="init" parent="1" style="ellipse;html=1;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="26" width="26" x="70" y="239.5" as="geometry" />
         </mxCell>
-        <mxCell id="loggedOut" value="&lt;b&gt;LOGGED_OUT&lt;/b&gt;&lt;br&gt;(Chưa đăng nhập)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="230" y="210" width="210" height="70" as="geometry" />
+        <mxCell id="loggedOut" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#ffffff;strokeColor=#000000;align=left;verticalAlign=top;spacing=0;fontSize=12;" value="&lt;p style=&quot;margin:0;padding:6px 8px;text-align:center;&quot;&gt;&lt;b&gt;Chưa đăng nhập&lt;/b&gt;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;daDangNhap : Boolean = false&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;entry/ hiển thị màn hình đăng nhập&lt;br/&gt;do/ chờ xác thực tài khoản&lt;br/&gt;exit/ kiểm tra thông tin nhập&lt;/p&gt;" vertex="1">
+          <mxGeometry height="145" width="260" x="220" y="180" as="geometry" />
         </mxCell>
-        <mxCell id="loggedIn" value="&lt;b&gt;AUTHENTICATED&lt;/b&gt;&lt;br&gt;(Đang hoạt động / Ca trực)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="680" y="210" width="220" height="70" as="geometry" />
+        <mxCell id="loggedIn" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#ffffff;strokeColor=#000000;align=left;verticalAlign=top;spacing=0;fontSize=12;" value="&lt;p style=&quot;margin:0;padding:6px 8px;text-align:center;&quot;&gt;&lt;b&gt;Đã đăng nhập&lt;/b&gt;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;daDangNhap : Boolean = true&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;entry/ khởi tạo phiên làm việc&lt;br/&gt;do/ cấp quyền thao tác theo vai trò&lt;br/&gt;exit/ hủy phiên làm việc&lt;/p&gt;" vertex="1">
+          <mxGeometry height="145" width="260" x="760" y="180" as="geometry" />
         </mxCell>
-        <mxCell id="otp" value="&lt;b&gt;OTP_VERIFY&lt;/b&gt;&lt;br&gt;(Đang xác thực OTP / Đặt lại MK)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="230" y="430" width="210" height="70" as="geometry" />
+        <mxCell id="otp" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#ffffff;strokeColor=#000000;align=left;verticalAlign=top;spacing=0;fontSize=12;" value="&lt;p style=&quot;margin:0;padding:6px 8px;text-align:center;&quot;&gt;&lt;b&gt;Đang xác thực mã&lt;/b&gt;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;maXacThucHopLe : Boolean&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;entry/ tạo và gửi mã qua thư điện tử&lt;br/&gt;do/ kiểm tra mã và thời hạn&lt;br/&gt;exit/ cập nhật mật khẩu hoặc hủy&lt;/p&gt;" vertex="1">
+          <mxGeometry height="145" width="260" x="220" y="480" as="geometry" />
         </mxCell>
-        <mxCell id="locked" value="&lt;b&gt;LOCKED&lt;/b&gt;&lt;br&gt;(Tài khoản bị khóa / Vô hiệu hóa)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="680" y="430" width="220" height="70" as="geometry" />
+        <mxCell id="locked" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#ffffff;strokeColor=#000000;align=left;verticalAlign=top;spacing=0;fontSize=12;" value="&lt;p style=&quot;margin:0;padding:6px 8px;text-align:center;&quot;&gt;&lt;b&gt;Tài khoản bị khóa&lt;/b&gt;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;trangThaiMo : Boolean = false&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;entry/ ghi nhận khóa tài khoản&lt;br/&gt;do/ từ chối mọi yêu cầu đăng nhập&lt;br/&gt;exit/ khôi phục quyền truy cập&lt;/p&gt;" vertex="1">
+          <mxGeometry height="145" width="260" x="760" y="480" as="geometry" />
         </mxCell>
-        <mxCell id="e1" value="Cấp tài khoản nhân viên" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="init" target="loggedOut">
+        <mxCell id="e1" edge="1" parent="1" source="init" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;" target="loggedOut" value="Cấp tài khoản()">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="0" y="-14" as="offset" />
+            <mxPoint y="-14" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e2" value="Đăng nhập [đúng MK, TK mở]&lt;br&gt;/ khởi tạo session" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="loggedOut" target="loggedIn">
+        <mxCell id="e2" edge="1" parent="1" source="loggedOut" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;exitX=1;exitY=0.3;entryX=0;entryY=0.3;" target="loggedIn" value="Đăng nhập(tenDN, matKhau)&lt;br/&gt;[đúng mật khẩu, tài khoản mở]&lt;br/&gt;/ khởi tạo phiên()">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="0" y="-18" as="offset" />
+            <mxPoint y="-26" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e3" value="Đăng xuất / Hết hạn phiên&lt;br&gt;/ hủy session" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0;exitY=0.7;exitDx=0;exitDy=0;entryX=1;entryY=0.7;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="loggedIn" target="loggedOut">
+        <mxCell id="e3" edge="1" parent="1" source="loggedIn" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;exitX=0;exitY=0.7;entryX=1;entryY=0.7;" target="loggedOut" value="Đăng xuất hoặc hết hạn phiên&lt;br/&gt;/ đóng phiên làm việc()">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="0" y="18" as="offset" />
+            <mxPoint y="22" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e4" value="Chọn Quên mật khẩu&lt;br&gt;[email hợp lệ] / gửi OTP" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0.3;exitY=1;exitDx=0;exitDy=0;entryX=0.3;entryY=0;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="loggedOut" target="otp">
+        <mxCell id="e4" edge="1" parent="1" source="loggedOut" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;exitX=0.3;exitY=1;entryX=0.3;entryY=0;" target="otp" value="Chọn Quên mật khẩu(email)&lt;br/&gt;[email hợp lệ] / gửi mã xác thực()">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="-65" y="0" as="offset" />
+            <mxPoint x="-95" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e5" value="OTP hợp lệ &amp;amp; Lưu MK mới&lt;br&gt;(hoặc sai OTP quá số lần)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="otp" target="loggedOut">
+        <mxCell id="e5" edge="1" parent="1" source="otp" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;exitX=0.75;exitY=0;entryX=0.75;entryY=1;" target="loggedOut" value="Lưu mật khẩu mới() [mã hợp lệ]&lt;br/&gt;(hoặc sai mã quá số lần)">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="75" y="0" as="offset" />
+            <mxPoint x="95" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e6" value="Sai MK quá số lần quy định&lt;br&gt;hoặc Admin vô hiệu hóa" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="loggedOut" target="locked">
+        <mxCell id="e6" edge="1" parent="1" source="loggedOut" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;exitX=1;exitY=0.9;entryX=0;entryY=0.3;" target="locked" value="Sai mật khẩu quá số lần&lt;br/&gt;hoặc Quản trị viên khóa()">
           <mxGeometry relative="1" as="geometry">
+            <mxPoint y="-22" as="offset" />
             <Array as="points">
-              <mxPoint x="560" y="280" />
-              <mxPoint x="560" y="451" />
+              <mxPoint x="620" y="310" />
+              <mxPoint x="620" y="523" />
             </Array>
-            <mxPoint x="0" y="-18" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e7" value="Admin mở khóa tài khoản" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="locked" target="loggedOut">
+        <mxCell id="e7" edge="1" parent="1" source="locked" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="loggedOut" value="Quản trị viên mở khóa()">
           <mxGeometry relative="1" as="geometry">
+            <mxPoint y="-14" as="offset" />
             <Array as="points">
-              <mxPoint x="790" y="550" />
-              <mxPoint x="960" y="550" />
-              <mxPoint x="960" y="140" />
-              <mxPoint x="335" y="140" />
+              <mxPoint x="890" y="680" />
+              <mxPoint x="1120" y="680" />
+              <mxPoint x="1120" y="110" />
+              <mxPoint x="350" y="110" />
             </Array>
-            <mxPoint x="0" y="-12" as="offset" />
           </mxGeometry>
         </mxCell>
       </root>

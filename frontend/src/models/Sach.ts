@@ -204,6 +204,29 @@ export class Sach extends BaseEntity {
       );
     }
     this._soLuongTon = tonMoi;
+    if (this._trangThai !== 'NGUNG_BAN') {
+      this._trangThai = this._soLuongTon > 0 ? 'CON_HANG' : 'HET_HANG';
+    }
+    this.touch();
+  }
+
+  /**
+   * Trạng thái đầu sách theo State Diagram (state-book.drawio)
+   */
+  public layTrangThaiTonKho(mucTonToiDa: number = 100): 'NGUNG_BAN' | 'HET_HANG' | 'SAP_HET_HANG' | 'TON_VUOT_MUC' | 'CON_HANG' {
+    if (this._trangThai === 'NGUNG_BAN') return 'NGUNG_BAN';
+    if (this._soLuongTon <= 0) return 'HET_HANG';
+    if (this._soLuongTon <= this._mucTonToiThieu) return 'SAP_HET_HANG';
+    if (this._soLuongTon >= mucTonToiDa) return 'TON_VUOT_MUC';
+    return 'CON_HANG';
+  }
+
+  public ngungKinhDoanh(): void {
+    this._trangThai = 'NGUNG_BAN';
+    this.touch();
+  }
+
+  public moKinhDoanhLai(): void {
     this._trangThai = this._soLuongTon > 0 ? 'CON_HANG' : 'HET_HANG';
     this.touch();
   }

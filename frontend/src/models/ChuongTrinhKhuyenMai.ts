@@ -107,4 +107,14 @@ export class ChuongTrinhKhuyenMai extends BaseEntity {
       ngayKiemTra <= this._ngayKetThuc
     );
   }
+
+  /**
+   * Trạng thái chiến dịch theo State Diagram (state-promotion-campaign.drawio)
+   */
+  public layTrangThaiChienDich(ngayKiemTra: Date = new Date()): 'UPCOMING' | 'ACTIVE' | 'ENDED' | 'STOPPED' {
+    if (!this._trangThai) return 'STOPPED';
+    if (ngayKiemTra < this._ngayBatDau) return 'UPCOMING';
+    if (ngayKiemTra > this._ngayKetThuc) return 'ENDED';
+    return 'ACTIVE';
+  }
 }

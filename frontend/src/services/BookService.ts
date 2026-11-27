@@ -1,12 +1,11 @@
-import { Book } from '@/models/Book';
-import { IBookRepository } from '@/repositories/IBookRepository';
+import { Sach } from '@/models/Sach';
+import type { IBookRepository } from '@/repositories/IBookRepository';
 import { BookRepository } from '@/repositories/BookRepository';
 import type { BookFilterParams, CreateBookDTO, UpdateBookDTO } from '@/types/dtos';
 
 /**
- * Lớp BookService (Tầng Dịch vụ Nghiệp vụ Sách)
- * Điều phối logic giữa Presentation Layer (UI) và Data Access Layer (Repository).
- * Áp dụng nguyên lý Dependency Injection: Nhận IBookRepository qua constructor.
+ * Lớp BookService (Tầng Dịch vụ Nghiệp vụ Sách - Phân hệ QLS)
+ * Sử dụng thực thể `Sach` theo Class Diagram và nhận `IBookRepository` qua DI.
  */
 export class BookService {
   private readonly bookRepository: IBookRepository;
@@ -15,78 +14,76 @@ export class BookService {
     this.bookRepository = repository;
   }
 
-  /**
-   * Lấy danh sách toàn bộ sách có áp dụng bộ lọc và từ khóa
-   */
-  async getAllBooks(filter?: BookFilterParams): Promise<Book[]> {
+  async getAllBooks(filter?: BookFilterParams): Promise<Sach[]> {
     return this.bookRepository.findAll(filter);
   }
 
-  /**
-   * Tra cứu chi tiết một cuốn sách theo ID
-   */
-  async getBookDetails(id: string): Promise<Book> {
-    const book = await this.bookRepository.findById(id);
-    if (!book) {
-      throw new Error(`Không tìm thấy cuốn sách có ID "${id}".`);
+  async getBookDetails(maSach: string): Promise<Sach> {
+    const sach = await this.bookRepository.findById(maSach);
+    if (!sach) {
+      throw new Error(`Không tìm thấy đầu sách có mã "${maSach}".`);
     }
-    return book;
+    return sach;
   }
 
-  /**
-   * Tìm kiếm sách theo mã ISBN (thường dùng khi nhân viên quét barcode tại quầy)
-   */
-  async findByIsbn(isbn: string): Promise<Book | null> {
-    return this.bookRepository.findByIsbn(isbn);
+  async findByCode(maSach: string): Promise<Sach | null> {
+    return this.bookRepository.findById(maSach);
   }
 
-  /**
-   * Thêm sách mới vào kho
-   */
-  async addNewBook(dto: CreateBookDTO): Promise<Book> {
-    // 1. Kiểm tra ISBN trùng lặp
-    const existing = await this.bookRepository.findByIsbn(dto.isbn);
-    if (existing) {
-      throw new Error(`Mã ISBN "${dto.isbn}" đã tồn tại trong hệ thống.`);
+  async addNewBook(dto: CreateBookDTO): Promise<Sach> {
+    if (!dto.title.trim()) {
+      throw new Error('Tên sách không được để trống.');
     }
-
-    // 2. Kiểm tra nghiệp vụ giá & số lượng
     if (dto.price < 0) {
-      throw new Error('Đơn giá sách không được là số âm.');
+      throw new Error('Giá bán sách không được là số âm.');
+    }
+    if ((dto.costPrice ?? 0) < 0) {
+      throw new Error('Giá nhập sách không được là số âm.');
     }
     if (dto.stockQuantity < 0) {
       throw new Error('Số lượng tồn kho ban đầu không thể âm.');
     }
 
+    if (dto.isbn.trim()) {
+      const existing = await this.bookRepository.findById(dto.isbn.trim());
+      if (existing) {
+        throw new Error(`Mã sách "${dto.isbn.trim()}" đã tồn tại trong hệ thống.`);
+      }
+    }
+
     return this.bookRepository.create(dto);
   }
 
-  /**
-   * Cập nhật thông tin sách
-   */
-  async updateBookInfo(dto: UpdateBookDTO): Promise<Book> {
+  async updateBookInfo(dto: UpdateBookDTO): Promise<Sach> {
     const existing = await this.bookRepository.findById(dto.id);
     if (!existing) {
-      throw new Error('Cuốn sách cần cập nhật không tồn tại.');
+      throw new Error('Đầu sách cần cập nhật không tồn tại.');
     }
-
+    if (dto.price !== undefined && dto.price < 0) {
+      throw new Error('Giá bán không thể âm.');
+    }
+    if (dto.costPrice !== undefined && dto.costPrice < 0) {
+      throw new Error('Giá nhập không thể âm.');
+    }
     return this.bookRepository.update(dto);
   }
 
-  /**
-   * Lấy danh sách các đầu sách có nguy cơ hết hàng cần nhập bổ sung
-   */
-  async getLowStockAlerts(threshold: number = 5): Promise<Book[]> {
-    const allBooks = await this.bookRepository.findAll();
-    return allBooks.filter(book => book.isLowStock(threshold));
+  async deleteBook(maSach: string): Promise<{ deleted: boolean; discontinued: boolean }> {
+    const existing = await this.bookRepository.findById(maSach);
+    if (!existing) {
+      throw new Error(`Không tìm thấy đầu sách "${maSach}".`);
+    }
+    return this.bookRepository.delete(maSach);
   }
 
-  /**
-   * Điều chỉnh tồn kho thủ công (nhập hàng kho)
-   */
-  async restockBook(bookId: string, additionalQuantity: number): Promise<void> {
-    const book = await this.getBookDetails(bookId);
-    book.restock(additionalQuantity);
-    await this.bookRepository.updateStock(bookId, book.stockQuantity);
+  async getLowStockAlerts(): Promise<Sach[]> {
+    const allBooks = await this.bookRepository.findAll();
+    return allBooks.filter((sach) => sach.kiemTraCanhBaoTonKho() && sach.trangThai !== 'NGUNG_BAN');
+  }
+
+  async restockBook(maSach: string, additionalQuantity: number): Promise<void> {
+    const sach = await this.getBookDetails(maSach);
+    sach.capNhatSoLuongTon(additionalQuantity);
+    await this.bookRepository.updateStock(maSach, sach.soLuongTon);
   }
 }

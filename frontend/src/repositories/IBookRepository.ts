@@ -1,16 +1,15 @@
-import { Book } from '@/models/Book';
+import { Sach } from '@/models/Sach';
 import type { BookFilterParams, CreateBookDTO, UpdateBookDTO } from '@/types/dtos';
 
 /**
  * Interface IBookRepository (Nguyên lý Dependency Inversion trong SOLID).
- * Định nghĩa hợp đồng truy xuất dữ liệu Sách mà không phụ thuộc trực tiếp vào Supabase.
+ * Sử dụng thực thể Domain `Sach` theo Class Diagram (docs/diagrams/Class diagram.drawio).
  */
 export interface IBookRepository {
-  findAll(filter?: BookFilterParams): Promise<Book[]>;
-  findById(id: string): Promise<Book | null>;
-  findByIsbn(isbn: string): Promise<Book | null>;
-  create(dto: CreateBookDTO): Promise<Book>;
-  update(dto: UpdateBookDTO): Promise<Book>;
-  delete(id: string): Promise<boolean>;
-  updateStock(bookId: string, remainingStock: number): Promise<void>;
+  findAll(filter?: BookFilterParams): Promise<Sach[]>;
+  findById(maSach: string): Promise<Sach | null>;
+  create(dto: CreateBookDTO): Promise<Sach>;
+  update(dto: UpdateBookDTO): Promise<Sach>;
+  delete(maSach: string): Promise<{ deleted: boolean; discontinued: boolean }>;
+  updateStock(maSach: string, remainingStock: number): Promise<void>;
 }

@@ -1,77 +1,80 @@
-<mxfile host="app.diagrams.net">
-  <diagram name="State - PromotionCampaign" id="state-promotion-campaign">
-    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1200" pageHeight="700" math="0" shadow="0">
+<mxfile host="Electron">
+  <diagram name="Trạng thái - Chương trình khuyến mãi" id="state-promotion-campaign">
+    <mxGraphModel dx="1755" dy="1079" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1450" pageHeight="760" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="title" value="&lt;b&gt;STATE DIAGRAM – PROMOTION CAMPAIGN (CHƯƠNG TRÌNH KHUYẾN MÃI)&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=16;" vertex="1" parent="1">
-          <mxGeometry x="250" y="20" width="700" height="30" as="geometry" />
+        <mxCell id="title" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=16;" value="&lt;b&gt;SƠ ĐỒ TRẠNG THÁI – CHƯƠNG TRÌNH KHUYẾN MÃI&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="900" x="275" y="15" as="geometry" />
         </mxCell>
-        <mxCell id="init" value="" style="ellipse;html=1;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="40" y="232" width="26" height="26" as="geometry" />
+        <mxCell id="init" parent="1" style="ellipse;html=1;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="26" width="26" x="30" y="239.5" as="geometry" />
         </mxCell>
-        <mxCell id="upcoming" value="&lt;b&gt;UPCOMING&lt;/b&gt;&lt;br&gt;(Sắp diễn ra)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="210" y="210" width="200" height="70" as="geometry" />
+        <mxCell id="upcoming" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#ffffff;strokeColor=#000000;align=left;verticalAlign=top;spacing=0;fontSize=12;" value="&lt;p style=&quot;margin:0;padding:6px 8px;text-align:center;&quot;&gt;&lt;b&gt;Sắp diễn ra&lt;/b&gt;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;trangThai : String = &quot;Sắp diễn ra&quot;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;entry/ lưu thông tin chiến dịch&lt;br/&gt;do/ chờ đến ngày bắt đầu&lt;br/&gt;exit/ kích hoạt ưu đãi&lt;/p&gt;" vertex="1">
+          <mxGeometry height="145" width="250" x="200" y="180" as="geometry" />
         </mxCell>
-        <mxCell id="active" value="&lt;b&gt;ACTIVE&lt;/b&gt;&lt;br&gt;(Đang diễn ra)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="550" y="210" width="200" height="70" as="geometry" />
+        <mxCell id="active" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#ffffff;strokeColor=#000000;align=left;verticalAlign=top;spacing=0;fontSize=12;" value="&lt;p style=&quot;margin:0;padding:6px 8px;text-align:center;&quot;&gt;&lt;b&gt;Đang diễn ra&lt;/b&gt;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;trangThai : String = &quot;Đang diễn ra&quot;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;entry/ bật áp dụng tại quầy bán&lt;br/&gt;do/ tự động tính chiết khấu&lt;br/&gt;exit/ tắt áp dụng khuyến mãi&lt;/p&gt;" vertex="1">
+          <mxGeometry height="145" width="250" x="600" y="180" as="geometry" />
         </mxCell>
-        <mxCell id="ended" value="&lt;b&gt;ENDED&lt;/b&gt;&lt;br&gt;(Đã kết thúc)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="880" y="210" width="200" height="70" as="geometry" />
+        <mxCell id="ended" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#ffffff;strokeColor=#000000;align=left;verticalAlign=top;spacing=0;fontSize=12;" value="&lt;p style=&quot;margin:0;padding:6px 8px;text-align:center;&quot;&gt;&lt;b&gt;Đã kết thúc&lt;/b&gt;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;trangThai : String = &quot;Đã kết thúc&quot;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;entry/ khóa chức năng chỉnh sửa&lt;br/&gt;do/ lưu lịch sử thống kê&lt;br/&gt;exit/ đóng chiến dịch&lt;/p&gt;" vertex="1">
+          <mxGeometry height="145" width="250" x="1000" y="180" as="geometry" />
         </mxCell>
-        <mxCell id="stopped" value="&lt;b&gt;STOPPED&lt;/b&gt;&lt;br&gt;(Đã hủy / Ngưng sớm)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="550" y="420" width="200" height="70" as="geometry" />
+        <mxCell id="stopped" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#ffffff;strokeColor=#000000;align=left;verticalAlign=top;spacing=0;fontSize=12;" value="&lt;p style=&quot;margin:0;padding:6px 8px;text-align:center;&quot;&gt;&lt;b&gt;Đã ngưng&lt;/b&gt;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;trangThai : String = &quot;Đã ngưng&quot;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;entry/ vô hiệu hóa chiến dịch&lt;br/&gt;do/ chặn áp dụng khi tính tiền&lt;br/&gt;exit/ lưu lịch sử ngưng sớm&lt;/p&gt;" vertex="1">
+          <mxGeometry height="145" width="250" x="600" y="460" as="geometry" />
         </mxCell>
-        <mxCell id="endNode" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="965" y="440" width="30" height="30" as="geometry" />
+        <mxCell id="endNode" parent="1" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="30" width="30" x="1110" y="518" as="geometry" />
         </mxCell>
-        <mxCell id="e1" value="Tạo mới [dữ liệu KM hợp lệ,&lt;br&gt;không trùng sách KM]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="init" target="upcoming">
+        <mxCell id="e1" edge="1" parent="1" source="init" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;" target="upcoming" value="Tạo mới(thongTinKM)&lt;br/&gt;[hợp lệ, không trùng sách]">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="0" y="-22" as="offset" />
+            <mxPoint y="-22" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e2" value="Chỉnh sửa thông tin [hợp lệ]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0.3;exitY=0;exitDx=0;exitDy=0;entryX=0.7;entryY=0;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="upcoming" target="upcoming">
+        <mxCell id="e2" edge="1" parent="1" source="upcoming" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;exitX=0.3;exitY=0;entryX=0.7;entryY=0;" target="upcoming" value="Chỉnh sửa(thongTinKM) [hợp lệ]">
           <mxGeometry relative="1" as="geometry">
+            <mxPoint y="-14" as="offset" />
             <Array as="points">
-              <mxPoint x="270" y="160" />
-              <mxPoint x="350" y="160" />
-            </Array>
-            <mxPoint x="0" y="-14" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="e3" value="Đến ngày bắt đầu" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="upcoming" target="active">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="0" y="-14" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="e4" value="Gia hạn / chỉnh mức giảm [hợp lệ]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0.3;exitY=0;exitDx=0;exitDy=0;entryX=0.7;entryY=0;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="active" target="active">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="610" y="160" />
-              <mxPoint x="690" y="160" />
-            </Array>
-            <mxPoint x="0" y="-14" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="e5" value="Qua ngày kết thúc&lt;br&gt;/ khóa chỉnh sửa" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="active" target="ended">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="0" y="-22" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="e6" value="Hủy / Ngưng [xác nhận]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="upcoming" target="stopped">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="310" y="455" />
+              <mxPoint x="275" y="120" />
+              <mxPoint x="375" y="120" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="e7" value="Hủy / Ngưng [xác nhận]&lt;br&gt;/ ngưng áp dụng tại POS" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="active" target="stopped">
+        <mxCell id="e3" edge="1" parent="1" source="upcoming" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;" target="active" value="Đến ngày bắt đầu">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="-14" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="active" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;exitX=0.3;exitY=0;entryX=0.7;entryY=0;" target="active" value="Gia hạn hoặc sửa mức giảm() [hợp lệ]">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="-14" as="offset" />
+            <Array as="points">
+              <mxPoint x="675" y="120" />
+              <mxPoint x="775" y="120" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="active" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;" target="ended" value="Qua ngày kết thúc&lt;br/&gt;/ khóa chỉnh sửa()">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="-22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="upcoming" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1;entryX=0;entryY=0.5;" target="stopped" value="Hủy hoặc ngưng() [đã xác nhận]">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="-14" as="offset" />
+            <Array as="points">
+              <mxPoint x="325" y="532" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="active" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;" target="stopped" value="Hủy hoặc ngưng() [đã xác nhận]&lt;br/&gt;/ ngưng áp dụng khi tính tiền()">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="95" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="ended" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;" target="endNode" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;" edge="1" parent="1" source="ended" target="endNode">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;" edge="1" parent="1" source="stopped" target="endNode">
+        <mxCell id="e9" edge="1" parent="1" source="stopped" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;" target="endNode" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>

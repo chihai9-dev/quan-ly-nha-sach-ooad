@@ -1,88 +1,88 @@
 <mxfile host="app.diagrams.net">
-  <diagram name="State - ReturnExchange" id="state-return-exchange">
-    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1300" pageHeight="700" math="0" shadow="0">
+  <diagram name="Trạng thái - Phiếu đổi trả" id="state-return-exchange">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1600" pageHeight="820" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="title" value="&lt;b&gt;STATE DIAGRAM – PHIẾU ĐỔI / TRẢ HÀNG (RETURN &amp;amp; EXCHANGE SLIP)&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=16;" vertex="1" parent="1">
-          <mxGeometry x="250" y="20" width="750" height="30" as="geometry" />
+        <mxCell id="title" value="&lt;b&gt;SƠ ĐỒ TRẠNG THÁI – PHIẾU ĐỔI / TRẢ HÀNG&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="350" y="15" width="900" height="30" as="geometry" />
         </mxCell>
         <mxCell id="init" value="" style="ellipse;html=1;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="30" y="282" width="26" height="26" as="geometry" />
+          <mxGeometry x="30" y="335" width="26" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="checking" value="&lt;b&gt;CHECKING&lt;/b&gt;&lt;br&gt;(Kiểm tra điều kiện đổi/trả)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="180" y="260" width="210" height="70" as="geometry" />
+        <mxCell id="checking" value="&lt;p style=&quot;margin:0;padding:6px 8px;text-align:center;&quot;&gt;&lt;b&gt;Đang kiểm tra điều kiện&lt;/b&gt;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;trangThai : String = &quot;Đang kiểm tra&quot;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;entry/ tải chi tiết hóa đơn cũ&lt;br/&gt;do/ kiểm tra hạn 7 ngày và sách&lt;br/&gt;exit/ trả kết quả thẩm định&lt;/p&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#ffffff;strokeColor=#000000;align=left;verticalAlign=top;spacing=0;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="190" y="275" width="250" height="145" as="geometry" />
         </mxCell>
-        <mxCell id="choice" value="" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
-          <mxGeometry x="500" y="275" width="40" height="40" as="geometry" />
+        <mxCell id="choice" value="" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="560" y="328" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="rejected" value="&lt;b&gt;REJECTED&lt;/b&gt;&lt;br&gt;(Từ chối xử lý)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
-          <mxGeometry x="680" y="110" width="210" height="70" as="geometry" />
+        <mxCell id="rejected" value="&lt;p style=&quot;margin:0;padding:6px 8px;text-align:center;&quot;&gt;&lt;b&gt;Đã bị từ chối&lt;/b&gt;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;trangThai : String = &quot;Đã bị từ chối&quot;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;entry/ thông báo lý do từ chối&lt;br/&gt;do/ giữ nguyên hóa đơn cũ&lt;br/&gt;exit/ đóng quy trình đổi trả&lt;/p&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#ffffff;strokeColor=#000000;align=left;verticalAlign=top;spacing=0;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="740" y="90" width="250" height="135" as="geometry" />
         </mxCell>
-        <mxCell id="exchanging" value="&lt;b&gt;EXCHANGING&lt;/b&gt;&lt;br&gt;(Đang đổi sách mới &amp;amp;&lt;br&gt;tính chênh lệch)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
-          <mxGeometry x="680" y="260" width="210" height="70" as="geometry" />
+        <mxCell id="exchanging" value="&lt;p style=&quot;margin:0;padding:6px 8px;text-align:center;&quot;&gt;&lt;b&gt;Đang đổi sách&lt;/b&gt;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;hinhThuc : String = &quot;Đổi sách&quot;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;entry/ quét sách mới khách chọn&lt;br/&gt;do/ tính tiền chênh lệch&lt;br/&gt;exit/ xác nhận thu hoặc thối tiền&lt;/p&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#ffffff;strokeColor=#000000;align=left;verticalAlign=top;spacing=0;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="740" y="275" width="250" height="145" as="geometry" />
         </mxCell>
-        <mxCell id="refunding" value="&lt;b&gt;REFUNDING&lt;/b&gt;&lt;br&gt;(Đang trả hàng &amp;amp; hoàn tiền)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
-          <mxGeometry x="680" y="420" width="210" height="70" as="geometry" />
+        <mxCell id="refunding" value="&lt;p style=&quot;margin:0;padding:6px 8px;text-align:center;&quot;&gt;&lt;b&gt;Đang hoàn tiền&lt;/b&gt;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;hinhThuc : String = &quot;Trả sách&quot;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;entry/ tính số tiền hoàn lại&lt;br/&gt;do/ kiểm nhận sách trả về kho&lt;br/&gt;exit/ chi hoàn tiền cho khách&lt;/p&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#ffffff;strokeColor=#000000;align=left;verticalAlign=top;spacing=0;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="740" y="480" width="250" height="145" as="geometry" />
         </mxCell>
-        <mxCell id="completed" value="&lt;b&gt;COMPLETED&lt;/b&gt;&lt;br&gt;(Hoàn tất đổi/trả)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-          <mxGeometry x="1010" y="340" width="190" height="70" as="geometry" />
+        <mxCell id="completed" value="&lt;p style=&quot;margin:0;padding:6px 8px;text-align:center;&quot;&gt;&lt;b&gt;Đã hoàn tất đổi/trả&lt;/b&gt;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;trangThai : String = &quot;Hoàn tất&quot;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;entry/ lưu phiếu đổi trả vào CSDL&lt;br/&gt;do/ cập nhật tồn kho và hóa đơn&lt;br/&gt;exit/ in biên bản đổi trả&lt;/p&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#ffffff;strokeColor=#000000;align=left;verticalAlign=top;spacing=0;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="380" width="260" height="145" as="geometry" />
         </mxCell>
         <mxCell id="endNode" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="1240" y="230" width="30" height="30" as="geometry" />
+          <mxGeometry x="1510" y="240" width="30" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="e1" value="Tạo từ Invoice PAID" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="init" target="checking">
+        <mxCell id="e1" value="Tạo phiếu đổi trả(maHoaDon)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="init" target="checking">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="0" y="-14" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e2" value="Kiểm tra hạn &amp;amp; sách" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="checking" target="choice">
+        <mxCell id="e2" value="Thẩm định()" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="checking" target="choice">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="0" y="-14" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e3" value="[Quá 7 ngày hoặc sách rách]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="choice" target="rejected">
+        <mxCell id="e3" value="[Quá 7 ngày hoặc sách rách]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;exitX=0.5;exitY=0;entryX=0;entryY=0.5;" edge="1" parent="1" source="choice" target="rejected">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="520" y="145" />
+              <mxPoint x="580" y="158" />
             </Array>
             <mxPoint x="0" y="-14" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e4" value="[Hợp lệ – Đổi sách]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="choice" target="exchanging">
+        <mxCell id="e4" value="[Hợp lệ, khách đổi sách]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="choice" target="exchanging">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="0" y="-14" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e5" value="[Hợp lệ – Trả sách]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="choice" target="refunding">
+        <mxCell id="e5" value="[Hợp lệ, khách trả sách]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1;entryX=0;entryY=0.5;" edge="1" parent="1" source="choice" target="refunding">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="520" y="455" />
+              <mxPoint x="580" y="552" />
             </Array>
             <mxPoint x="0" y="14" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e6" value="Thu/thối chênh lệch,&lt;br&gt;cộng sách cũ, trừ sách mới" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="exchanging" target="completed">
+        <mxCell id="e6" value="Xác nhận hoàn tất()&lt;br/&gt;/ cộng sách cũ, trừ sách mới()" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.3;" edge="1" parent="1" source="exchanging" target="completed">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="0" y="-22" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e7" value="Hoàn tiền, cộng tồn kho,&lt;br&gt;Invoice → REFUNDED" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.7;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="refunding" target="completed">
+        <mxCell id="e7" value="Xác nhận hoàn tất()&lt;br/&gt;/ cộng tồn, cập nhật hóa đơn()" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.7;" edge="1" parent="1" source="refunding" target="completed">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="0" y="22" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="rejected" target="endNode">
+        <mxCell id="e8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0.5;entryY=0;" edge="1" parent="1" source="rejected" target="endNode">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="1255" y="145" />
+              <mxPoint x="1525" y="158" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="e9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="completed" target="endNode">
+        <mxCell id="e9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0.5;entryY=1;" edge="1" parent="1" source="completed" target="endNode">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="1255" y="375" />
+              <mxPoint x="1525" y="452" />
             </Array>
           </mxGeometry>
         </mxCell>

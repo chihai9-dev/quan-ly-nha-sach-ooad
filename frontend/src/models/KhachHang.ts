@@ -98,4 +98,14 @@ export class KhachHang extends NguoiDung {
     this._lichSuMuaHang.push(hoaDon);
     this.touch();
   }
+
+  /**
+   * Xác định hạng thành viên theo State Diagram (state-customer.drawio)
+   */
+  public xacDinhHangThanhVien(): 'STANDARD' | 'SILVER' | 'GOLD' | 'PLATINUM' {
+    if (this._diemTichLuy >= 1000) return 'PLATINUM';
+    if (this._diemTichLuy >= 500) return 'GOLD';
+    if (this._diemTichLuy >= 100) return 'SILVER';
+    return 'STANDARD';
+  }
 }

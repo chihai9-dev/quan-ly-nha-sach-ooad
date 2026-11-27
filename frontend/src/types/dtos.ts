@@ -7,12 +7,18 @@ export interface CreateBookDTO {
   isbn: string;
   title: string;
   author: string;
+  authorIds?: string[];
   publisher?: string;
+  publisherId?: string;
   publishYear?: number;
+  costPrice?: number;
   price: number;
   stockQuantity: number;
+  minStockThreshold?: number;
   coverUrl?: string;
   categoryId?: string;
+  promotionId?: string | null;
+  status?: string;
 }
 
 export interface UpdateBookDTO extends Partial<CreateBookDTO> {

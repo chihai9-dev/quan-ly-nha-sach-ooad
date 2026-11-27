@@ -1,16 +1,51 @@
-import { bookstoreStore, computeAlertStatus } from '@/lib/mock/bookstoreStore';
-import type { FullReportDTO } from '@/types/dtos';
+import { InventoryRepository, type IInventoryRepository } from '@/repositories/InventoryRepository';
+import { SupplierRepository, type ISupplierRepository } from '@/repositories/SupplierRepository';
+import { ReturnRepository, type IReturnRepository } from '@/repositories/ReturnRepository';
+import { OrderRepository } from '@/repositories/OrderRepository';
+import type { IOrderRepository } from '@/repositories/IOrderRepository';
+import type { FullReportDTO, PaymentMethod, RevenueByMethodDTO } from '@/types/dtos';
 
+const METHOD_LABELS: Record<PaymentMethod, string> = {
+  CASH: 'Tiền mặt',
+  BANK_TRANSFER: 'Chuyển khoản',
+  MOMO: 'Ví MoMo',
+  CARD: 'Thẻ ngân hàng',
+};
+
+/**
+ * Lớp ReportService (Phân hệ Thống kê - Báo cáo TK-BC)
+ * Tổng hợp dữ liệu thực từ Repositories (Supabase hoặc fallback mock), áp dụng DI.
+ */
 export class ReportService {
-  async getFullReport(): Promise<FullReportDTO> {
-    const books = bookstoreStore.books;
-    const suppliers = bookstoreStore.suppliers;
-    const returns = bookstoreStore.returns;
+  private readonly inventoryRepo: IInventoryRepository;
+  private readonly supplierRepo: ISupplierRepository;
+  private readonly returnRepo: IReturnRepository;
+  private readonly orderRepo: IOrderRepository;
 
-    const bestsellers = [...books]
+  constructor(
+    inventoryRepo: IInventoryRepository = new InventoryRepository(),
+    supplierRepo: ISupplierRepository = new SupplierRepository(),
+    returnRepo: IReturnRepository = new ReturnRepository(),
+    orderRepo: IOrderRepository = new OrderRepository()
+  ) {
+    this.inventoryRepo = inventoryRepo;
+    this.supplierRepo = supplierRepo;
+    this.returnRepo = returnRepo;
+    this.orderRepo = orderRepo;
+  }
+
+  async getFullReport(): Promise<FullReportDTO> {
+    const [inventoryItems, suppliers, returns, hoaDons] = await Promise.all([
+      this.inventoryRepo.getInventoryItems(),
+      this.supplierRepo.findAll(),
+      this.returnRepo.findAll(),
+      this.orderRepo.listRecent(200),
+    ]);
+
+    const bestsellers = [...inventoryItems]
       .sort((a, b) => b.soldQuantity - a.soldQuantity)
       .map((b) => ({
-        bookId: b.id,
+        bookId: b.bookId,
         title: b.title,
         categoryName: b.categoryName,
         soldQuantity: b.soldQuantity,
@@ -18,35 +53,46 @@ export class ReportService {
         stockQuantity: b.stockQuantity,
       }));
 
-    const totalRevenue = bestsellers.reduce((sum, b) => sum + b.revenue, 0);
+    const orderRevenue = hoaDons.reduce((sum, hd) => sum + hd.thanhToanCuoi, 0);
+    const catalogRevenue = bestsellers.reduce((sum, b) => sum + b.revenue, 0);
+    const totalRevenue = orderRevenue > 0 ? orderRevenue : catalogRevenue;
     const totalRefunds = returns.reduce((sum, r) => sum + Math.max(0, r.refundAmount), 0);
     const netRevenue = Math.max(0, totalRevenue - totalRefunds);
-    const totalOrders = Math.max(
-      1,
-      bookstoreStore.customers.reduce((sum, c) => sum + c.orderCount, 0)
+    const totalOrders = hoaDons.length > 0 ? hoaDons.length : bestsellers.reduce((s, b) => s + (b.soldQuantity > 0 ? 1 : 0), 0);
+
+    const methodAgg = new Map<PaymentMethod, { count: number; rev: number }>([
+      ['CASH', { count: 0, rev: 0 }],
+      ['BANK_TRANSFER', { count: 0, rev: 0 }],
+      ['MOMO', { count: 0, rev: 0 }],
+      ['CARD', { count: 0, rev: 0 }],
+    ]);
+
+    if (hoaDons.length > 0) {
+      for (const hd of hoaDons) {
+        const rawMethod = (hd.danhSachThanhToan[0]?.phuongThuc ?? 'CASH') as PaymentMethod;
+        const m: PaymentMethod = methodAgg.has(rawMethod) ? rawMethod : 'CASH';
+        const cur = methodAgg.get(m)!;
+        cur.count += 1;
+        cur.rev += hd.thanhToanCuoi;
+      }
+    } else {
+      methodAgg.set('CASH', { count: Math.round(totalOrders * 0.45), rev: Math.round(totalRevenue * 0.42) });
+      methodAgg.set('BANK_TRANSFER', { count: Math.round(totalOrders * 0.3), rev: Math.round(totalRevenue * 0.33) });
+      methodAgg.set('MOMO', { count: Math.round(totalOrders * 0.15), rev: Math.round(totalRevenue * 0.14) });
+      methodAgg.set('CARD', {
+        count: Math.max(0, totalOrders - Math.round(totalOrders * 0.9)),
+        rev: Math.max(0, totalRevenue - Math.round(totalRevenue * 0.89)),
+      });
+    }
+
+    const revenueByMethod: RevenueByMethodDTO[] = (['CASH', 'BANK_TRANSFER', 'MOMO', 'CARD'] as PaymentMethod[]).map(
+      (method) => ({
+        method,
+        label: METHOD_LABELS[method],
+        orderCount: methodAgg.get(method)!.count,
+        revenue: methodAgg.get(method)!.rev,
+      })
     );
-
-    const revenueByMethod = [
-      { method: 'CASH' as const, label: 'Tiền mặt', orderCount: Math.round(totalOrders * 0.45), revenue: Math.round(totalRevenue * 0.42) },
-      { method: 'BANK_TRANSFER' as const, label: 'Chuyển khoản', orderCount: Math.round(totalOrders * 0.30), revenue: Math.round(totalRevenue * 0.33) },
-      { method: 'MOMO' as const, label: 'Ví MoMo', orderCount: Math.round(totalOrders * 0.15), revenue: Math.round(totalRevenue * 0.14) },
-      { method: 'CARD' as const, label: 'Thẻ ngân hàng', orderCount: Math.max(1, totalOrders - Math.round(totalOrders * 0.9)), revenue: Math.max(0, totalRevenue - Math.round(totalRevenue * 0.89)) },
-    ];
-
-    const inventoryItems = books.map((b) => ({
-      bookId: b.id,
-      isbn: b.isbn,
-      title: b.title,
-      categoryName: b.categoryName,
-      price: b.price,
-      costPrice: b.costPrice,
-      stockQuantity: b.stockQuantity,
-      minStockThreshold: b.minStockThreshold,
-      maxStockThreshold: b.maxStockThreshold,
-      soldQuantity: b.soldQuantity,
-      businessStatus: b.businessStatus,
-      alertStatus: computeAlertStatus(b.stockQuantity, b.minStockThreshold, b.maxStockThreshold),
-    }));
 
     return {
       generatedAt: new Date().toISOString(),
@@ -69,7 +115,7 @@ export class ReportService {
         totalImported: suppliers.reduce((sum, s) => sum + s.totalImported, 0),
         totalPaid: suppliers.reduce((sum, s) => sum + s.totalPaid, 0),
         totalRemainingDebt: suppliers.reduce((sum, s) => sum + s.currentDebt, 0),
-        suppliers: [...suppliers],
+        suppliers,
       },
     };
   }

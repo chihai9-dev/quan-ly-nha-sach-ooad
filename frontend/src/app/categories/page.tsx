@@ -1,7 +1,19 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { FolderTree, UserPen, Building2, Plus, Lock, Unlock, AlertCircle } from 'lucide-react';
+import {
+  FolderTree,
+  UserPen,
+  Building2,
+  Plus,
+  Lock,
+  Unlock,
+  AlertCircle,
+  Search,
+  Pencil,
+  Trash2,
+  X,
+} from 'lucide-react';
 import type { AuthorDTO, CategoryDTO, PublisherDTO } from '@/types/dtos';
 
 type TabKey = 'categories' | 'authors' | 'publishers';
@@ -11,32 +23,37 @@ export default function CategoriesPage() {
   const [categories, setCategories] = useState<CategoryDTO[]>([]);
   const [authors, setAuthors] = useState<AuthorDTO[]>([]);
   const [publishers, setPublishers] = useState<PublisherDTO[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<string | null>(null);
 
-  // Category form
+  // Category form (Add / Edit)
+  const [editingCatId, setEditingCatId] = useState<string | null>(null);
   const [catCode, setCatCode] = useState('');
   const [catName, setCatName] = useState('');
   const [catDesc, setCatDesc] = useState('');
 
-  // Author form
+  // Author form (Add / Edit)
+  const [editingAutId, setEditingAutId] = useState<string | null>(null);
   const [autName, setAutName] = useState('');
   const [autPenName, setAutPenName] = useState('');
   const [autNation, setAutNation] = useState('Việt Nam');
   const [autBio, setAutBio] = useState('');
 
-  // Publisher form
+  // Publisher form (Add / Edit)
+  const [editingPubId, setEditingPubId] = useState<string | null>(null);
   const [pubName, setPubName] = useState('');
   const [pubAddress, setPubAddress] = useState('');
   const [pubPhone, setPubPhone] = useState('');
   const [pubContact, setPubContact] = useState('');
 
-  const loadData = async () => {
+  const loadData = async (q?: string) => {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch('/api/catalog', { cache: 'no-store' });
+      const url = q?.trim() ? `/api/catalog?q=${encodeURIComponent(q.trim())}` : '/api/catalog';
+      const res = await fetch(url, { cache: 'no-store' });
       const data = (await res.json()) as {
         categories?: CategoryDTO[];
         authors?: AuthorDTO[];
@@ -61,25 +78,56 @@ export default function CategoriesPage() {
     void loadData();
   }, []);
 
-  const handleAddCategory = async (e: React.FormEvent) => {
+  const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    setError(null);
-    setFeedback(null);
-    const res = await fetch('/api/catalog', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'category', code: catCode, name: catName, description: catDesc }),
-    });
-    const data = (await res.json()) as { error?: string };
-    if (!res.ok) {
-      setError(data.error ?? 'Không thể thêm thể loại.');
-      return;
-    }
+    void loadData(searchTerm);
+  };
+
+  const resetCategoryForm = () => {
+    setEditingCatId(null);
     setCatCode('');
     setCatName('');
     setCatDesc('');
-    setFeedback('Đã thêm thể loại sách mới.');
-    await loadData();
+  };
+
+  const resetAuthorForm = () => {
+    setEditingAutId(null);
+    setAutName('');
+    setAutPenName('');
+    setAutNation('Việt Nam');
+    setAutBio('');
+  };
+
+  const resetPublisherForm = () => {
+    setEditingPubId(null);
+    setPubName('');
+    setPubAddress('');
+    setPubPhone('');
+    setPubContact('');
+  };
+
+  const handleSaveCategory = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setFeedback(null);
+    const isEdit = Boolean(editingCatId);
+    const res = await fetch('/api/catalog', {
+      method: isEdit ? 'PATCH' : 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(
+        isEdit
+          ? { type: 'category', id: editingCatId, name: catName, description: catDesc }
+          : { type: 'category', code: catCode, name: catName, description: catDesc }
+      ),
+    });
+    const data = (await res.json()) as { error?: string };
+    if (!res.ok) {
+      setError(data.error ?? 'Không thể lưu thể loại.');
+      return;
+    }
+    resetCategoryForm();
+    setFeedback(isEdit ? 'Đã cập nhật thể loại sách.' : 'Đã thêm thể loại sách mới.');
+    await loadData(searchTerm);
   };
 
   const handleToggleCategory = async (id: string) => {
@@ -94,18 +142,20 @@ export default function CategoriesPage() {
       setError(data.error ?? 'Không thể cập nhật trạng thái thể loại.');
       return;
     }
-    await loadData();
+    await loadData(searchTerm);
   };
 
-  const handleAddAuthor = async (e: React.FormEvent) => {
+  const handleSaveAuthor = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setFeedback(null);
+    const isEdit = Boolean(editingAutId);
     const res = await fetch('/api/catalog', {
-      method: 'POST',
+      method: isEdit ? 'PATCH' : 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         type: 'author',
+        ...(isEdit ? { id: editingAutId } : {}),
         name: autName,
         penName: autPenName,
         nationality: autNation,
@@ -114,25 +164,25 @@ export default function CategoriesPage() {
     });
     const data = (await res.json()) as { error?: string };
     if (!res.ok) {
-      setError(data.error ?? 'Không thể thêm tác giả.');
+      setError(data.error ?? 'Không thể lưu tác giả.');
       return;
     }
-    setAutName('');
-    setAutPenName('');
-    setAutBio('');
-    setFeedback('Đã thêm tác giả mới.');
-    await loadData();
+    resetAuthorForm();
+    setFeedback(isEdit ? 'Đã cập nhật thông tin tác giả.' : 'Đã thêm tác giả mới.');
+    await loadData(searchTerm);
   };
 
-  const handleAddPublisher = async (e: React.FormEvent) => {
+  const handleSavePublisher = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setFeedback(null);
+    const isEdit = Boolean(editingPubId);
     const res = await fetch('/api/catalog', {
-      method: 'POST',
+      method: isEdit ? 'PATCH' : 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         type: 'publisher',
+        ...(isEdit ? { id: editingPubId } : {}),
         name: pubName,
         address: pubAddress,
         phoneNumber: pubPhone,
@@ -141,24 +191,58 @@ export default function CategoriesPage() {
     });
     const data = (await res.json()) as { error?: string };
     if (!res.ok) {
-      setError(data.error ?? 'Không thể thêm nhà xuất bản.');
+      setError(data.error ?? 'Không thể lưu nhà xuất bản.');
       return;
     }
-    setPubName('');
-    setPubAddress('');
-    setPubPhone('');
-    setPubContact('');
-    setFeedback('Đã thêm nhà xuất bản mới.');
-    await loadData();
+    resetPublisherForm();
+    setFeedback(isEdit ? 'Đã cập nhật nhà xuất bản.' : 'Đã thêm nhà xuất bản mới.');
+    await loadData(searchTerm);
+  };
+
+  const handleDelete = async (type: 'category' | 'author' | 'publisher', id: string, label: string) => {
+    if (!window.confirm(`Xác nhận xóa "${label}"?`)) return;
+    setError(null);
+    setFeedback(null);
+    const res = await fetch(`/api/catalog?type=${type}&id=${encodeURIComponent(id)}`, {
+      method: 'DELETE',
+    });
+    const data = (await res.json()) as { error?: string };
+    if (!res.ok) {
+      setError(data.error ?? 'Không thể xóa mục đã chọn.');
+      return;
+    }
+    setFeedback(`Đã xóa "${label}".`);
+    await loadData(searchTerm);
   };
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-slate-800 tracking-tight">Quản Lý Danh Mục Sách</h1>
-        <p className="text-xs text-slate-500 mt-1">
-          Quản lý thể loại, tác giả và nhà xuất bản (Phân hệ Nhân viên kho).
-        </p>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold text-slate-800 tracking-tight">Quản Lý Danh Mục Sách</h1>
+          <p className="text-xs text-slate-500 mt-1">
+            Quản lý Thể loại (TheLoai), Tác giả (TacGia) và Nhà xuất bản (NhaXuatBan) theo đúng sơ đồ QLDMS.
+          </p>
+        </div>
+
+        <form onSubmit={handleSearch} className="flex items-center gap-2">
+          <div className="relative">
+            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Tìm thể loại, tác giả, NXB..."
+              className="pl-9 pr-3 py-2 text-xs border border-slate-300 rounded-lg w-60"
+            />
+          </div>
+          <button
+            type="submit"
+            className="px-3 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-lg text-xs font-semibold"
+          >
+            Tìm kiếm
+          </button>
+        </form>
       </div>
 
       {error && (
@@ -216,17 +300,26 @@ export default function CategoriesPage() {
         </div>
       ) : tab === 'categories' ? (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <form onSubmit={handleAddCategory} className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3 h-fit">
-            <h2 className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
-              <Plus className="w-4 h-4 text-indigo-600" /> Thêm thể loại mới
-            </h2>
+          <form onSubmit={handleSaveCategory} className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3 h-fit">
+            <div className="flex items-center justify-between">
+              <h2 className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
+                <Plus className="w-4 h-4 text-indigo-600" />
+                {editingCatId ? 'Cập nhật thể loại' : 'Thêm thể loại mới'}
+              </h2>
+              {editingCatId && (
+                <button type="button" onClick={resetCategoryForm} className="text-xs text-slate-400 hover:text-slate-600">
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+            </div>
             <input
               type="text"
               required
-              placeholder="Mã thể loại (VD: LICH_SU)"
+              disabled={Boolean(editingCatId)}
+              placeholder="Mã thể loại (VD: TL_LICHSU)"
               value={catCode}
               onChange={(e) => setCatCode(e.target.value)}
-              className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg"
+              className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg disabled:bg-slate-100"
             />
             <input
               type="text"
@@ -244,7 +337,7 @@ export default function CategoriesPage() {
               className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg"
             />
             <button type="submit" className="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-semibold">
-              Lưu thể loại
+              {editingCatId ? 'Cập nhật thể loại' : 'Lưu thể loại'}
             </button>
           </form>
 
@@ -276,14 +369,35 @@ export default function CategoriesPage() {
                         {cat.isActive ? 'Đang dùng' : 'Đã khóa'}
                       </span>
                     </td>
-                    <td className="py-3 px-4 text-right">
+                    <td className="py-3 px-4 text-right space-x-1 whitespace-nowrap">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setEditingCatId(cat.id);
+                          setCatCode(cat.code);
+                          setCatName(cat.name);
+                          setCatDesc(cat.description);
+                        }}
+                        className="inline-flex items-center gap-1 px-2 py-1 rounded-md border border-slate-200 hover:bg-slate-100 text-slate-600"
+                        title="Cập nhật thể loại"
+                      >
+                        <Pencil className="w-3 h-3" />
+                      </button>
                       <button
                         type="button"
                         onClick={() => void handleToggleCategory(cat.id)}
-                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md border border-slate-200 hover:bg-slate-100 text-slate-600"
+                        className="inline-flex items-center gap-1 px-2 py-1 rounded-md border border-slate-200 hover:bg-slate-100 text-slate-600"
+                        title={cat.isActive ? 'Khóa' : 'Mở'}
                       >
                         {cat.isActive ? <Lock className="w-3 h-3" /> : <Unlock className="w-3 h-3" />}
-                        {cat.isActive ? 'Khóa' : 'Mở'}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => void handleDelete('category', cat.id, cat.name)}
+                        className="inline-flex items-center gap-1 px-2 py-1 rounded-md border border-rose-200 hover:bg-rose-50 text-rose-600"
+                        title="Xóa thể loại"
+                      >
+                        <Trash2 className="w-3 h-3" />
                       </button>
                     </td>
                   </tr>
@@ -294,10 +408,18 @@ export default function CategoriesPage() {
         </div>
       ) : tab === 'authors' ? (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <form onSubmit={handleAddAuthor} className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3 h-fit">
-            <h2 className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
-              <Plus className="w-4 h-4 text-indigo-600" /> Thêm tác giả mới
-            </h2>
+          <form onSubmit={handleSaveAuthor} className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3 h-fit">
+            <div className="flex items-center justify-between">
+              <h2 className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
+                <Plus className="w-4 h-4 text-indigo-600" />
+                {editingAutId ? 'Cập nhật tác giả' : 'Thêm tác giả mới'}
+              </h2>
+              {editingAutId && (
+                <button type="button" onClick={resetAuthorForm} className="text-xs text-slate-400 hover:text-slate-600">
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+            </div>
             <input
               type="text"
               required
@@ -328,7 +450,7 @@ export default function CategoriesPage() {
               className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg"
             />
             <button type="submit" className="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-semibold">
-              Lưu tác giả
+              {editingAutId ? 'Cập nhật tác giả' : 'Lưu tác giả'}
             </button>
           </form>
 
@@ -338,8 +460,8 @@ export default function CategoriesPage() {
                 <tr>
                   <th className="py-3 px-4 font-semibold">Tác giả</th>
                   <th className="py-3 px-4 font-semibold">Bút danh</th>
-                  <th className="py-3 px-4 font-semibold">Quốc tịch</th>
                   <th className="py-3 px-4 font-semibold">Tiểu sử</th>
+                  <th className="py-3 px-4 font-semibold text-right">Thao tác</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -347,8 +469,29 @@ export default function CategoriesPage() {
                   <tr key={a.id} className="hover:bg-slate-50/70">
                     <td className="py-3 px-4 font-semibold text-slate-800">{a.name}</td>
                     <td className="py-3 px-4 text-slate-600">{a.penName || '—'}</td>
-                    <td className="py-3 px-4 text-slate-600">{a.nationality || '—'}</td>
                     <td className="py-3 px-4 text-slate-500">{a.biography || '—'}</td>
+                    <td className="py-3 px-4 text-right space-x-1 whitespace-nowrap">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setEditingAutId(a.id);
+                          setAutName(a.name);
+                          setAutPenName(a.penName ?? '');
+                          setAutNation(a.nationality ?? 'Việt Nam');
+                          setAutBio(a.biography);
+                        }}
+                        className="inline-flex items-center gap-1 px-2 py-1 rounded-md border border-slate-200 hover:bg-slate-100 text-slate-600"
+                      >
+                        <Pencil className="w-3 h-3" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => void handleDelete('author', a.id, a.name)}
+                        className="inline-flex items-center gap-1 px-2 py-1 rounded-md border border-rose-200 hover:bg-rose-50 text-rose-600"
+                      >
+                        <Trash2 className="w-3 h-3" />
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -357,10 +500,18 @@ export default function CategoriesPage() {
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <form onSubmit={handleAddPublisher} className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3 h-fit">
-            <h2 className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
-              <Plus className="w-4 h-4 text-indigo-600" /> Thêm Nhà xuất bản
-            </h2>
+          <form onSubmit={handleSavePublisher} className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3 h-fit">
+            <div className="flex items-center justify-between">
+              <h2 className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
+                <Plus className="w-4 h-4 text-indigo-600" />
+                {editingPubId ? 'Cập nhật NXB' : 'Thêm Nhà xuất bản'}
+              </h2>
+              {editingPubId && (
+                <button type="button" onClick={resetPublisherForm} className="text-xs text-slate-400 hover:text-slate-600">
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+            </div>
             <input
               type="text"
               required
@@ -391,7 +542,7 @@ export default function CategoriesPage() {
               className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg"
             />
             <button type="submit" className="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-semibold">
-              Lưu NXB
+              {editingPubId ? 'Cập nhật NXB' : 'Lưu NXB'}
             </button>
           </form>
 
@@ -402,7 +553,7 @@ export default function CategoriesPage() {
                   <th className="py-3 px-4 font-semibold">Tên NXB</th>
                   <th className="py-3 px-4 font-semibold">Địa chỉ</th>
                   <th className="py-3 px-4 font-semibold">Điện thoại</th>
-                  <th className="py-3 px-4 font-semibold">Đại diện</th>
+                  <th className="py-3 px-4 font-semibold text-right">Thao tác</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -411,7 +562,28 @@ export default function CategoriesPage() {
                     <td className="py-3 px-4 font-semibold text-slate-800">{p.name}</td>
                     <td className="py-3 px-4 text-slate-600">{p.address || '—'}</td>
                     <td className="py-3 px-4 font-mono text-slate-600">{p.phoneNumber || '—'}</td>
-                    <td className="py-3 px-4 text-slate-500">{p.contactPerson || '—'}</td>
+                    <td className="py-3 px-4 text-right space-x-1 whitespace-nowrap">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setEditingPubId(p.id);
+                          setPubName(p.name);
+                          setPubAddress(p.address);
+                          setPubPhone(p.phoneNumber);
+                          setPubContact(p.contactPerson ?? '');
+                        }}
+                        className="inline-flex items-center gap-1 px-2 py-1 rounded-md border border-slate-200 hover:bg-slate-100 text-slate-600"
+                      >
+                        <Pencil className="w-3 h-3" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => void handleDelete('publisher', p.id, p.name)}
+                        className="inline-flex items-center gap-1 px-2 py-1 rounded-md border border-rose-200 hover:bg-rose-50 text-rose-600"
+                      >
+                        <Trash2 className="w-3 h-3" />
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>

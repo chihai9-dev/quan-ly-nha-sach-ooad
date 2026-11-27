@@ -1,102 +1,104 @@
-<mxfile host="Electron">
-  <diagram name="State - StockAudit" id="state-stock-audit">
-    <mxGraphModel dx="1256" dy="763" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1300" pageHeight="700" math="0" shadow="0">
+<mxfile host="app.diagrams.net">
+  <diagram name="Trạng thái - Kiểm kê kho" id="state-stock-audit">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1550" pageHeight="820" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="title" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=16;" value="&lt;b&gt;STATE DIAGRAM – STOCK AUDIT &amp;amp; INVENTORY ADJUSTMENT (KIỂM KÊ &amp;amp; ĐIỀU CHỈNH KHO)&lt;/b&gt;" vertex="1">
-          <mxGeometry height="30" width="800" x="250" y="20" as="geometry" />
+        <mxCell id="title" value="&lt;b&gt;SƠ ĐỒ TRẠNG THÁI – PHIẾU KIỂM KÊ &amp; ĐIỀU CHỈNH KHO&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="325" y="15" width="900" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="init" parent="1" style="ellipse;html=1;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">
-          <mxGeometry height="26" width="26" x="40" y="252" as="geometry" />
+        <mxCell id="init" value="" style="ellipse;html=1;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="30" y="295" width="26" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="counting" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" value="&lt;b&gt;COUNTING&lt;/b&gt;&lt;br&gt;(Đang kiểm đếm thực tế)" vertex="1">
-          <mxGeometry height="70" width="210" x="190" y="230" as="geometry" />
+        <mxCell id="counting" value="&lt;p style=&quot;margin:0;padding:6px 8px;text-align:center;&quot;&gt;&lt;b&gt;Đang kiểm đếm&lt;/b&gt;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;trangThai : String = &quot;Đang kiểm kê&quot;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;entry/ tải danh sách tồn hệ thống&lt;br/&gt;do/ nhập số lượng thực tế&lt;br/&gt;exit/ đối chiếu số liệu tồn&lt;/p&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#ffffff;strokeColor=#000000;align=left;verticalAlign=top;spacing=0;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="180" y="235" width="250" height="145" as="geometry" />
         </mxCell>
-        <mxCell id="choice" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;" value="" vertex="1">
-          <mxGeometry height="40" width="40" x="520" y="245" as="geometry" />
+        <mxCell id="choice" value="" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="550" y="288" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="balanced" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" value="&lt;b&gt;BALANCED&lt;/b&gt;&lt;br&gt;(Đã ghi nhận – Khớp tồn kho)" vertex="1">
-          <mxGeometry height="70" width="220" x="720" y="120" as="geometry" />
+        <mxCell id="balanced" value="&lt;p style=&quot;margin:0;padding:6px 8px;text-align:center;&quot;&gt;&lt;b&gt;Khớp tồn kho&lt;/b&gt;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;chenhLech : int = 0&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;entry/ ghi nhận kết quả khớp kho&lt;br/&gt;do/ lưu lịch sử kiểm kê&lt;br/&gt;exit/ kết thúc đợt kiểm kê&lt;/p&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#ffffff;strokeColor=#000000;align=left;verticalAlign=top;spacing=0;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="740" y="90" width="250" height="135" as="geometry" />
         </mxCell>
-        <mxCell id="discrepancy" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" value="&lt;b&gt;DISCREPANCY&lt;/b&gt;&lt;br&gt;(Phát hiện chênh lệch –&lt;br&gt;Chờ lập phiếu điều chỉnh)" vertex="1">
-          <mxGeometry height="75" width="220" x="660" y="280" as="geometry" />
+        <mxCell id="discrepancy" value="&lt;p style=&quot;margin:0;padding:6px 8px;text-align:center;&quot;&gt;&lt;b&gt;Có chênh lệch&lt;/b&gt;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;chenhLech : int != 0&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;entry/ hiển thị danh sách lệch kho&lt;br/&gt;do/ chờ lập phiếu điều chỉnh&lt;br/&gt;exit/ ghi nhận nguyên nhân lệch&lt;/p&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#ffffff;strokeColor=#000000;align=left;verticalAlign=top;spacing=0;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="700" y="290" width="260" height="145" as="geometry" />
         </mxCell>
-        <mxCell id="adjusted" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" value="&lt;b&gt;ADJUSTED&lt;/b&gt;&lt;br&gt;(Đã cân bằng tồn kho)" vertex="1">
-          <mxGeometry height="70" width="200" x="980" y="282" as="geometry" />
+        <mxCell id="adjusted" value="&lt;p style=&quot;margin:0;padding:6px 8px;text-align:center;&quot;&gt;&lt;b&gt;Đã cân bằng kho&lt;/b&gt;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;trangThai : String = &quot;Đã điều chỉnh&quot;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;entry/ lưu phiếu điều chỉnh kho&lt;br/&gt;do/ cập nhật lại số lượng tồn&lt;br/&gt;exit/ thông báo cân bằng xong&lt;/p&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#ffffff;strokeColor=#000000;align=left;verticalAlign=top;spacing=0;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="290" width="250" height="145" as="geometry" />
         </mxCell>
-        <mxCell id="cancelled" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=30;fillColor=#ffffff;strokeColor=#000000;" value="&lt;b&gt;CANCELLED&lt;/b&gt;&lt;br&gt;(Đã hủy – Giữ nguyên tồn kho)" vertex="1">
-          <mxGeometry height="70" width="220" x="430" y="470" as="geometry" />
+        <mxCell id="cancelled" value="&lt;p style=&quot;margin:0;padding:6px 8px;text-align:center;&quot;&gt;&lt;b&gt;Đã hủy&lt;/b&gt;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;trangThai : String = &quot;Đã hủy&quot;&lt;/p&gt;&lt;hr style=&quot;border:0;border-top:1px solid #000000;margin:0;&quot;/&gt;&lt;p style=&quot;margin:0;padding:5px 8px;&quot;&gt;entry/ hủy bỏ phiên làm việc&lt;br/&gt;do/ giữ nguyên tồn kho cũ&lt;br/&gt;exit/ đóng màn hình kiểm kê&lt;/p&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#ffffff;strokeColor=#000000;align=left;verticalAlign=top;spacing=0;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="450" y="540" width="250" height="135" as="geometry" />
         </mxCell>
-        <mxCell id="endNode" parent="1" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">
-          <mxGeometry height="30" width="30" x="1220" y="302" as="geometry" />
+        <mxCell id="endNode" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1470" y="348" width="30" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="e1" edge="1" parent="1" source="init" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;labelBackgroundColor=#ffffff;" target="counting" value="Tạo phiếu kiểm kê">
+        <mxCell id="e1" value="Tạo phiếu kiểm kê()" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="init" target="counting">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint y="-14" as="offset" />
+            <mxPoint x="0" y="-14" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e2" edge="1" parent="1" source="counting" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0.3;exitY=0;exitDx=0;exitDy=0;entryX=0.7;entryY=0;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" target="counting" value="Nhập SL thực tế từng đầu sách">
+        <mxCell id="e2" value="Nhập tồn thực tế(maSach, soLuong)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;exitX=0.3;exitY=0;entryX=0.7;entryY=0;" edge="1" parent="1" source="counting" target="counting">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint y="-14" as="offset" />
             <Array as="points">
-              <mxPoint x="253" y="175" />
-              <mxPoint x="337" y="175" />
+              <mxPoint x="255" y="170" />
+              <mxPoint x="355" y="170" />
+            </Array>
+            <mxPoint x="0" y="-14" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" value="Hoàn tất kiểm đếm()" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="counting" target="choice">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="0" y="-14" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" value="[Không chênh lệch]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;exitX=0.5;exitY=0;entryX=0;entryY=0.5;" edge="1" parent="1" source="choice" target="balanced">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="570" y="158" />
+            </Array>
+            <mxPoint x="0" y="-14" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" value="[Có thừa, thiếu hoặc hỏng]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="choice" target="discrepancy">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="0" y="-18" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" value="Lưu phiếu điều chỉnh(lyDo)&lt;br/&gt;[dữ liệu hợp lệ]&lt;br/&gt;/ cập nhật tồn kho()" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="discrepancy" target="adjusted">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="0" y="-26" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7" value="Hủy kiểm kê()" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1;entryX=0;entryY=0.5;" edge="1" parent="1" source="counting" target="cancelled">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="305" y="608" />
+            </Array>
+            <mxPoint x="0" y="-14" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" value="Hủy điều chỉnh()" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1;entryX=1;entryY=0.5;" edge="1" parent="1" source="discrepancy" target="cancelled">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="830" y="608" />
+            </Array>
+            <mxPoint x="0" y="-14" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0.5;entryY=0;" edge="1" parent="1" source="balanced" target="endNode">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1485" y="158" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="e3" edge="1" parent="1" source="counting" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;labelBackgroundColor=#ffffff;" target="choice" value="Hoàn tất kiểm đếm">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint y="-14" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="e4" edge="1" parent="1" source="choice" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" target="balanced" value="[Không chênh lệch]">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint y="-14" as="offset" />
-            <Array as="points">
-              <mxPoint x="540" y="155" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="e5" edge="1" parent="1" source="choice" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" target="discrepancy" value="[Có thừa / thiếu / hỏng]">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint y="-18" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="e6" edge="1" parent="1" source="discrepancy" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;labelBackgroundColor=#ffffff;" target="adjusted" value="Lưu phiếu điều chỉnh [có lý do]&lt;br&gt;/ cập nhật tồn kho">
-          <mxGeometry relative="1" x="-0.005" y="-63" as="geometry">
-            <mxPoint x="-63" y="63" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="e7" edge="1" parent="1" source="counting" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" target="cancelled" value="Hủy kiểm kê">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="295" y="505" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="e8" edge="1" parent="1" source="discrepancy" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=11;labelBackgroundColor=#ffffff;" target="cancelled" value="Hủy điều chỉnh">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="770" y="505" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="e9" edge="1" parent="1" source="balanced" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="endNode" value="">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="1235" y="155" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="e10" edge="1" parent="1" source="adjusted" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;" target="endNode" value="">
+        <mxCell id="e10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="adjusted" target="endNode">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e11" edge="1" parent="1" source="cancelled" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="endNode" value="">
+        <mxCell id="e11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=open;endSize=8;fontSize=11;strokeColor=#000000;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1;entryX=0.5;entryY=1;" edge="1" parent="1" source="cancelled" target="endNode">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="540" y="580" />
-              <mxPoint x="1235" y="580" />
+              <mxPoint x="575" y="730" />
+              <mxPoint x="1485" y="730" />
             </Array>
           </mxGeometry>
         </mxCell>

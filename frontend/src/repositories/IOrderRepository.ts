@@ -1,13 +1,12 @@
-import { Order } from '@/models/Order';
-import { Invoice } from '@/models/Invoice';
+import { HoaDon } from '@/models/HoaDon';
+import { ThanhToan } from '@/models/ThanhToan';
 
 /**
- * Giao diện IOrderRepository (Dependency Inversion)
+ * Interface IOrderRepository (Nguyên lý Dependency Inversion trong SOLID).
+ * Sử dụng thực thể `HoaDon` và `ThanhToan` theo Class Diagram.
  */
 export interface IOrderRepository {
-  saveOrder(order: Order): Promise<Order>;
-  createInvoice(invoice: Invoice): Promise<Invoice>;
-  findOrderById(id: string): Promise<Order | null>;
-  findOrderByCode(orderCode: string): Promise<Order | null>;
-  listRecentOrders(limit?: number): Promise<Order[]>;
+  saveHoaDon(hoaDon: HoaDon, thanhToan: ThanhToan): Promise<HoaDon>;
+  findById(maHoaDon: string): Promise<HoaDon | null>;
+  listRecent(limit?: number, searchTerm?: string): Promise<HoaDon[]>;
 }

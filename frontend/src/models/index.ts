@@ -1,7 +1,7 @@
 export * from './BaseEntity';
 export * from './NguoiDung';
 
-// Các thực thể OOP theo đúng Class Diagram (docs/diagrams/Class diagram.drawio)
+// 21 thực thể OOP theo đúng Class Diagram (docs/diagrams/Class diagram.drawio)
 export * from './VaiTro';
 export * from './TaiKhoan';
 export * from './NhanVien';
@@ -23,11 +23,3 @@ export * from './ChiTietHoaDon';
 export * from './ThanhToan';
 export * from './PhieuDoiTra';
 export * from './ChiTietDoiTra';
-
-// Các thực thể hiện có phục vụ tầng UI POS
-export * from './Book';
-export * from './Category';
-export * from './Customer';
-export * from './Order';
-export * from './OrderItem';
-export * from './Invoice';

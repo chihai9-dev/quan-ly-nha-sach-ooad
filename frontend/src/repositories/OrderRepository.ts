@@ -1,128 +1,264 @@
-import { supabase } from '@/lib/supabase/client';
-import { Order } from '@/models/Order';
-import { OrderItem } from '@/models/OrderItem';
-import { Invoice } from '@/models/Invoice';
-import { IOrderRepository } from './IOrderRepository';
-import type { OrderStatus } from '@/types/dtos';
+import { supabase, isSupabaseConfigured } from '@/lib/supabase/client';
+import { bookstoreStore } from '@/lib/mock/bookstoreStore';
+import { HoaDon } from '@/models/HoaDon';
+import { ChiTietHoaDon } from '@/models/ChiTietHoaDon';
+import { ThanhToan } from '@/models/ThanhToan';
+import { Sach } from '@/models/Sach';
+import { NhanVien } from '@/models/NhanVien';
+import { KhachHang } from '@/models/KhachHang';
+import { MaGiamGia } from '@/models/MaGiamGia';
+import type { IOrderRepository } from './IOrderRepository';
 
+const mockHoaDonStore: HoaDon[] = [];
+
+/**
+ * Triển khai OrderRepository kết nối trực tiếp 3 bảng `hoa_don`, `chi_tiet_hoa_don`, `thanh_toan`
+ * theo Relational Data Model (có fallback in-memory khi chưa cấu hình Supabase).
+ */
 export class OrderRepository implements IOrderRepository {
-  async saveOrder(order: Order): Promise<Order> {
-    try {
-      // 1. Chèn bản ghi đơn hàng chính
-      const { data: orderData, error: orderError } = await supabase
-        .from('orders')
-        .insert(order.toDatabase())
-        .select()
-        .single();
+  async saveHoaDon(hoaDon: HoaDon, thanhToan: ThanhToan): Promise<HoaDon> {
+    hoaDon.themThanhToan(thanhToan);
 
-      if (orderError) {
-        console.warn('Supabase saveOrder error (fallback mock):', orderError.message);
-        return order;
+    if (isSupabaseConfigured()) {
+      const { error: hdErr } = await supabase.from('hoa_don').insert({
+        ma_hoa_don: hoaDon.maHoaDon,
+        ngay_lap: hoaDon.ngayLap.toISOString(),
+        tong_tien_hang: hoaDon.tongTienHang,
+        tien_giam_gia: hoaDon.tienGiamGia,
+        trang_thai: hoaDon.trangThai,
+        ma_kh: hoaDon.khachHang?.maKH ?? null,
+        ma_nv: hoaDon.nhanVien?.maNV ?? 'NV003',
+        ma_code: hoaDon.maGiamGia?.maCode ?? null,
+      });
+
+      if (hdErr) {
+        throw new Error(`Không thể lưu hóa đơn vào CSDL: ${hdErr.message}`);
       }
 
-      // 2. Chèn danh sách chi tiết đơn hàng (order_items)
-      const orderItemsData = order.items.map(item => item.toDatabase(orderData.id));
-
-      if (orderItemsData.length > 0) {
-        const { error: itemsError } = await supabase
-          .from('order_items')
-          .insert(orderItemsData);
-
-        if (itemsError) {
-          console.warn('Supabase saveOrderItems error:', itemsError.message);
+      if (hoaDon.danhSachChiTiet.length > 0) {
+        const { error: ctErr } = await supabase.from('chi_tiet_hoa_don').insert(
+          hoaDon.danhSachChiTiet.map((ct) => ({
+            ma_hoa_don: hoaDon.maHoaDon,
+            ma_sach: ct.sach.maSach,
+            so_luong_ban: ct.soLuongBan,
+            don_gia_ban: ct.donGiaBan,
+            giam_gia: ct.giamGia,
+          }))
+        );
+        if (ctErr) {
+          throw new Error(`Không thể lưu chi tiết hóa đơn: ${ctErr.message}`);
         }
       }
 
-      return order;
-    } catch (err) {
-      console.warn('Lỗi kết nối Supabase khi lưu đơn hàng:', err);
-      return order;
-    }
-  }
-
-  async createInvoice(invoice: Invoice): Promise<Invoice> {
-    try {
-      const { data, error } = await supabase
-        .from('invoices')
-        .insert(invoice.toDatabase())
-        .select()
-        .single();
-
-      if (error) {
-        console.warn('Supabase createInvoice error (fallback mock):', error.message);
-        return invoice;
+      const { error: ttErr } = await supabase.from('thanh_toan').insert({
+        ma_thanh_toan: thanhToan.maThanhToan,
+        ngay_thanh_toan: thanhToan.ngayThanhToan.toISOString(),
+        so_tien: thanhToan.soTien,
+        phuong_thuc: thanhToan.phuongThuc,
+        trang_thai: thanhToan.trangThai,
+        ma_hoa_don: hoaDon.maHoaDon,
+      });
+      if (ttErr) {
+        throw new Error(`Không thể ghi nhận thanh toán: ${ttErr.message}`);
       }
 
-      return invoice;
-    } catch (err) {
-      console.warn('Lỗi kết nối Supabase khi tạo hóa đơn:', err);
-      return invoice;
+      // Trừ lượt sử dụng mã giảm giá nếu có
+      if (hoaDon.maGiamGia) {
+        await supabase
+          .from('ma_giam_gia')
+          .update({
+            so_luong_con_lai: hoaDon.maGiamGia.soLuongConLai,
+            updated_at: new Date().toISOString(),
+          })
+          .eq('ma_code', hoaDon.maGiamGia.maCode);
+      }
+
+      // Cộng điểm tích lũy khách hàng nếu có
+      if (hoaDon.khachHang) {
+        await supabase
+          .from('khach_hang')
+          .update({
+            diem_tich_luy: hoaDon.khachHang.diemTichLuy,
+            updated_at: new Date().toISOString(),
+          })
+          .eq('ma_kh', hoaDon.khachHang.maKH);
+      }
+
+      return hoaDon;
     }
+
+    // Fallback in-memory mock store
+    mockHoaDonStore.unshift(hoaDon);
+    // Cập nhật số lượng bán & tồn kho trên bookstoreStore
+    for (const ct of hoaDon.danhSachChiTiet) {
+      const mockBook = bookstoreStore.books.find((b) => b.id === ct.sach.maSach);
+      if (mockBook) {
+        mockBook.stockQuantity = Math.max(0, mockBook.stockQuantity - ct.soLuongBan);
+        mockBook.soldQuantity += ct.soLuongBan;
+      }
+    }
+    if (hoaDon.khachHang) {
+      const mockKh = bookstoreStore.customers.find((c) => c.id === hoaDon.khachHang?.maKH);
+      if (mockKh) {
+        mockKh.loyaltyPoints = hoaDon.khachHang.diemTichLuy;
+        mockKh.tier = hoaDon.khachHang.xacDinhHangThanhVien();
+        mockKh.totalSpent += hoaDon.thanhToanCuoi;
+        mockKh.orderCount += 1;
+      }
+    }
+    return hoaDon;
   }
 
-  async findOrderById(id: string): Promise<Order | null> {
-    const { data: orderData, error: orderError } = await supabase
-      .from('orders')
-      .select('*, order_items(*, books(*))')
-      .eq('id', id)
-      .single();
-
-    if (orderError || !orderData) return null;
-
-    const items = (orderData.order_items || []).map((row: any) => new OrderItem({
-      id: row.id,
-      bookId: row.book_id,
-      bookTitle: row.books?.title || 'Sách',
-      bookIsbn: row.books?.isbn || '',
-      unitPrice: Number(row.unit_price),
-      quantity: row.quantity,
-      coverUrl: row.books?.cover_url,
-    }));
-
-    return new Order({
-      id: orderData.id,
-      orderCode: orderData.order_code,
-      customerId: orderData.customer_id,
-      status: orderData.status as OrderStatus,
-      discountAmount: Number(orderData.discount_amount),
-      cashierName: orderData.cashier_name,
-      note: orderData.note,
-      items: items,
-      createdAt: orderData.created_at,
-      updatedAt: orderData.updated_at,
-    });
+  async findById(maHoaDon: string): Promise<HoaDon | null> {
+    const list = await this.listRecent(100);
+    return list.find((hd) => hd.maHoaDon === maHoaDon) ?? null;
   }
 
-  async findOrderByCode(orderCode: string): Promise<Order | null> {
-    const { data, error } = await supabase
-      .from('orders')
-      .select('id')
-      .eq('order_code', orderCode)
-      .single();
+  async listRecent(limit: number = 20, searchTerm?: string): Promise<HoaDon[]> {
+    let list: HoaDon[];
 
-    if (error || !data) return null;
-    return this.findOrderById(data.id);
-  }
+    if (!isSupabaseConfigured()) {
+      list = [...mockHoaDonStore];
+    } else {
+      try {
+        const [hdRes, ctRes, ttRes, sachRes, nvRes, khRes, mggRes] = await Promise.all([
+          supabase
+            .from('hoa_don')
+            .select('*')
+            .order('ngay_lap', { ascending: false })
+            .limit(limit),
+          supabase.from('chi_tiet_hoa_don').select('*'),
+          supabase.from('thanh_toan').select('*'),
+          supabase.from('sach').select('*'),
+          supabase.from('nhan_vien').select('*'),
+          supabase.from('khach_hang').select('*'),
+          supabase.from('ma_giam_gia').select('*'),
+        ]);
 
-  async listRecentOrders(limit: number = 10): Promise<Order[]> {
-    const { data, error } = await supabase
-      .from('orders')
-      .select('*')
-      .order('created_at', { ascending: false })
-      .limit(limit);
+        if (hdRes.error || !hdRes.data) {
+          list = [...mockHoaDonStore];
+        } else {
+          const sachMap = new Map(
+            (sachRes.data ?? []).map((r) => [
+              r.ma_sach,
+              new Sach({
+                maSach: r.ma_sach,
+                tenSach: r.ten_sach,
+                namXuatBan: r.nam_xuat_ban ?? 2024,
+                giaNhap: Number(r.gia_nhap),
+                giaBan: Number(r.gia_ban),
+                soLuongTon: r.so_luong_ton,
+                mucTonToiThieu: r.muc_ton_toi_thieu,
+                trangThai: r.trang_thai,
+              }),
+            ])
+          );
+          const nvMap = new Map(
+            (nvRes.data ?? []).map((r) => [
+              r.ma_nv,
+              new NhanVien({
+                maNV: r.ma_nv,
+                hoTen: r.ho_ten,
+                soDienThoai: r.so_dien_thoai ?? '',
+                email: r.email ?? '',
+                diaChi: r.dia_chi ?? '',
+                ngayVaoLam: r.ngay_vao_lam,
+              }),
+            ])
+          );
+          const khMap = new Map(
+            (khRes.data ?? []).map((r) => [
+              r.ma_kh,
+              new KhachHang({
+                maKH: r.ma_kh,
+                hoTen: r.ho_ten,
+                soDienThoai: r.so_dien_thoai ?? '',
+                email: r.email ?? '',
+                diemTichLuy: r.diem_tich_luy,
+              }),
+            ])
+          );
+          const mggMap = new Map(
+            (mggRes.data ?? []).map((r) => [
+              r.ma_code,
+              new MaGiamGia({
+                maCode: r.ma_code,
+                giaTriGiam: Number(r.gia_tri_giam),
+                donToiThieu: Number(r.don_toi_thieu),
+                soLuongConLai: r.so_luong_con_lai,
+                hanSuDung: r.han_su_dung,
+              }),
+            ])
+          );
 
-    if (error || !data) return [];
+          list = hdRes.data.map((row) => {
+            const chiTiets = (ctRes.data ?? [])
+              .filter((ct) => ct.ma_hoa_don === row.ma_hoa_don)
+              .map((ct) => {
+                const sach =
+                  sachMap.get(ct.ma_sach) ??
+                  new Sach({
+                    maSach: ct.ma_sach,
+                    tenSach: ct.ma_sach,
+                    namXuatBan: 2024,
+                    giaNhap: 0,
+                    giaBan: Number(ct.don_gia_ban),
+                    soLuongTon: 0,
+                  });
+                return new ChiTietHoaDon({
+                  sach,
+                  soLuongBan: ct.so_luong_ban,
+                  donGiaBan: Number(ct.don_gia_ban),
+                  giamGia: Number(ct.giam_gia),
+                });
+              });
 
-    return data.map(o => new Order({
-      id: o.id,
-      orderCode: o.order_code,
-      customerId: o.customer_id,
-      status: o.status as OrderStatus,
-      discountAmount: Number(o.discount_amount),
-      cashierName: o.cashier_name,
-      note: o.note,
-      createdAt: o.created_at,
-      updatedAt: o.updated_at,
-    }));
+            const thanhToans = (ttRes.data ?? [])
+              .filter((tt) => tt.ma_hoa_don === row.ma_hoa_don)
+              .map(
+                (tt) =>
+                  new ThanhToan({
+                    maThanhToan: tt.ma_thanh_toan,
+                    ngayThanhToan: tt.ngay_thanh_toan,
+                    soTien: Number(tt.so_tien),
+                    phuongThuc: tt.phuong_thuc,
+                    trangThai: tt.trang_thai,
+                  })
+              );
+
+            return new HoaDon({
+              maHoaDon: row.ma_hoa_don,
+              ngayLap: row.ngay_lap,
+              tongTienHang: Number(row.tong_tien_hang),
+              tienGiamGia: Number(row.tien_giam_gia),
+              thanhToanCuoi: Number(row.thanh_toan_cuoi),
+              trangThai: row.trang_thai,
+              khachHang: row.ma_kh ? khMap.get(row.ma_kh) ?? null : null,
+              nhanVien: nvMap.get(row.ma_nv) ?? null,
+              maGiamGia: row.ma_code ? mggMap.get(row.ma_code) ?? null : null,
+              danhSachChiTiet: chiTiets,
+              danhSachThanhToan: thanhToans,
+              createdAt: row.created_at,
+              updatedAt: row.updated_at,
+            });
+          });
+        }
+      } catch {
+        list = [...mockHoaDonStore];
+      }
+    }
+
+    if (searchTerm?.trim()) {
+      const kw = searchTerm.trim().toLowerCase();
+      list = list.filter(
+        (hd) =>
+          hd.maHoaDon.toLowerCase().includes(kw) ||
+          (hd.khachHang?.hoTen.toLowerCase().includes(kw) ?? false) ||
+          (hd.nhanVien?.hoTen.toLowerCase().includes(kw) ?? false) ||
+          hd.trangThai.toLowerCase().includes(kw)
+      );
+    }
+
+    return list.slice(0, limit);
   }
 }

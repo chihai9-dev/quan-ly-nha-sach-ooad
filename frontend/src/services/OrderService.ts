@@ -1,19 +1,34 @@
-import { Order } from '@/models/Order';
-import { Invoice } from '@/models/Invoice';
-import { IOrderRepository } from '@/repositories/IOrderRepository';
+import { HoaDon } from '@/models/HoaDon';
+import { ChiTietHoaDon } from '@/models/ChiTietHoaDon';
+import { ThanhToan } from '@/models/ThanhToan';
+import { NhanVien } from '@/models/NhanVien';
+import { KhachHang } from '@/models/KhachHang';
+import { MaGiamGia } from '@/models/MaGiamGia';
+import type { IOrderRepository } from '@/repositories/IOrderRepository';
 import { OrderRepository } from '@/repositories/OrderRepository';
-import { IBookRepository } from '@/repositories/IBookRepository';
+import type { IBookRepository } from '@/repositories/IBookRepository';
 import { BookRepository } from '@/repositories/BookRepository';
 import type { PaymentMethod } from '@/types/dtos';
 
+export interface CheckoutInput {
+  items: Array<{ maSach: string; soLuongBan: number }>;
+  paymentMethod: PaymentMethod;
+  paidAmount: number;
+  nhanVien: NhanVien;
+  khachHang?: KhachHang | null;
+  maGiamGia?: MaGiamGia | null;
+  directDiscountAmount?: number;
+}
+
 export interface CheckoutResult {
-  order: Order;
-  invoice: Invoice;
+  hoaDon: HoaDon;
+  thanhToan: ThanhToan;
+  tienThoi: number;
 }
 
 /**
- * Lớp OrderService (Tầng Dịch vụ Nghiệp vụ Bán hàng & Đơn hàng)
- * Chịu trách nhiệm thực thi giao dịch thanh toán quầy thu ngân (POS) và trừ tồn kho.
+ * Lớp OrderService (Tầng Dịch vụ Nghiệp vụ Bán hàng - Phân hệ QLBH)
+ * Thực thi luồng: Kiểm tra tồn kho -> Áp dụng CTKM / MaGiamGia -> Lập HoaDon -> Ghi nhận ThanhToan -> Trừ tồn & Tích điểm.
  */
 export class OrderService {
   private readonly orderRepository: IOrderRepository;
@@ -27,98 +42,88 @@ export class OrderService {
     this.bookRepository = bookRepo;
   }
 
-  /**
-   * Khởi tạo một đối tượng Đơn hàng mới
-   */
-  createNewOrder(cashierName: string = 'Thu ngân 01'): Order {
-    const timestamp = Date.now().toString().slice(-6);
-    const orderCode = `ORD-${timestamp}`;
-    const id = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `order-${Date.now()}`;
-
-    return new Order({
-      id: id,
-      orderCode: orderCode,
-      cashierName: cashierName,
-      status: 'PENDING',
-    });
-  }
-
-  /**
-   * Thực hiện thanh toán và lập hóa đơn cho đơn hàng
-   * @param order Đơn hàng cần thanh toán
-   * @param paymentMethod Phương thức thanh toán (Tiền mặt, Chuyển khoản, Momo, Thẻ)
-   * @param paidAmount Số tiền khách hàng đưa
-   */
-  async checkout(
-    order: Order,
-    paymentMethod: PaymentMethod,
-    paidAmount: number
-  ): Promise<CheckoutResult> {
-    // 1. Kiểm tra đơn hàng hợp lệ
-    if (order.items.length === 0) {
-      throw new Error('Đơn hàng không có sản phẩm nào để thanh toán.');
+  async checkout(input: CheckoutInput): Promise<CheckoutResult> {
+    if (!input.items.length) {
+      throw new Error('Hóa đơn phải có ít nhất 1 đầu sách.');
     }
 
-    const totalDue = order.calculateFinalTotal();
+    const chiTiets: ChiTietHoaDon[] = [];
+    for (const reqItem of input.items) {
+      if (reqItem.soLuongBan <= 0) {
+        throw new Error('Số lượng bán phải lớn hơn 0.');
+      }
+      const sach = await this.bookRepository.findById(reqItem.maSach);
+      if (!sach) {
+        throw new Error(`Không tìm thấy đầu sách mã "${reqItem.maSach}".`);
+      }
+      if (sach.trangThai === 'NGUNG_BAN') {
+        throw new Error(`Sách "${sach.tenSach}" đã ngưng kinh doanh.`);
+      }
+      if (sach.soLuongTon < reqItem.soLuongBan) {
+        throw new Error(
+          `Sách "${sach.tenSach}" không đủ tồn kho (hiện có: ${sach.soLuongTon}, cần mua: ${reqItem.soLuongBan}).`
+        );
+      }
 
-    // 2. Kiểm tra số tiền thanh toán
-    if (paidAmount < totalDue) {
-      throw new Error(
-        `Số tiền nhận (${paidAmount.toLocaleString()} đ) ít hơn tổng cần trả (${totalDue.toLocaleString()} đ).`
+      const giaSauKM = sach.tinhGiaBanSauKhuyenMai();
+      const giamGiaDong = Math.max(0, (sach.giaBan - giaSauKM) * reqItem.soLuongBan);
+      chiTiets.push(
+        new ChiTietHoaDon({
+          sach,
+          soLuongBan: reqItem.soLuongBan,
+          donGiaBan: sach.giaBan,
+          giamGia: giamGiaDong,
+        })
       );
     }
 
-    // 3. Kiểm tra số lượng tồn kho và chuẩn bị trừ kho
-    for (const item of order.items) {
-      const book = await this.bookRepository.findById(item.bookId);
-      if (book) {
-        if (!book.isAvailable(item.quantity)) {
-          throw new Error(
-            `Sách "${book.title}" không đủ số lượng tồn kho (Còn lại: ${book.stockQuantity}, Cần mua: ${item.quantity}).`
-          );
-        }
-      }
-    }
-
-    // 4. Trừ tồn kho thực tế
-    for (const item of order.items) {
-      const book = await this.bookRepository.findById(item.bookId);
-      if (book) {
-        book.reduceStock(item.quantity);
-        await this.bookRepository.updateStock(book.getId(), book.stockQuantity);
-      }
-    }
-
-    // 5. Đánh dấu hoàn tất đơn hàng
-    order.complete();
-    await this.orderRepository.saveOrder(order);
-
-    // 6. Lập thực thể Hóa đơn
-    const invoiceId = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `inv-${Date.now()}`;
-    const invoiceCode = `INV-${order.orderCode.replace('ORD-', '')}`;
-    const invoice = new Invoice({
-      id: invoiceId,
-      invoiceCode: invoiceCode,
-      orderId: order.getId(),
-      paymentMethod: paymentMethod,
-      paidAmount: paidAmount,
-      changeAmount: paidAmount - totalDue,
-      paymentStatus: 'PAID',
+    const maHoaDon = `HD-${new Date().toISOString().slice(0, 10).replace(/-/g, '')}-${Date.now().toString().slice(-4)}`;
+    const hoaDon = new HoaDon({
+      maHoaDon,
+      nhanVien: input.nhanVien,
+      khachHang: input.khachHang ?? null,
+      danhSachChiTiet: chiTiets,
     });
 
-    invoice.processPayment(totalDue);
-    await this.orderRepository.createInvoice(invoice);
+    if (input.maGiamGia) {
+      hoaDon.applyDiscount(input.maGiamGia);
+    } else if (input.directDiscountAmount && input.directDiscountAmount > 0) {
+      hoaDon.applyDiscount(Math.min(input.directDiscountAmount, hoaDon.tongTienHang));
+    }
+
+    const tongCanTra = hoaDon.tinhTongThanhToan();
+    if (input.paidAmount < tongCanTra) {
+      throw new Error(
+        `Số tiền khách đưa (${input.paidAmount.toLocaleString('vi-VN')} đ) ít hơn tổng thanh toán (${tongCanTra.toLocaleString('vi-VN')} đ).`
+      );
+    }
+
+    // Thực thi quy tắc Domain: trừ tồn trên entity + cộng điểm tích lũy + đổi trạng thái DA_THANH_TOAN
+    hoaDon.lapHoaDon();
+
+    const maThanhToan = `TT-${Date.now().toString().slice(-6)}`;
+    const thanhToan = new ThanhToan({
+      maThanhToan,
+      soTien: tongCanTra,
+      phuongThuc: input.paymentMethod,
+      trangThai: 'THANH_CONG',
+    });
+
+    // Lưu vào CSDL (Trigger DB sẽ tự trừ tồn kho khi insert chi_tiet_hoa_don trên Supabase)
+    await this.orderRepository.saveHoaDon(hoaDon, thanhToan);
 
     return {
-      order,
-      invoice,
+      hoaDon,
+      thanhToan,
+      tienThoi: input.paidAmount - tongCanTra,
     };
   }
 
-  /**
-   * Xem danh sách các đơn hàng gần đây
-   */
-  async getRecentOrders(limit: number = 10): Promise<Order[]> {
-    return this.orderRepository.listRecentOrders(limit);
+  async getRecentOrders(limit: number = 20, searchTerm?: string): Promise<HoaDon[]> {
+    return this.orderRepository.listRecent(limit, searchTerm);
+  }
+
+  async getOrderById(maHoaDon: string): Promise<HoaDon | null> {
+    return this.orderRepository.findById(maHoaDon);
   }
 }
